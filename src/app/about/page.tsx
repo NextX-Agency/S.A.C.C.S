@@ -8,7 +8,7 @@ export default function AboutPage() {
           <h2 className="text-2xl font-semibold mb-4">Modern Architecture</h2>
           <p className="text-gray-600 mb-4">
             This project is built with Next.js 14, leveraging the latest App Router for
-            optimal performance and developer experience. It's optimized for serverless
+            optimal performance and developer experience. It&apos;s optimized for serverless
             deployment on Vercel.
           </p>
         </section>
