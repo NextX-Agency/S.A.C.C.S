@@ -7,6 +7,7 @@ import ReferencesSection from '@/components/ReferencesSection';
 import ProcessSection from '@/components/ProcessSection';
 import ContactSection from '@/components/ContactSection';
 import Footer from '@/components/Footer';
+import WhatsAppButton from '@/components/WhatsAppButton';
 
 export default function HomePage() {
   return (
@@ -22,6 +23,7 @@ export default function HomePage() {
         <ContactSection />
       </main>
       <Footer />
+      <WhatsAppButton />
     </>
   );
 }
