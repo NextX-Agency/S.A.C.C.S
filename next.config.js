@@ -3,9 +3,6 @@ const nextConfig = {
   // Enable React strict mode for better development experience
   reactStrictMode: true,
   
-  // Optimize for Vercel serverless deployment
-  output: 'standalone',
-  
   // Power the Next.js App Router
   experimental: {
     // Server Actions for serverless operations
