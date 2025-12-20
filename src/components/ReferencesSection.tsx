@@ -1,55 +1,8 @@
 'use client';
 
 import { useEffect, useRef, useState } from 'react';
-
-const references = [
-  {
-    name: 'Marriott Hotel',
-    icon: (
-      <svg className="w-8 h-8" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-        <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" />
-      </svg>
-    ),
-    category: 'Hospitality',
-  },
-  {
-    name: 'Torarica Hotel',
-    icon: (
-      <svg className="w-8 h-8" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-        <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" />
-      </svg>
-    ),
-    category: 'Hospitality',
-  },
-  {
-    name: 'Hard Rock Cafe',
-    icon: (
-      <svg className="w-8 h-8" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-        <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" />
-        <circle cx="12" cy="10" r="3" />
-      </svg>
-    ),
-    category: 'Horeca',
-  },
-  {
-    name: 'Radisson Hotel',
-    icon: (
-      <svg className="w-8 h-8" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-        <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" />
-      </svg>
-    ),
-    category: 'Hospitality',
-  },
-  {
-    name: 'AZP Suriname',
-    icon: (
-      <svg className="w-8 h-8" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-        <path d="M22 12h-4l-3 9L9 3l-3 9H2" />
-      </svg>
-    ),
-    category: 'Gezondheidszorg',
-  },
-];
+import Image from 'next/image';
+import { references } from '@/lib/content';
 
 export default function ReferencesSection() {
   const [isVisible, setIsVisible] = useState(false);
@@ -74,10 +27,10 @@ export default function ReferencesSection() {
   }, []);
 
   return (
-    <section ref={sectionRef} id="referenties" className="py-24 bg-white">
+    <section ref={sectionRef} id="referenties" className="py-16 md:py-24 bg-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
-        <div className="text-center mb-16">
+        <div className="text-center mb-12 md:mb-16">
           <h2 className="section-title">Onze Referenties</h2>
           <div className="title-underline" />
           <p className="section-subtitle">
@@ -85,27 +38,37 @@ export default function ReferencesSection() {
           </p>
         </div>
 
-        {/* References Grid */}
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6">
+        {/* References Grid - Using Actual Logos */}
+        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-4 md:gap-6 lg:gap-8 mb-12 md:mb-16">
           {references.map((ref, index) => (
             <div
               key={ref.name}
-              className={`bg-white p-6 rounded-2xl shadow-saccs-sm text-center group hover:shadow-saccs-lg transition-all duration-500 border border-gray-100 hover:border-primary/30 ${
+              className={`group bg-white p-4 md:p-6 rounded-xl md:rounded-2xl shadow-saccs-sm hover:shadow-saccs-lg transition-all duration-500 border border-gray-100 hover:border-primary/30 flex flex-col items-center justify-center ${
                 isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
               }`}
               style={{ transitionDelay: `${index * 100}ms` }}
             >
-              <div className="w-16 h-16 mx-auto mb-4 bg-gradient-to-br from-primary to-primary-light rounded-full flex items-center justify-center text-white group-hover:scale-110 transition-transform duration-300 shadow-saccs-md">
-                {ref.icon}
+              {/* Logo Container */}
+              <div className="relative w-full aspect-[3/2] mb-3 md:mb-4">
+                <Image
+                  src={ref.logo}
+                  alt={ref.name}
+                  fill
+                  className="object-contain grayscale group-hover:grayscale-0 transition-all duration-300"
+                  sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 20vw"
+                />
               </div>
-              <h3 className="font-heading text-sm lg:text-base font-bold text-saccs-text mb-1">{ref.name}</h3>
-              <p className="text-xs text-saccs-grey">{ref.category}</p>
+              
+              {/* Category Badge */}
+              <span className="text-xs md:text-sm text-saccs-grey font-medium px-3 py-1 bg-saccs-light rounded-full">
+                {ref.category}
+              </span>
             </div>
           ))}
         </div>
 
-        {/* Trust Indicators */}
-        <div className="mt-20 bg-gradient-to-br from-primary to-primary-dark rounded-3xl p-8 md:p-12 text-white overflow-hidden relative">
+        {/* Trust Indicators - Mobile Optimized */}
+        <div className="bg-gradient-to-br from-primary to-primary-dark rounded-2xl md:rounded-3xl p-6 md:p-12 text-white overflow-hidden relative">
           {/* Background Pattern */}
           <div className="absolute inset-0 opacity-10">
             <svg className="w-full h-full" viewBox="0 0 100 100" preserveAspectRatio="none">
@@ -119,33 +82,67 @@ export default function ReferencesSection() {
           </div>
 
           <div className="relative z-10">
-            <div className="text-center mb-12">
-              <h3 className="font-heading text-2xl md:text-3xl font-bold mb-4">
+            <div className="text-center mb-8 md:mb-12">
+              <h3 className="font-heading text-xl md:text-2xl lg:text-3xl font-bold mb-3 md:mb-4">
                 Waarom klanten voor SACCS kiezen
               </h3>
-              <p className="text-white/80 max-w-2xl mx-auto">
+              <p className="text-sm md:text-base text-white/90 max-w-2xl mx-auto">
                 Onze toewijding aan kwaliteit en betrouwbaarheid heeft ons het vertrouwen van vele
                 vooraanstaande organisaties in Suriname opgeleverd.
               </p>
             </div>
 
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-8">
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-6 lg:gap-8">
               {[
-                { icon: '✓', title: 'Betrouwbaar', desc: 'Altijd op tijd' },
-                { icon: '★', title: 'Kwaliteit', desc: 'Gegarandeerd resultaat' },
-                { icon: '♻', title: 'Duurzaam', desc: 'Milieuvriendelijk' },
-                { icon: '⚡', title: 'Flexibel', desc: 'Op maat gemaakt' },
+                { 
+                  icon: (
+                    <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                    </svg>
+                  ), 
+                  title: 'Betrouwbaar', 
+                  desc: 'Altijd op tijd' 
+                },
+                { 
+                  icon: (
+                    <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.197-1.538-1.118l1.518-4.674a1 1 0 00-.363-1.118l-3.976-2.888c-.784-.57-.38-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.519-4.674z" />
+                    </svg>
+                  ), 
+                  title: 'Kwaliteit', 
+                  desc: 'Gegarandeerd resultaat' 
+                },
+                { 
+                  icon: (
+                    <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
+                    </svg>
+                  ), 
+                  title: 'Duurzaam', 
+                  desc: 'Milieuvriendelijk' 
+                },
+                { 
+                  icon: (
+                    <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
+                    </svg>
+                  ), 
+                  title: 'Flexibel', 
+                  desc: 'Op maat gemaakt' 
+                },
               ].map((item, index) => (
                 <div
                   key={item.title}
-                  className={`text-center p-4 bg-white/10 rounded-2xl backdrop-blur-sm transition-all duration-500 ${
+                  className={`text-center p-3 md:p-4 lg:p-6 bg-white/10 rounded-xl md:rounded-2xl backdrop-blur-sm hover:bg-white/20 transition-all duration-500 ${
                     isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
                   }`}
                   style={{ transitionDelay: `${500 + index * 100}ms` }}
                 >
-                  <div className="text-3xl mb-3">{item.icon}</div>
-                  <h4 className="font-heading font-bold mb-1">{item.title}</h4>
-                  <p className="text-sm text-white/70">{item.desc}</p>
+                  <div className="w-10 h-10 md:w-12 md:h-12 mx-auto mb-2 md:mb-3 text-white/90">
+                    {item.icon}
+                  </div>
+                  <h4 className="font-heading font-bold text-sm md:text-base mb-1">{item.title}</h4>
+                  <p className="text-xs md:text-sm text-white/70">{item.desc}</p>
                 </div>
               ))}
             </div>
