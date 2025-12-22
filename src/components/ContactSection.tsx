@@ -248,7 +248,7 @@ export default function ContactSection() {
                   <button
                     type="submit"
                     disabled={isSubmitting}
-                    className="w-full py-4 bg-primary text-white font-semibold rounded-xl hover:bg-primary-dark transition-all duration-300 disabled:opacity-70 disabled:cursor-not-allowed flex items-center justify-center gap-2"
+                    className="w-full py-4 bg-primary text-white font-semibold rounded-xl hover:bg-primary-dark transition-all duration-300 disabled:opacity-70 disabled:cursor-not-allowed flex items-center justify-center gap-2 min-h-[52px] touch-manipulation"
                   >
                     {isSubmitting ? (
                       <>

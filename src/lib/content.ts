@@ -176,41 +176,34 @@ export const services = [
 ];
 
 export const clients = [
-  { name: 'Marriott Hotel', logo: '/carousel/marriot.png', description: 'Internationale hotelketen' },
-  { name: 'Torarica Hotel', logo: '/carousel/torarica.png', description: 'Premium resort Suriname' },
-  { name: 'Hard Rock Cafe', logo: '/carousel/hardrock.png', description: 'Wereldberoemd restaurant' },
-  { name: 'Radisson Hotel', logo: '/carousel/radison.png', description: 'Luxe accommodatie' },
-  { name: 'AZP Suriname', logo: '/carousel/azp.png', description: 'Medische faciliteit' },
+  { name: 'Torarica Hotel', logo: '/carousel/torarica.jpg', description: 'Premium resort Suriname' },
+  { name: 'Hard Rock Cafe', logo: '/carousel/hardrock.jpg', description: 'Wereldberoemd restaurant' },
+  { name: 'Radisson Hotel', logo: '/carousel/radisson.png', description: 'Luxe accommodatie' },
+  { name: 'AZP Suriname', logo: '/carousel/azplogo.jpg', description: 'Medische faciliteit' },
 ];
 
 export const references = [
   {
-    name: 'Marriott Hotel',
-    logo: '/carousel/marriot.png',
-    category: 'Hospitality',
-    description: 'Dagelijks onderhoud en periodieke dieptereiniging van alle faciliteiten.',
-  },
-  {
     name: 'Torarica Hotel',
-    logo: '/carousel/torarica.png',
+    logo: '/carousel/torarica.jpg',
     category: 'Hospitality',
     description: 'Complete schoonmaakservice voor kamers, lobby en conferentieruimtes.',
   },
   {
     name: 'Hard Rock Cafe',
-    logo: '/carousel/hardrock.png',
+    logo: '/carousel/hardrock.jpg',
     category: 'Horeca',
     description: 'Restaurant- en keukenreiniging volgens strenge hygiënenormen.',
   },
   {
     name: 'Radisson Hotel',
-    logo: '/carousel/radison.png',
+    logo: '/carousel/radisson.png',
     category: 'Hospitality',
     description: 'Professionele schoonmaakdiensten voor alle hotelruimtes.',
   },
   {
     name: 'AZP Suriname',
-    logo: '/carousel/azp.png',
+    logo: '/carousel/azplogo.jpg',
     category: 'Gezondheidszorg',
     description: 'Medische schoonmaak met focus op hygiëne en desinfectie.',
   },

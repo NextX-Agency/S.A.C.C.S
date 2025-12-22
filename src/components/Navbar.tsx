@@ -81,11 +81,12 @@ export default function Navbar() {
             </a>
           </div>
 
-          {/* Mobile Menu Toggle */}
+          {/* Mobile Menu Toggle - Improved touch target */}
           <button
-            className="lg:hidden flex flex-col justify-center items-center w-10 h-10 space-y-1.5"
+            className="lg:hidden flex flex-col justify-center items-center w-12 h-12 space-y-1.5 rounded-lg hover:bg-saccs-light transition-colors touch-manipulation"
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
             aria-label="Toggle menu"
+            aria-expanded={isMobileMenuOpen}
           >
             <span
               className={`w-6 h-0.5 bg-saccs-text transition-all duration-300 ${
@@ -105,10 +106,10 @@ export default function Navbar() {
           </button>
         </div>
 
-        {/* Mobile Navigation */}
+        {/* Mobile Navigation - Improved touch targets */}
         <div
           className={`lg:hidden overflow-hidden transition-all duration-300 ${
-            isMobileMenuOpen ? 'max-h-96 pb-6' : 'max-h-0'
+            isMobileMenuOpen ? 'max-h-[500px] pb-6' : 'max-h-0'
           }`}
         >
           <div className="flex flex-col space-y-1 pt-4 border-t border-gray-100">
@@ -117,7 +118,7 @@ export default function Navbar() {
                 key={item.href}
                 href={item.href}
                 onClick={(e) => handleNavClick(e, item.href)}
-                className="px-4 py-3 text-saccs-text font-medium hover:text-primary hover:bg-saccs-light rounded-lg transition-colors duration-200"
+                className="px-4 py-4 text-saccs-text font-medium hover:text-primary hover:bg-saccs-light rounded-lg transition-colors duration-200 touch-manipulation min-h-[48px] flex items-center"
               >
                 {item.label}
               </a>
@@ -125,7 +126,7 @@ export default function Navbar() {
             <a
               href="#contact"
               onClick={(e) => handleNavClick(e, '#contact')}
-              className="mx-4 mt-2 px-6 py-3 bg-primary text-white font-semibold rounded-xl text-center hover:bg-primary-dark transition-all duration-300"
+              className="mx-4 mt-2 px-6 py-4 bg-primary text-white font-semibold rounded-xl text-center hover:bg-primary-dark transition-all duration-300 touch-manipulation min-h-[48px] flex items-center justify-center"
             >
               Contact
             </a>

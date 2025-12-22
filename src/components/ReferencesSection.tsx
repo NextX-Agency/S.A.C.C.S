@@ -6,6 +6,7 @@ import { references } from '@/lib/content';
 
 export default function ReferencesSection() {
   const [isVisible, setIsVisible] = useState(false);
+  const [imageErrors, setImageErrors] = useState<Set<string>>(new Set());
   const sectionRef = useRef<HTMLElement>(null);
 
   useEffect(() => {
@@ -26,11 +27,15 @@ export default function ReferencesSection() {
     return () => observer.disconnect();
   }, []);
 
+  const handleImageError = (name: string) => {
+    setImageErrors(prev => new Set(prev).add(name));
+  };
+
   return (
-    <section ref={sectionRef} id="referenties" className="py-16 md:py-24 bg-white">
+    <section ref={sectionRef} id="referenties" className="py-12 sm:py-16 md:py-24 bg-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
-        <div className="text-center mb-12 md:mb-16">
+        <div className="text-center mb-10 sm:mb-12 md:mb-16">
           <h2 className="section-title">Onze Referenties</h2>
           <div className="title-underline" />
           <p className="section-subtitle">
@@ -38,29 +43,37 @@ export default function ReferencesSection() {
           </p>
         </div>
 
-        {/* References Grid - Using Actual Logos */}
-        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-4 md:gap-6 lg:gap-8 mb-12 md:mb-16">
+        {/* References Grid - Improved responsive layout */}
+        <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4 md:gap-6 lg:gap-8 mb-10 sm:mb-12 md:mb-16">
           {references.map((ref, index) => (
             <div
               key={ref.name}
-              className={`group bg-white p-4 md:p-6 rounded-xl md:rounded-2xl shadow-saccs-sm hover:shadow-saccs-lg transition-all duration-500 border border-gray-100 hover:border-primary/30 flex flex-col items-center justify-center ${
+              className={`group bg-white p-3 sm:p-4 md:p-6 rounded-xl md:rounded-2xl shadow-saccs-sm hover:shadow-saccs-lg transition-all duration-500 border border-gray-100 hover:border-primary/30 flex flex-col items-center justify-center ${
                 isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
               }`}
               style={{ transitionDelay: `${index * 100}ms` }}
             >
-              {/* Logo Container */}
-              <div className="relative w-full aspect-[3/2] mb-3 md:mb-4">
-                <Image
-                  src={ref.logo}
-                  alt={ref.name}
-                  fill
-                  className="object-contain grayscale group-hover:grayscale-0 transition-all duration-300"
-                  sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 20vw"
-                />
+              {/* Logo Container with fallback */}
+              <div className="relative w-full aspect-[3/2] mb-2 sm:mb-3 md:mb-4 flex items-center justify-center">
+                {!imageErrors.has(ref.name) ? (
+                  <Image
+                    src={ref.logo}
+                    alt={ref.name}
+                    fill
+                    className="object-contain grayscale group-hover:grayscale-0 transition-all duration-300"
+                    sizes="(max-width: 640px) 45vw, (max-width: 1024px) 25vw, 20vw"
+                    loading="lazy"
+                    onError={() => handleImageError(ref.name)}
+                  />
+                ) : (
+                  <div className="w-full h-full flex items-center justify-center bg-saccs-light rounded-lg">
+                    <span className="text-xs sm:text-sm text-saccs-grey text-center px-2">{ref.name}</span>
+                  </div>
+                )}
               </div>
               
               {/* Category Badge */}
-              <span className="text-xs md:text-sm text-saccs-grey font-medium px-3 py-1 bg-saccs-light rounded-full">
+              <span className="text-[10px] sm:text-xs md:text-sm text-saccs-grey font-medium px-2 sm:px-3 py-1 bg-saccs-light rounded-full text-center">
                 {ref.category}
               </span>
             </div>

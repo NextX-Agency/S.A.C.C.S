@@ -7,26 +7,64 @@
 @layer base {
   html {
     scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
+    text-size-adjust: 100%;
+  }
+  
+  /* iOS Safari smooth scrolling fix */
+  @supports (-webkit-touch-callout: none) {
+    html {
+      scroll-behavior: auto;
+    }
+    
+    body {
+      -webkit-overflow-scrolling: touch;
+    }
   }
   
   body {
     @apply font-sans text-saccs-text antialiased bg-white;
     line-height: 1.6;
     overflow-x: hidden;
+    /* Safe area for notched devices */
+    padding-top: env(safe-area-inset-top);
+    padding-bottom: env(safe-area-inset-bottom);
+    padding-left: env(safe-area-inset-left);
+    padding-right: env(safe-area-inset-right);
   }
 
   ::selection {
     @apply bg-primary/20 text-primary-dark;
   }
+  
+  /* Improve tap highlights on iOS */
+  a, button {
+    -webkit-tap-highlight-color: rgba(62, 190, 113, 0.1);
+  }
 }
 
 @layer components {
   .btn {
-    @apply inline-flex items-center justify-center px-8 py-4 text-base font-semibold rounded-xl transition-all duration-300;
+    @apply inline-flex items-center justify-center px-6 sm:px-8 py-3 sm:py-4 text-sm sm:text-base font-semibold rounded-xl transition-all duration-300;
+    min-height: 44px; /* iOS touch target minimum */
+    touch-action: manipulation;
   }
   
   .btn-primary {
     @apply bg-white text-primary hover:bg-transparent hover:text-white border-2 border-transparent hover:border-white transform hover:-translate-y-1 hover:shadow-saccs-lg;
+  }
+
+  /* Remove transform on touch devices to prevent jank */
+  @media (hover: none) {
+    .btn-primary:hover {
+      transform: none;
+    }
+    .btn-secondary:hover {
+      transform: none;
+    }
+    .btn-green:hover {
+      transform: none;
+    }
   }
   
   .btn-secondary {
@@ -38,23 +76,35 @@
   }
 
   .section-title {
-    @apply font-heading text-3xl md:text-4xl lg:text-5xl font-bold text-saccs-text mb-4;
+    @apply font-heading text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-saccs-text mb-4;
   }
 
   .section-subtitle {
-    @apply text-lg text-saccs-grey max-w-2xl mx-auto;
+    @apply text-base sm:text-lg text-saccs-grey max-w-2xl mx-auto px-4;
   }
 
   .title-underline {
-    @apply w-20 h-1 bg-gradient-to-r from-primary to-primary-light rounded-full mx-auto mb-6;
+    @apply w-16 sm:w-20 h-1 bg-gradient-to-r from-primary to-primary-light rounded-full mx-auto mb-6;
   }
 
   .card-hover {
-    @apply transition-all duration-300 hover:-translate-y-2 hover:shadow-saccs-lg;
+    @apply transition-all duration-300;
+  }
+  
+  /* Only apply hover effects on devices that support hover */
+  @media (hover: hover) {
+    .card-hover:hover {
+      @apply -translate-y-2 shadow-saccs-lg;
+    }
   }
 
   .gradient-text {
     @apply bg-gradient-to-r from-primary to-primary-light bg-clip-text text-transparent;
+  }
+  
+  /* Touch-friendly interactive elements */
+  .touch-manipulation {
+    touch-action: manipulation;
   }
 }
 
@@ -70,23 +120,34 @@
   .glass-dark {
     @apply bg-black/20 backdrop-blur-md;
   }
+  
+  /* GPU acceleration for animations */
+  .will-change-opacity {
+    will-change: opacity;
+  }
+  
+  .will-change-transform {
+    will-change: transform;
+  }
 }
 
-/* Custom scrollbar */
-::-webkit-scrollbar {
-  width: 8px;
-}
+/* Custom scrollbar - only on non-touch devices */
+@media (hover: hover) {
+  ::-webkit-scrollbar {
+    width: 8px;
+  }
 
-::-webkit-scrollbar-track {
-  @apply bg-saccs-light;
-}
+  ::-webkit-scrollbar-track {
+    @apply bg-saccs-light;
+  }
 
-::-webkit-scrollbar-thumb {
-  @apply bg-primary/50 rounded-full;
-}
+  ::-webkit-scrollbar-thumb {
+    @apply bg-primary/50 rounded-full;
+  }
 
-::-webkit-scrollbar-thumb:hover {
-  @apply bg-primary;
+  ::-webkit-scrollbar-thumb:hover {
+    @apply bg-primary;
+  }
 }
 
 /* Hero slider transitions */
@@ -98,9 +159,12 @@
   @apply opacity-100;
 }
 
-/* Form styles */
+/* Form styles - iOS Safari fixes */
 .form-input {
   @apply w-full px-4 py-4 border-2 border-gray-200 rounded-xl font-sans text-base transition-all duration-200 bg-white focus:outline-none focus:border-primary;
+  -webkit-appearance: none;
+  appearance: none;
+  font-size: 16px; /* Prevents iOS zoom on focus */
 }
 
 /* Infinite scroll carousel */
@@ -117,8 +181,11 @@
   animation: scroll-infinite 30s linear infinite;
 }
 
-.animate-scroll-infinite:hover {
-  animation-play-state: paused;
+/* Only pause on hover for devices with hover support */
+@media (hover: hover) {
+  .animate-scroll-infinite:hover {
+    animation-play-state: paused;
+  }
 }
 
 /* Fade in animation */
@@ -131,4 +198,24 @@
 .fade-in-view.visible {
   opacity: 1;
   transform: translateY(0);
+}
+
+/* Reduced motion preference */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+  
+  .animate-scroll-infinite {
+    animation: none;
+  }
+  
+  .fade-in-view {
+    opacity: 1;
+    transform: none;
+  }
 }

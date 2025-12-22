@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import Image from 'next/image';
 
 const heroImages = [
@@ -12,14 +12,18 @@ const heroImages = [
 
 export default function Hero() {
   const [currentSlide, setCurrentSlide] = useState(0);
+  const [isPaused, setIsPaused] = useState(false);
+
+  const nextSlide = useCallback(() => {
+    setCurrentSlide((prev) => (prev + 1) % heroImages.length);
+  }, []);
 
   useEffect(() => {
-    const interval = setInterval(() => {
-      setCurrentSlide((prev) => (prev + 1) % heroImages.length);
-    }, 5000);
-
+    if (isPaused) return;
+    
+    const interval = setInterval(nextSlide, 5000);
     return () => clearInterval(interval);
-  }, []);
+  }, [isPaused, nextSlide]);
 
   const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
     e.preventDefault();
@@ -31,15 +35,22 @@ export default function Hero() {
   };
 
   return (
-    <section id="home" className="relative min-h-screen flex items-center justify-center overflow-hidden pt-20">
-      {/* Background Slider */}
+    <section 
+      id="home" 
+      className="relative flex items-center justify-center overflow-hidden pt-20"
+      style={{ minHeight: '100dvh' }}
+      onMouseEnter={() => setIsPaused(true)}
+      onMouseLeave={() => setIsPaused(false)}
+    >
+      {/* Background Slider - Optimized for performance */}
       <div className="absolute inset-0">
         {heroImages.map((image, index) => (
           <div
             key={image.src}
-            className={`absolute inset-0 transition-opacity duration-1000 ${
+            className={`absolute inset-0 transition-opacity duration-1000 will-change-opacity ${
               index === currentSlide ? 'opacity-100' : 'opacity-0'
             }`}
+            aria-hidden={index !== currentSlide}
           >
             <Image
               src={image.src}
@@ -47,40 +58,43 @@ export default function Hero() {
               fill
               className="object-cover"
               priority={index === 0}
-              quality={90}
+              loading={index === 0 ? 'eager' : 'lazy'}
+              quality={85}
+              sizes="100vw"
             />
           </div>
         ))}
       </div>
 
-      {/* Overlay */}
-      <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/50 to-black/70" />
+      {/* Enhanced Overlay for better text readability */}
+      <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/60 to-black/80" />
 
       {/* Content */}
-      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center py-8">
         <div className="animate-fade-in-up">
           {/* Badge */}
-          <div className="inline-flex items-center gap-2 px-4 py-2 bg-white/10 backdrop-blur-md rounded-full border border-white/20 mb-8">
+          <div className="inline-flex items-center gap-2 px-4 py-2 bg-white/10 backdrop-blur-md rounded-full border border-white/20 mb-6 sm:mb-8">
             <span className="w-2 h-2 bg-primary rounded-full animate-pulse" />
-            <span className="text-white/90 text-sm font-medium">Sinds 2012 actief in Suriname</span>
+            <span className="text-white/90 text-xs sm:text-sm font-medium">Sinds 2012 actief in Suriname</span>
           </div>
 
-          <h1 className="font-heading text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-white mb-6 leading-tight">
+          <h1 className="font-heading text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold text-white mb-4 sm:mb-6 leading-tight px-2">
             Uw partner in{' '}
             <span className="text-primary-light">professionele</span>
-            <br />
+            <br className="hidden sm:block" />
+            <span className="sm:hidden"> </span>
             schoonmaakdiensten
           </h1>
 
-          <p className="text-xl sm:text-2xl md:text-3xl text-white/90 italic font-light mb-10">
+          <p className="text-lg sm:text-xl md:text-2xl lg:text-3xl text-white/90 italic font-light mb-8 sm:mb-10">
             &ldquo;Wij doen wat wij zeggen&rdquo;
           </p>
 
-          <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
+          <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center items-center px-4">
             <a
               href="#contact"
               onClick={(e) => handleNavClick(e, '#contact')}
-              className="btn btn-primary group"
+              className="btn btn-primary w-full sm:w-auto min-h-[48px] touch-manipulation"
             >
               <span>Vraag een offerte aan</span>
               <svg
@@ -95,15 +109,15 @@ export default function Hero() {
             <a
               href="#diensten"
               onClick={(e) => handleNavClick(e, '#diensten')}
-              className="btn btn-secondary"
+              className="btn btn-secondary w-full sm:w-auto min-h-[48px] touch-manipulation"
             >
               Bekijk onze diensten
             </a>
           </div>
         </div>
 
-        {/* Stats */}
-        <div className="mt-16 sm:mt-20 grid grid-cols-2 md:grid-cols-4 gap-6 max-w-4xl mx-auto">
+        {/* Stats - Improved mobile layout */}
+        <div className="mt-12 sm:mt-16 md:mt-20 grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-4 md:gap-6 max-w-4xl mx-auto px-2">
           {[
             { number: '13+', label: 'Jaar ervaring' },
             { number: '50+', label: 'Tevreden klanten' },
@@ -112,18 +126,18 @@ export default function Hero() {
           ].map((stat, index) => (
             <div
               key={stat.label}
-              className="p-4 bg-white/10 backdrop-blur-md rounded-2xl border border-white/10"
+              className="p-3 sm:p-4 bg-white/10 backdrop-blur-md rounded-xl sm:rounded-2xl border border-white/10"
               style={{ animationDelay: `${index * 100}ms` }}
             >
-              <div className="text-3xl sm:text-4xl font-bold text-primary-light mb-1">{stat.number}</div>
-              <div className="text-white/70 text-sm">{stat.label}</div>
+              <div className="text-2xl sm:text-3xl md:text-4xl font-bold text-primary-light mb-1">{stat.number}</div>
+              <div className="text-white/70 text-xs sm:text-sm">{stat.label}</div>
             </div>
           ))}
         </div>
       </div>
 
-      {/* Scroll Indicator */}
-      <div className="absolute bottom-8 left-1/2 -translate-x-1/2 z-10">
+      {/* Scroll Indicator - Hidden on very small screens */}
+      <div className="absolute bottom-28 sm:bottom-8 left-1/2 -translate-x-1/2 z-10 hidden sm:block">
         <div className="w-8 h-12 border-2 border-white/50 rounded-full flex justify-center p-2">
           <div className="w-1.5 h-3 bg-white rounded-full animate-bounce" />
         </div>
@@ -145,14 +159,14 @@ export default function Hero() {
         </svg>
       </div>
 
-      {/* Slide Indicators */}
-      <div className="absolute bottom-24 left-1/2 -translate-x-1/2 z-10 flex gap-2">
+      {/* Slide Indicators - Better positioned for mobile */}
+      <div className="absolute bottom-20 sm:bottom-24 left-1/2 -translate-x-1/2 z-10 flex gap-2">
         {heroImages.map((_, index) => (
           <button
             key={index}
             onClick={() => setCurrentSlide(index)}
-            className={`w-2 h-2 rounded-full transition-all duration-300 ${
-              index === currentSlide ? 'w-8 bg-primary' : 'bg-white/50 hover:bg-white/70'
+            className={`h-2 rounded-full transition-all duration-300 min-w-[32px] touch-manipulation ${
+              index === currentSlide ? 'w-8 bg-primary' : 'w-2 bg-white/50 hover:bg-white/70'
             }`}
             aria-label={`Ga naar slide ${index + 1}`}
           />
