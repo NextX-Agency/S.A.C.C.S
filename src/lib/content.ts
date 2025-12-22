@@ -177,7 +177,7 @@ export const services = [
 
 export const clients = [
   { name: 'Torarica Hotel', logo: '/carousel/torarica.jpg', description: 'Premium resort Suriname' },
-  { name: 'Hard Rock Cafe', logo: '/carousel/hardrock.jpg', description: 'Wereldberoemd restaurant' },
+  { name: 'Hard Rock Cafe', logo: '/carousel/hardrock.png', fallbackLogo: '/carousel/hardrock.jpg', description: 'Wereldberoemd restaurant' },
   { name: 'Radisson Hotel', logo: '/carousel/radisson.png', description: 'Luxe accommodatie' },
   { name: 'AZP Suriname', logo: '/carousel/azplogo.jpg', description: 'Medische faciliteit' },
 ];
@@ -191,7 +191,8 @@ export const references = [
   },
   {
     name: 'Hard Rock Cafe',
-    logo: '/carousel/hardrock.jpg',
+    logo: '/carousel/hardrock.png',
+    fallbackLogo: '/carousel/hardrock.jpg',
     category: 'Horeca',
     description: 'Restaurant- en keukenreiniging volgens strenge hygiënenormen.',
   },

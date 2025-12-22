@@ -5,13 +5,14 @@ import Image from 'next/image';
 
 const clients = [
   { src: '/carousel/torarica.jpg', alt: 'Torarica Hotel' },
-  { src: '/carousel/hardrock.jpg', alt: 'Hard Rock Cafe' },
+  { src: '/carousel/hardrock.png', alt: 'Hard Rock Cafe', fallback: '/carousel/hardrock.jpg' },
   { src: '/carousel/azplogo.jpg', alt: 'AZP Suriname' },
   { src: '/carousel/radisson.png', alt: 'Radisson Hotel' },
 ];
 
 export default function ClientsCarousel() {
   const [isLoaded, setIsLoaded] = useState(false);
+  const [fallbacks, setFallbacks] = useState<Record<string, string>>({});
   
   // Duplicate clients for infinite scroll effect
   const duplicatedClients = [...clients, ...clients, ...clients, ...clients];
@@ -53,12 +54,17 @@ export default function ClientsCarousel() {
             >
               <div className="w-28 h-20 sm:w-40 sm:h-24 relative grayscale hover:grayscale-0 opacity-60 hover:opacity-100 transition-all duration-300">
                 <Image
-                  src={client.src}
+                  src={fallbacks[client.alt] ?? client.src}
                   alt={client.alt}
                   fill
                   className="object-contain"
                   loading="lazy"
                   sizes="(max-width: 640px) 112px, 160px"
+                  onError={() => {
+                    if (client.fallback && !fallbacks[client.alt]) {
+                      setFallbacks((prev) => ({ ...prev, [client.alt]: client.fallback! }));
+                    }
+                  }}
                 />
               </div>
             </div>

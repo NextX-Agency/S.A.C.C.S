@@ -37,8 +37,7 @@ export default function Hero() {
   return (
     <section 
       id="home" 
-      className="relative flex items-center justify-center overflow-hidden pt-20"
-      style={{ minHeight: '100dvh' }}
+      className="relative flex items-center justify-center overflow-hidden pt-20 min-h-[115dvh] pb-24 sm:pb-32"
       onMouseEnter={() => setIsPaused(true)}
       onMouseLeave={() => setIsPaused(false)}
     >

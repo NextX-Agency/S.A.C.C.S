@@ -35,7 +35,7 @@ export default function Footer() {
                 alt="SACCS Logo"
                 width={200}
                 height={80}
-                className="h-20 w-auto mb-4 brightness-0 invert"
+                className="h-20 w-auto mb-4 drop-shadow-[0_4px_10px_rgba(0,0,0,0.3)]"
               />
             </Link>
             <p className="text-white/80 italic text-lg mb-6">&quot;Wij doen wat wij zeggen&quot;</p>

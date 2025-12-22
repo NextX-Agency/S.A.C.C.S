@@ -7,6 +7,7 @@ import { references } from '@/lib/content';
 export default function ReferencesSection() {
   const [isVisible, setIsVisible] = useState(false);
   const [imageErrors, setImageErrors] = useState<Set<string>>(new Set());
+  const [fallbackLogos, setFallbackLogos] = useState<Record<string, string>>({});
   const sectionRef = useRef<HTMLElement>(null);
 
   useEffect(() => {
@@ -27,7 +28,11 @@ export default function ReferencesSection() {
     return () => observer.disconnect();
   }, []);
 
-  const handleImageError = (name: string) => {
+  const handleImageError = (name: string, fallback?: string) => {
+    if (fallback && !fallbackLogos[name]) {
+      setFallbackLogos(prev => ({ ...prev, [name]: fallback }));
+      return;
+    }
     setImageErrors(prev => new Set(prev).add(name));
   };
 
@@ -57,13 +62,13 @@ export default function ReferencesSection() {
               <div className="relative w-full aspect-[3/2] mb-2 sm:mb-3 md:mb-4 flex items-center justify-center">
                 {!imageErrors.has(ref.name) ? (
                   <Image
-                    src={ref.logo}
+                    src={fallbackLogos[ref.name] ?? ref.logo}
                     alt={ref.name}
                     fill
                     className="object-contain grayscale group-hover:grayscale-0 transition-all duration-300"
                     sizes="(max-width: 640px) 45vw, (max-width: 1024px) 25vw, 20vw"
                     loading="lazy"
-                    onError={() => handleImageError(ref.name)}
+                    onError={() => handleImageError(ref.name, ref.fallbackLogo)}
                   />
                 ) : (
                   <div className="w-full h-full flex items-center justify-center bg-saccs-light rounded-lg">
