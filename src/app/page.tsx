@@ -1,5 +1,6 @@
 import Navbar from '@/components/Navbar';
 import Hero from '@/components/Hero';
+import Stats from '@/components/Stats';
 import ClientsCarousel from '@/components/ClientsCarousel';
 import AboutSection from '@/components/AboutSection';
 import ServicesSection from '@/components/ServicesSection';
@@ -15,6 +16,7 @@ export default function HomePage() {
       <Navbar />
       <main>
         <Hero />
+        <Stats />
         <ClientsCarousel />
         <AboutSection />
         <ServicesSection />

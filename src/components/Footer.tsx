@@ -2,8 +2,10 @@
 
 import Image from 'next/image';
 import Link from 'next/link';
+import { usePathname } from 'next/navigation';
+import { siteConfig, contactInfo, navigation } from '@/lib/content';
 
-const footerLinks = [
+const homeFooterLinks = [
   { href: '#home', label: 'Home' },
   { href: '#over-ons', label: 'Over Ons' },
   { href: '#diensten', label: 'Diensten' },
@@ -13,120 +15,180 @@ const footerLinks = [
 
 export default function Footer() {
   const currentYear = new Date().getFullYear();
+  const pathname = usePathname();
+  const isHomePage = pathname === '/';
+  const quickLinks = isHomePage ? homeFooterLinks : navigation.footer.quickLinks;
 
   const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
-    e.preventDefault();
-    const target = document.querySelector(href);
-    if (target) {
-      const offsetTop = target.getBoundingClientRect().top + window.scrollY - 80;
-      window.scrollTo({ top: offsetTop, behavior: 'smooth' });
+    if (isHomePage && href.startsWith('#')) {
+      e.preventDefault();
+      const target = document.querySelector(href);
+      if (target) {
+        const offsetTop = target.getBoundingClientRect().top + window.scrollY - 70;
+        window.scrollTo({ top: offsetTop, behavior: 'smooth' });
+      }
     }
   };
 
   return (
-    <footer className="bg-gradient-to-br from-[#2a9d5f] to-[#1e7347] text-white">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
-          {/* Logo & Slogan */}
-          <div className="lg:col-span-2">
-            <Link href="#home" onClick={(e) => handleNavClick(e, '#home')}>
-              <Image
-                src="/logo/noslogan.png"
-                alt="SACCS Logo"
-                width={200}
-                height={80}
-                className="h-20 w-auto mb-4 drop-shadow-[0_4px_10px_rgba(0,0,0,0.3)]"
-              />
-            </Link>
-            <p className="text-white/80 italic text-lg mb-6">&quot;Wij doen wat wij zeggen&quot;</p>
-            <p className="text-white/70 leading-relaxed max-w-md">
-              SACCS is uw betrouwbare partner voor professionele schoonmaakdiensten in Suriname. 
-              Met meer dan 13 jaar ervaring leveren wij kwaliteit die zichtbaar en voelbaar is.
+    <footer className="bg-gray-900 text-white">
+      {/* Main Footer */}
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 lg:gap-12">
+          {/* Company Info */}
+          <div className="lg:col-span-1">
+            {isHomePage ? (
+              <a href="#home" onClick={(e) => handleNavClick(e, '#home')} className="inline-block mb-6">
+                <Image
+                  src="/logo/noslogan.png"
+                  alt="SACCS Logo"
+                  width={140}
+                  height={50}
+                  className="h-12 w-auto brightness-0 invert"
+                />
+              </a>
+            ) : (
+              <Link href="/" className="inline-block mb-6">
+                <Image
+                  src="/logo/noslogan.png"
+                  alt="SACCS Logo"
+                  width={140}
+                  height={50}
+                  className="h-12 w-auto brightness-0 invert"
+                />
+              </Link>
+            )}
+            <p className="text-gray-400 text-sm mb-4 leading-relaxed">
+              {siteConfig.description}
+            </p>
+            <p className="text-primary font-medium text-sm italic">
+              &ldquo;{siteConfig.tagline}&rdquo;
             </p>
           </div>
 
           {/* Quick Links */}
           <div>
-            <h4 className="font-heading font-bold text-lg mb-6">Snelle Links</h4>
-            <ul className="space-y-3">
-              {footerLinks.map((link) => (
+            <h3 className="font-heading text-base font-bold mb-5 text-white">Snelle Links</h3>
+            <ul className="space-y-2.5">
+              {quickLinks.map((link) => (
                 <li key={link.href}>
-                  <a
-                    href={link.href}
-                    onClick={(e) => handleNavClick(e, link.href)}
-                    className="text-white/70 hover:text-primary-light transition-colors duration-200 flex items-center gap-2 group"
-                  >
-                    <span className="w-1.5 h-1.5 bg-primary-light rounded-full opacity-0 group-hover:opacity-100 transition-opacity" />
-                    {link.label}
-                  </a>
+                  {isHomePage && link.href.startsWith('#') ? (
+                    <a
+                      href={link.href}
+                      onClick={(e) => handleNavClick(e, link.href)}
+                      className="text-gray-400 hover:text-white transition-colors text-sm"
+                    >
+                      {link.label}
+                    </a>
+                  ) : (
+                    <Link
+                      href={link.href}
+                      className="text-gray-400 hover:text-white transition-colors text-sm"
+                    >
+                      {link.label}
+                    </Link>
+                  )}
                 </li>
               ))}
             </ul>
           </div>
 
-          {/* Contact Info */}
+          {/* Legal */}
           <div>
-            <h4 className="font-heading font-bold text-lg mb-6">Contact</h4>
-            <div className="space-y-4">
-              <div>
-                <p className="text-white/50 text-sm mb-1">Directeur</p>
-                <p className="font-medium">Safiek Jahangier</p>
-              </div>
-              <div>
-                <p className="text-white/50 text-sm mb-1">Telefoon</p>
+            <h3 className="font-heading text-base font-bold mb-5 text-white">Juridisch</h3>
+            <ul className="space-y-2.5">
+              {navigation.footer.legal.map((link) => (
+                <li key={link.href}>
+                  <Link
+                    href={link.href}
+                    className="text-gray-400 hover:text-white transition-colors text-sm"
+                  >
+                    {link.label}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          {/* Contact */}
+          <div>
+            <h3 className="font-heading text-base font-bold mb-5 text-white">Contact</h3>
+            <ul className="space-y-3">
+              <li>
+                <div className="text-gray-500 text-xs mb-1">Directeur</div>
+                <div className="text-gray-300 text-sm">{contactInfo.director.name}</div>
+              </li>
+              <li>
                 <a
-                  href="tel:+5978517364"
-                  className="font-medium hover:text-primary-light transition-colors"
+                  href={contactInfo.phone.href}
+                  className="block text-gray-400 hover:text-white transition-colors text-sm"
                 >
-                  +597 8517364
+                  {contactInfo.phone.display}
                 </a>
-              </div>
-              <div>
-                <p className="text-white/50 text-sm mb-1">E-mail</p>
+              </li>
+              <li>
                 <a
-                  href="mailto:jahangier_s@hotmail.com"
-                  className="font-medium hover:text-primary-light transition-colors break-all"
+                  href={contactInfo.email.href}
+                  className="block text-gray-400 hover:text-white transition-colors text-sm break-all"
                 >
-                  jahangier_s@hotmail.com
+                  {contactInfo.email.display}
                 </a>
-              </div>
-            </div>
+              </li>
+            </ul>
           </div>
         </div>
+      </div>
 
-        {/* Bottom Bar */}
-        <div className="mt-16 pt-8 border-t border-white/10">
+      {/* Bottom Bar */}
+      <div className="border-t border-gray-800 bg-black">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-5">
           <div className="flex flex-col md:flex-row justify-between items-center gap-4">
-            <p className="text-white/50 text-sm text-center md:text-left">
-              © {currentYear} SACCS - S.A. Cleaning Consultancy Suriname. Alle rechten voorbehouden.
+            <p className="text-gray-500 text-xs text-center md:text-left">
+              &copy; {currentYear} {siteConfig.fullName}. Alle rechten voorbehouden.
             </p>
-            <div className="flex items-center gap-6">
+            <div className="flex items-center gap-3">
               <a
-                href="#"
-                className="w-10 h-10 bg-white/10 rounded-full flex items-center justify-center hover:bg-white/20 transition-colors"
+                href={contactInfo.social.facebook}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-9 h-9 rounded-full border border-gray-700 flex items-center justify-center text-gray-400 hover:border-primary hover:text-primary transition-colors"
                 aria-label="Facebook"
               >
-                <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
-                  <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z" />
+                <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M18.77 7.46H14.5v-1.9c0-.9.6-1.1 1-1.1h3V.5h-4.33C10.24.5 9.5 3.44 9.5 5.32v2.15h-3v4h3v12h5v-12h3.85l.42-4z"/>
                 </svg>
               </a>
               <a
-                href="https://wa.me/5978517364"
-                className="w-10 h-10 bg-white/10 rounded-full flex items-center justify-center hover:bg-white/20 transition-colors"
+                href={contactInfo.social.instagram}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-9 h-9 rounded-full border border-gray-700 flex items-center justify-center text-gray-400 hover:border-primary hover:text-primary transition-colors"
+                aria-label="Instagram"
+              >
+                <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+                </svg>
+              </a>
+              <a
+                href={contactInfo.social.linkedin}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-9 h-9 rounded-full border border-gray-700 flex items-center justify-center text-gray-400 hover:border-primary hover:text-primary transition-colors"
+                aria-label="LinkedIn"
+              >
+                <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/>
+                </svg>
+              </a>
+              <a
+                href={contactInfo.phone.whatsapp}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-9 h-9 rounded-full border border-gray-700 flex items-center justify-center text-gray-400 hover:border-primary hover:text-primary transition-colors"
                 aria-label="WhatsApp"
               >
-                <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
-                  <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z" />
-                </svg>
-              </a>
-              <a
-                href="mailto:jahangier_s@hotmail.com"
-                className="w-10 h-10 bg-white/10 rounded-full flex items-center justify-center hover:bg-white/20 transition-colors"
-                aria-label="Email"
-              >
-                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2">
-                  <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" />
-                  <polyline points="22,6 12,13 2,6" />
+                <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
                 </svg>
               </a>
             </div>
@@ -134,8 +196,8 @@ export default function Footer() {
         </div>
       </div>
 
-      {/* Scroll to Top Button */}
-      <ScrollToTop />
+      {/* Scroll to Top Button - Only on homepage */}
+      {isHomePage && <ScrollToTop />}
     </footer>
   );
 }
@@ -148,12 +210,12 @@ function ScrollToTop() {
   return (
     <button
       onClick={scrollToTop}
-      className="fixed bottom-24 right-6 w-11 h-11 sm:w-12 sm:h-12 bg-primary text-white rounded-full shadow-saccs-lg flex items-center justify-center hover:bg-primary-dark transition-all duration-300 z-40 touch-manipulation"
+      className="fixed bottom-24 right-6 w-11 h-11 bg-primary text-white rounded-full shadow-saccs-md flex items-center justify-center hover:bg-primary-dark transition-all duration-200 z-40 touch-manipulation"
       aria-label="Scroll naar boven"
       style={{ WebkitTapHighlightColor: 'transparent' }}
     >
-      <svg className="w-5 h-5 sm:w-6 sm:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 10l7-7m0 0l7 7m-7-7v18" />
+      <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={2}>
+        <path strokeLinecap="round" strokeLinejoin="round" d="M5 10l7-7m0 0l7 7m-7-7v18" />
       </svg>
     </button>
   );

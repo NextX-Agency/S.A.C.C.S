@@ -79,103 +79,79 @@ export default function ContactSection() {
   };
 
   return (
-    <section ref={sectionRef} id="contact" className="py-24 bg-white">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section ref={sectionRef} id="contact" className="py-16 md:py-20 bg-saccs-light">
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
-        <div className="text-center mb-16">
-          <h2 className="section-title">Neem Contact Op</h2>
-          <div className="title-underline" />
-          <p className="section-subtitle">
+        <div className="text-center mb-12 md:mb-16">
+          <h2 className="font-heading text-3xl md:text-4xl font-bold text-saccs-text mb-4">
+            Neem Contact Op
+          </h2>
+          <p className="text-saccs-grey text-base md:text-lg max-w-2xl mx-auto">
             Vraag een offerte aan of stel uw vraag – wij reageren binnen 24 uur
           </p>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-12">
           {/* Contact Info */}
           <div
-            className={`transition-all duration-700 ${
+            className={`transition-all duration-500 ${
               isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-8'
             }`}
           >
-            <div className="space-y-6 mb-10">
+            <div className="space-y-4 mb-8">
               {contactInfo.map((info, index) => (
                 <div
                   key={info.title}
-                  className="flex items-center gap-4 p-5 bg-saccs-light rounded-2xl hover:shadow-saccs-md transition-all duration-300"
+                  className="flex items-center gap-4"
                   style={{ transitionDelay: `${index * 100}ms` }}
                 >
-                  <div className="w-12 h-12 bg-gradient-to-br from-primary to-primary-light rounded-xl flex items-center justify-center text-white flex-shrink-0">
+                  <div className="w-10 h-10 bg-primary/10 rounded-lg flex items-center justify-center text-primary flex-shrink-0">
                     {info.icon}
                   </div>
                   <div>
-                    <p className="text-sm text-saccs-grey font-medium">{info.title}</p>
+                    <p className="text-xs text-saccs-grey font-medium">{info.title}</p>
                     {info.href ? (
                       <a
                         href={info.href}
-                        className="font-heading font-bold text-saccs-text hover:text-primary transition-colors"
+                        className="text-sm font-semibold text-saccs-text hover:text-primary transition-colors"
                       >
                         {info.value}
                       </a>
                     ) : (
-                      <p className="font-heading font-bold text-saccs-text">{info.value}</p>
+                      <p className="text-sm font-semibold text-saccs-text">{info.value}</p>
                     )}
                   </div>
                 </div>
               ))}
             </div>
-
-            {/* Map or Additional Info */}
-            <div className="bg-gradient-to-br from-primary to-primary-dark p-8 rounded-2xl text-white">
-              <h3 className="font-heading text-xl font-bold mb-4">Waarom SACCS kiezen?</h3>
-              <ul className="space-y-3">
-                {[
-                  'Gratis vrijblijvende offerte',
-                  'Maatwerk schoonmaakplannen',
-                  'Ervaren en betrouwbaar personeel',
-                  'Kwaliteitsgarantie op alle diensten',
-                  'Flexibele planning',
-                ].map((item) => (
-                  <li key={item} className="flex items-center gap-3">
-                    <svg className="w-5 h-5 text-primary-light flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
-                      <path
-                        fillRule="evenodd"
-                        d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
-                        clipRule="evenodd"
-                      />
-                    </svg>
-                    <span className="text-white/90">{item}</span>
-                  </li>
-                ))}
-              </ul>
-            </div>
           </div>
 
           {/* Contact Form */}
           <div
-            className={`transition-all duration-700 ${
+            className={`transition-all duration-500 ${
               isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-8'
             }`}
             style={{ transitionDelay: '200ms' }}
           >
-            <div className="bg-white p-8 rounded-2xl shadow-saccs-lg border border-gray-100">
+            <div className="corporate-card p-6 md:p-8">
               {isSubmitted ? (
-                <div className="text-center py-12">
-                  <div className="w-20 h-20 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-6">
-                    <svg className="w-10 h-10 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                <div className="text-center py-8">
+                  <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                    <svg className="w-8 h-8 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={2}>
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
                     </svg>
                   </div>
-                  <h3 className="font-heading text-2xl font-bold text-saccs-text mb-2">
+                  <h3 className="font-heading text-xl font-bold text-saccs-text mb-2">
                     Bedankt voor uw bericht!
                   </h3>
-                  <p className="text-saccs-grey">
+                  <p className="text-saccs-grey text-sm">
                     We nemen zo spoedig mogelijk contact met u op.
                   </p>
                 </div>
               ) : (
-                <form onSubmit={handleSubmit} className="space-y-6">
+                <form onSubmit={handleSubmit} className="space-y-4">
                   <div>
-                    <label htmlFor="name" className="block text-sm font-medium text-saccs-text mb-2">
+                    <label htmlFor="name" className="block text-sm font-medium text-saccs-text mb-1">
                       Naam *
                     </label>
                     <input
@@ -188,9 +164,9 @@ export default function ContactSection() {
                     />
                   </div>
 
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <div>
-                      <label htmlFor="email" className="block text-sm font-medium text-saccs-text mb-2">
+                      <label htmlFor="email" className="block text-sm font-medium text-saccs-text mb-1">
                         E-mail *
                       </label>
                       <input
@@ -203,7 +179,7 @@ export default function ContactSection() {
                       />
                     </div>
                     <div>
-                      <label htmlFor="phone" className="block text-sm font-medium text-saccs-text mb-2">
+                      <label htmlFor="phone" className="block text-sm font-medium text-saccs-text mb-1">
                         Telefoon *
                       </label>
                       <input
@@ -218,13 +194,13 @@ export default function ContactSection() {
                   </div>
 
                   <div>
-                    <label htmlFor="service" className="block text-sm font-medium text-saccs-text mb-2">
+                    <label htmlFor="service" className="block text-sm font-medium text-saccs-text mb-1">
                       Type dienst
                     </label>
                     <select id="service" name="service" className="form-input">
                       <option value="">Selecteer een dienst</option>
-                      <option value="b2b">Zakelijke Schoonmaak (B2B)</option>
-                      <option value="b2c">Particuliere Schoonmaak (B2C)</option>
+                      <option value="b2b">Zakelijke Schoonmaak</option>
+                      <option value="b2c">Particuliere Schoonmaak</option>
                       <option value="event">Evenementenservice</option>
                       <option value="special">Specialistische Diensten</option>
                       <option value="other">Anders</option>
@@ -232,13 +208,13 @@ export default function ContactSection() {
                   </div>
 
                   <div>
-                    <label htmlFor="message" className="block text-sm font-medium text-saccs-text mb-2">
+                    <label htmlFor="message" className="block text-sm font-medium text-saccs-text mb-1">
                       Bericht *
                     </label>
                     <textarea
                       id="message"
                       name="message"
-                      rows={5}
+                      rows={4}
                       required
                       className="form-input resize-none"
                       placeholder="Vertel ons over uw schoonmaakbehoeften..."
@@ -248,7 +224,7 @@ export default function ContactSection() {
                   <button
                     type="submit"
                     disabled={isSubmitting}
-                    className="w-full py-4 bg-primary text-white font-semibold rounded-xl hover:bg-primary-dark transition-all duration-300 disabled:opacity-70 disabled:cursor-not-allowed flex items-center justify-center gap-2 min-h-[52px] touch-manipulation"
+                    className="w-full py-3 bg-primary text-white font-semibold rounded-lg hover:bg-primary-dark transition-all duration-200 disabled:opacity-70 disabled:cursor-not-allowed flex items-center justify-center gap-2 min-h-[48px] touch-manipulation"
                   >
                     {isSubmitting ? (
                       <>
@@ -272,8 +248,8 @@ export default function ContactSection() {
                     ) : (
                       <>
                         <span>Verstuur Bericht</span>
-                        <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                        <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={2}>
+                          <path strokeLinecap="round" strokeLinejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3" />
                         </svg>
                       </>
                     )}

@@ -23,11 +23,11 @@ export default function OverOnsPage() {
       />
 
       {/* Introduction */}
-      <section className="py-20 bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <section className="py-16 md:py-20 bg-white">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             <div>
-              <span className="inline-block px-4 py-2 bg-primary/10 text-primary font-semibold rounded-full text-sm mb-6">
+              <span className="inline-block px-4 py-2 bg-primary/10 text-primary font-semibold rounded-lg text-sm mb-4">
                 Sinds {siteConfig.foundedYear} actief
               </span>
               <h2 className="font-heading text-3xl md:text-4xl font-bold text-saccs-text mb-6">
@@ -42,7 +42,7 @@ export default function OverOnsPage() {
               <div className="flex flex-wrap gap-4">
                 <Link
                   href="/diensten"
-                  className="inline-flex items-center gap-2 px-6 py-3 bg-primary text-white font-semibold rounded-xl hover:bg-primary-dark transition-all duration-300"
+                  className="inline-flex items-center gap-2 px-6 py-3 bg-primary text-white font-semibold rounded-lg hover:bg-primary-dark transition-all duration-300"
                 >
                   Onze Diensten
                   <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -51,28 +51,27 @@ export default function OverOnsPage() {
                 </Link>
                 <Link
                   href="/contact"
-                  className="inline-flex items-center gap-2 px-6 py-3 bg-saccs-light text-saccs-text font-semibold rounded-xl hover:bg-gray-200 transition-all duration-300"
+                  className="inline-flex items-center gap-2 px-6 py-3 bg-saccs-light text-saccs-text font-semibold rounded-lg hover:bg-gray-200 transition-all duration-300"
                 >
                   Contact
                 </Link>
               </div>
             </div>
-            <div className="relative h-[500px] rounded-2xl overflow-hidden shadow-saccs-lg">
+            <div className="relative h-[500px] rounded-lg overflow-hidden">
               <Image
                 src="/beeld/beeld1.jpg"
                 alt="SACCS Team"
                 fill
                 className="object-cover"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-primary/20 to-transparent" />
             </div>
           </div>
         </div>
       </section>
 
       {/* Stats */}
-      <section className="py-16 bg-saccs-light">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <section className="py-12 md:py-16 bg-saccs-light">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
             {stats.map((stat) => (
               <div key={stat.label} className="text-center">
@@ -87,17 +86,16 @@ export default function OverOnsPage() {
       </section>
 
       {/* Mission & Vision */}
-      <section className="py-20 bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <section className="py-16 md:py-20 bg-white">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
-            <h2 className="section-title">Missie & Visie</h2>
-            <div className="title-underline" />
+            <h2 className="font-heading text-3xl md:text-4xl font-bold text-saccs-text mb-4">Missie & Visie</h2>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             {/* Mission */}
-            <div className="bg-gradient-to-br from-primary to-primary-dark p-8 rounded-2xl text-white">
-              <div className="w-14 h-14 bg-white/20 rounded-xl flex items-center justify-center mb-6">
+            <div className="bg-primary p-6 rounded-lg text-white">
+              <div className="w-14 h-14 bg-white/20 rounded-lg flex items-center justify-center mb-6">
                 <svg className="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
                 </svg>
@@ -107,8 +105,8 @@ export default function OverOnsPage() {
             </div>
 
             {/* Vision */}
-            <div className="bg-saccs-light p-8 rounded-2xl">
-              <div className="w-14 h-14 bg-gradient-to-br from-primary to-primary-light rounded-xl flex items-center justify-center text-white mb-6">
+            <div className="border border-gray-200 p-6 rounded-lg">
+              <div className="w-14 h-14 bg-primary rounded-lg flex items-center justify-center text-white mb-6">
                 <svg className="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
@@ -122,12 +120,11 @@ export default function OverOnsPage() {
       </section>
 
       {/* Values */}
-      <section className="py-20 bg-saccs-light">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <section className="py-16 md:py-20 bg-saccs-light">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
-            <h2 className="section-title">Onze Kernwaarden</h2>
-            <div className="title-underline" />
-            <p className="section-subtitle">
+            <h2 className="font-heading text-3xl md:text-4xl font-bold text-saccs-text mb-4">Onze Kernwaarden</h2>
+            <p className="text-saccs-grey text-base md:text-lg max-w-2xl mx-auto">
               De principes die ons werk en onze relaties met klanten bepalen
             </p>
           </div>
@@ -136,9 +133,9 @@ export default function OverOnsPage() {
             {aboutContent.values.map((value, index) => (
               <div
                 key={value.title}
-                className="bg-white p-6 rounded-2xl shadow-saccs-sm hover:shadow-saccs-md transition-all duration-300 hover:-translate-y-2"
+                className="corporate-card p-6"
               >
-                <div className="w-12 h-12 bg-gradient-to-br from-primary to-primary-light rounded-xl flex items-center justify-center text-white mb-4 font-heading font-bold text-lg">
+                <div className="w-12 h-12 bg-primary rounded-lg flex items-center justify-center text-white mb-4 font-heading font-bold text-lg">
                   {index + 1}
                 </div>
                 <h3 className="font-heading text-xl font-bold text-saccs-text mb-2">{value.title}</h3>
@@ -150,19 +147,18 @@ export default function OverOnsPage() {
       </section>
 
       {/* Timeline */}
-      <section className="py-20 bg-white">
+      <section className="py-16 md:py-20 bg-white">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
-            <h2 className="section-title">Onze Geschiedenis</h2>
-            <div className="title-underline" />
-            <p className="section-subtitle">
+            <h2 className="font-heading text-3xl md:text-4xl font-bold text-saccs-text mb-4">Onze Geschiedenis</h2>
+            <p className="text-saccs-grey text-base md:text-lg max-w-2xl mx-auto">
               Een tijdlijn van onze groei en belangrijke mijlpalen
             </p>
           </div>
 
           <div className="relative">
             {/* Timeline Line */}
-            <div className="absolute left-1/2 transform -translate-x-1/2 w-1 h-full bg-gradient-to-b from-primary via-primary-light to-primary rounded-full" />
+            <div className="absolute left-1/2 transform -translate-x-1/2 w-1 h-full bg-gray-200" />
 
             {/* Timeline Items */}
             <div className="space-y-12">
@@ -175,7 +171,7 @@ export default function OverOnsPage() {
                 >
                   {/* Content */}
                   <div className={`w-5/12 ${index % 2 === 0 ? 'text-right pr-8' : 'text-left pl-8'}`}>
-                    <div className="bg-white p-6 rounded-xl shadow-saccs-md border border-gray-100">
+                    <div className="bg-white p-6 rounded-lg shadow-saccs-sm border border-gray-100">
                       <span className="font-heading text-2xl font-bold text-primary">{milestone.year}</span>
                       <p className="text-saccs-grey mt-2">{milestone.event}</p>
                     </div>
@@ -194,7 +190,7 @@ export default function OverOnsPage() {
       </section>
 
       {/* CTA */}
-      <section className="py-20 bg-gradient-to-br from-primary to-primary-dark">
+      <section className="py-20 bg-gray-900">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <h2 className="font-heading text-3xl md:text-4xl font-bold text-white mb-6">
             &ldquo;{siteConfig.tagline}&rdquo;
@@ -204,7 +200,7 @@ export default function OverOnsPage() {
           </p>
           <Link
             href="/contact"
-            className="inline-flex items-center gap-2 px-8 py-4 bg-white text-primary font-semibold rounded-xl hover:bg-gray-100 transition-all duration-300 hover:-translate-y-1 hover:shadow-lg"
+            className="inline-flex items-center gap-2 px-8 py-4 bg-white text-primary font-semibold rounded-lg hover:bg-gray-100 transition-all duration-300"
           >
             <span>Neem contact op</span>
             <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">

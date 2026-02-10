@@ -52,13 +52,13 @@
 
 @layer components {
   .btn {
-    @apply inline-flex items-center justify-center px-6 sm:px-8 py-3 sm:py-4 text-sm sm:text-base font-semibold rounded-xl transition-all duration-300;
+    @apply inline-flex items-center justify-center px-6 sm:px-8 py-3 sm:py-4 text-sm sm:text-base font-semibold rounded-lg transition-all duration-200;
     min-height: 44px; /* iOS touch target minimum */
     touch-action: manipulation;
   }
   
   .btn-primary {
-    @apply bg-white text-primary hover:bg-transparent hover:text-white border-2 border-transparent hover:border-white transform hover:-translate-y-1 hover:shadow-saccs-lg;
+    @apply bg-white text-primary hover:bg-transparent hover:text-white border-2 border-transparent hover:border-white shadow-saccs-sm hover:shadow-saccs-md;
   }
 
   /* Remove transform on touch devices to prevent jank */
@@ -75,11 +75,11 @@
   }
   
   .btn-secondary {
-    @apply bg-transparent text-white border-2 border-white hover:bg-white hover:text-primary transform hover:-translate-y-1 hover:shadow-saccs-lg;
+    @apply bg-transparent text-white border-2 border-white hover:bg-white hover:text-primary shadow-saccs-sm hover:shadow-saccs-md;
   }
 
   .btn-green {
-    @apply bg-primary text-white hover:bg-primary-dark transform hover:-translate-y-1 hover:shadow-saccs-lg;
+    @apply bg-primary text-white hover:bg-primary-dark shadow-saccs-sm hover:shadow-saccs-md;
   }
 
   .section-title {
@@ -95,13 +95,23 @@
   }
 
   .card-hover {
-    @apply transition-all duration-300;
+    @apply transition-all duration-200;
   }
   
   /* Only apply hover effects on devices that support hover */
   @media (hover: hover) {
     .card-hover:hover {
-      @apply -translate-y-2 shadow-saccs-lg;
+      @apply shadow-saccs-md;
+    }
+  }
+
+  .corporate-card {
+    @apply bg-white rounded-lg shadow-saccs-sm transition-shadow duration-200;
+  }
+
+  @media (hover: hover) {
+    .corporate-card:hover {
+      @apply shadow-saccs-md;
     }
   }
 
@@ -159,7 +169,7 @@
 
 /* Hero slider transitions */
 .hero-slide {
-  @apply absolute inset-0 opacity-0 transition-opacity duration-1000;
+  @apply absolute inset-0 opacity-0 transition-opacity duration-[2000ms];
 }
 
 .hero-slide.active {
@@ -168,7 +178,7 @@
 
 /* Form styles - iOS Safari fixes */
 .form-input {
-  @apply w-full px-4 py-4 border-2 border-gray-200 rounded-xl font-sans text-base transition-all duration-200 bg-white focus:outline-none focus:border-primary;
+  @apply w-full px-4 py-4 border border-gray-300 rounded-lg font-sans text-base transition-all duration-200 bg-white focus:outline-none focus:border-primary;
   -webkit-appearance: none;
   appearance: none;
   font-size: 16px; /* Prevents iOS zoom on focus */
