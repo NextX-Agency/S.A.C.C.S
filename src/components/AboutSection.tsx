@@ -96,20 +96,21 @@ export default function AboutSection() {
           ))}
         </div>
 
-        {/* Mission Statement */}
+        {/* Quote */}
         <div
           className={`max-w-3xl mx-auto text-center transition-all duration-500 ${
             isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
           }`}
           style={{ transitionDelay: '300ms' }}
         >
-          <div className="border-l-4 border-primary pl-6 text-left">
-            <p className="text-saccs-text text-base md:text-lg leading-relaxed">
-              Wij zorgen voor schone, hygiënische en uitnodigende omgevingen waarin organisaties en 
-              particulieren in Suriname optimaal kunnen functioneren. Met vakmanschap, betrouwbaarheid 
-              en maatwerk leveren wij schoonmaakoplossingen die meetbaar verschil maken.
-            </p>
-          </div>
+          <svg className="w-10 h-10 mx-auto mb-4 text-primary" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z" />
+          </svg>
+          <p className="text-saccs-text text-base md:text-lg leading-relaxed italic mb-4">
+            &ldquo;Verantwoordelijke schoonmaakdiensten. Ze nemen daartoe hun
+            kwaliteit die zichtbaar en voelbaar is.&rdquo;
+          </p>
+          <p className="text-primary font-semibold text-sm">Radisson Team</p>
         </div>
       </div>
     </section>

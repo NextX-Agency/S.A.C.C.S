@@ -8,12 +8,15 @@ const clients = [
   { src: '/carousel/hardrock.png', alt: 'Hard Rock Cafe', fallback: '/carousel/hardrock.jpg' },
   { src: '/carousel/azplogo.jpg', alt: 'AZP Suriname' },
   { src: '/carousel/radisson.png', alt: 'Radisson Hotel' },
-  { src: '/carousel/torarica.jpg', alt: 'Torarica Hotel 2' },
-  { src: '/carousel/azplogo.jpg', alt: 'AZP Suriname 2' },
+  { src: '/carousel/torarica.jpg', alt: 'Torarica Resort' },
+  { src: '/carousel/azplogo.jpg', alt: 'AZI' },
 ];
 
 export default function ClientsCarousel() {
   const [fallbacks, setFallbacks] = useState<Record<string, string>>({});
+
+  // Duplicate the list to create the seamless infinite loop
+  const doubledClients = [...clients, ...clients];
 
   return (
     <section className="py-16 md:py-20 bg-white">
@@ -23,25 +26,33 @@ export default function ClientsCarousel() {
             Onze klanten
           </h2>
         </div>
+      </div>
 
-        {/* Logo Grid */}
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-8 md:gap-10 items-center justify-items-center">
-          {clients.map((client, index) => (
+      {/* Infinite scrolling carousel — full width, overflow hidden */}
+      <div className="relative overflow-hidden">
+        {/* Fade edges */}
+        <div className="absolute left-0 top-0 bottom-0 w-16 md:w-24 bg-gradient-to-r from-white to-transparent z-10 pointer-events-none" />
+        <div className="absolute right-0 top-0 bottom-0 w-16 md:w-24 bg-gradient-to-l from-white to-transparent z-10 pointer-events-none" />
+
+        {/* Scrolling track */}
+        <div className="animate-scroll-infinite flex items-center gap-12 md:gap-16 w-max hover:[animation-play-state:paused]">
+          {doubledClients.map((client, index) => (
             <div
               key={`${client.alt}-${index}`}
-              className="w-full flex items-center justify-center"
+              className="flex items-center justify-center flex-shrink-0"
             >
-              <div className="w-28 h-20 sm:w-32 sm:h-22 md:w-36 md:h-24 relative grayscale opacity-60">
+              <div className="w-28 h-20 sm:w-32 sm:h-22 md:w-36 md:h-24 relative grayscale hover:grayscale-0 opacity-60 hover:opacity-100 transition-all duration-300">
                 <Image
-                  src={fallbacks[client.alt] ?? client.src}
+                  src={fallbacks[client.alt + index] ?? client.src}
                   alt={client.alt}
                   fill
                   className="object-contain"
                   loading="lazy"
                   sizes="(max-width: 640px) 112px, (max-width: 768px) 128px, 144px"
                   onError={() => {
-                    if (client.fallback && !fallbacks[client.alt]) {
-                      setFallbacks((prev) => ({ ...prev, [client.alt]: client.fallback! }));
+                    const key = client.alt + index;
+                    if (client.fallback && !fallbacks[key]) {
+                      setFallbacks((prev) => ({ ...prev, [key]: client.fallback! }));
                     }
                   }}
                 />

@@ -62,14 +62,20 @@ export default function ServicesSection() {
           observer.disconnect();
         }
       },
-      { threshold: 0.1 }
+      { threshold: 0.05, rootMargin: '50px' }
     );
 
     if (sectionRef.current) {
       observer.observe(sectionRef.current);
     }
 
-    return () => observer.disconnect();
+    // Fallback: if observer hasn't fired after 1s, force visible
+    const fallback = setTimeout(() => setIsVisible(true), 1000);
+
+    return () => {
+      observer.disconnect();
+      clearTimeout(fallback);
+    };
   }, []);
 
   const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
@@ -95,19 +101,19 @@ export default function ServicesSection() {
         </div>
 
         {/* Services Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8 mb-12">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8 mb-12">
           {services.map((service, index) => (
             <div
               key={service.title}
-              className={`corporate-card p-6 transition-all duration-500 ${
-                isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+              className={`corporate-card p-6 text-center transition-all duration-700 ${
+                isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'
               }`}
-              style={{ transitionDelay: `${index * 100}ms` }}
+              style={{ transitionDelay: isVisible ? `${index * 150}ms` : '0ms' }}
             >
-              <div className="w-12 h-12 bg-icon-bg rounded-lg flex items-center justify-center text-primary mb-4">
+              <div className="w-14 h-14 mx-auto bg-icon-bg rounded-xl flex items-center justify-center text-primary mb-4">
                 {service.icon}
               </div>
-              <h3 className="font-heading text-lg font-bold text-saccs-text mb-3">
+              <h3 className="font-heading text-base font-bold text-saccs-text mb-3">
                 {service.title}
               </h3>
               <p className="text-saccs-grey text-sm leading-relaxed">{service.description}</p>
@@ -120,7 +126,7 @@ export default function ServicesSection() {
           <a
             href="#contact"
             onClick={handleNavClick}
-            className="inline-flex items-center gap-2 px-6 py-3 bg-primary text-white font-semibold rounded-lg hover:bg-primary-dark transition-all duration-200"
+            className="inline-flex items-center gap-2 px-8 py-3 bg-primary text-white font-semibold rounded-full hover:bg-primary-dark transition-all duration-200"
           >
             <span>Bekijk alle diensten</span>
             <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={2}>
