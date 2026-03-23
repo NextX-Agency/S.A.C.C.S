@@ -70,7 +70,7 @@ export default function ProcessSection() {
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16">
           {/* Left: Process Steps */}
-          <div>
+          <div className="lg:pt-14">
             <h2 className="font-heading text-3xl md:text-4xl font-bold text-white mb-10">
               Onze Werkwijze
             </h2>
@@ -97,17 +97,6 @@ export default function ProcessSection() {
               ))}
             </div>
 
-            <div className="mt-8">
-              <a
-                href="#contact"
-                className="inline-flex items-center gap-2 px-6 py-3 bg-primary text-white font-semibold rounded-lg hover:bg-primary-dark transition-all duration-200"
-              >
-                <span>Neem contact op</span>
-                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={2}>
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
-                </svg>
-              </a>
-            </div>
           </div>
 
           {/* Right: Contact Form */}

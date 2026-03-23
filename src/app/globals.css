@@ -106,7 +106,7 @@
   }
 
   .corporate-card {
-    @apply bg-white rounded-lg shadow-saccs-sm transition-shadow duration-200;
+    @apply bg-white rounded-xl shadow-saccs-sm transition-shadow duration-200 border border-gray-100;
   }
 
   @media (hover: hover) {

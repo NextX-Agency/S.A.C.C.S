@@ -40,21 +40,21 @@ export default function Footer() {
             {isHomePage ? (
               <a href="#home" onClick={(e) => handleNavClick(e, '#home')} className="inline-block mb-6">
                 <Image
-                  src="/logo/noslogan.png"
+                  src="/logo/barelogo-removebg-preview.png"
                   alt="SACCS Logo"
                   width={140}
-                  height={50}
-                  className="h-12 w-auto brightness-0 invert"
+                  height={140}
+                  className="h-12 w-auto"
                 />
               </a>
             ) : (
               <Link href="/" className="inline-block mb-6">
                 <Image
-                  src="/logo/noslogan.png"
+                  src="/logo/barelogo-removebg-preview.png"
                   alt="SACCS Logo"
                   width={140}
-                  height={50}
-                  className="h-12 w-auto brightness-0 invert"
+                  height={140}
+                  className="h-12 w-auto"
                 />
               </Link>
             )}
