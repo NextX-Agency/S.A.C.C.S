@@ -3,7 +3,7 @@ export default function Stats() {
     { number: '13+', label: 'Jaar ervaring' },
     { number: '50+', label: 'Tevreden klanten' },
     { number: '100%', label: 'Kwaliteitsgarantie' },
-    { number: '24/7', label: 'Ondersteuning' },
+    { number: '6/7', label: 'Dagen bereikbaar' },
   ];
 
   return (

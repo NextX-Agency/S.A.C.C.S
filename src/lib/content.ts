@@ -76,7 +76,7 @@ export const stats = [
   { value: '13+', label: 'Jaar ervaring', suffix: '' },
   { value: '50+', label: 'Tevreden klanten', suffix: '' },
   { value: '100%', label: 'Tevredenheidsgarantie', suffix: '' },
-  { value: '24/7', label: 'Beschikbaarheid', suffix: '' },
+  { value: '6/7', label: 'Dagen bereikbaar', suffix: '' },
 ];
 
 export const services = [
@@ -144,7 +144,7 @@ export const services = [
     benefits: [
       'Professionele uitstraling gedurende het event',
       'Snelle responstijd bij ongelukken',
-      '24/7 beschikbaarheid',
+      '6 dagen per week bereikbaar',
       'Ervaring met grote evenementen',
     ],
     icon: 'users',
