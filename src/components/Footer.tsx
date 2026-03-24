@@ -50,9 +50,28 @@ export default function Footer() {
 
   return (
     <footer className="bg-slate-50 w-full border-t border-slate-100">
-      <div className="grid grid-cols-2 md:grid-cols-4 gap-6 lg:gap-12 max-w-7xl mx-auto px-4 lg:px-8 py-10 lg:py-16">
+      {/* Mobile: Minimal centered footer */}
+      <div className="lg:hidden flex flex-col items-center gap-6 w-full text-center py-12 px-8">
+        <div className="flex gap-8 mb-2">
+          {legalLinks.map((link) => (
+            <Link
+              key={link.href}
+              href={link.href}
+              className="text-slate-400 text-[11px] font-medium tracking-[0.05em] uppercase hover:text-primary transition-colors"
+            >
+              {link.label}
+            </Link>
+          ))}
+        </div>
+        <div className="text-on-surface text-[11px] font-medium tracking-[0.05em] uppercase opacity-80">
+          &copy; {currentYear} {siteConfig.fullName}
+        </div>
+      </div>
+
+      {/* Desktop: Full grid footer */}
+      <div className="hidden lg:grid grid-cols-4 gap-12 max-w-7xl mx-auto px-8 py-16">
         {/* Company Info */}
-        <div className="space-y-4 col-span-2 md:col-span-1">
+        <div className="space-y-4">
           <div className="flex items-center gap-3">
             <Image
               src="/logo/barelogo-removebg-preview.png"
@@ -126,8 +145,8 @@ export default function Footer() {
         </div>
       </div>
 
-      {/* Bottom Bar */}
-      <div className="max-w-7xl mx-auto px-8 py-8 border-t border-slate-100 flex flex-col md:flex-row justify-between items-center gap-4">
+      {/* Bottom Bar - Desktop only */}
+      <div className="hidden lg:flex max-w-7xl mx-auto px-8 py-8 border-t border-slate-100 flex-row justify-between items-center gap-4">
         <p className="text-slate-500 text-xs leading-relaxed">
           &copy; {currentYear} {siteConfig.fullName}. Alle rechten voorbehouden.
         </p>
@@ -155,7 +174,7 @@ function ScrollToTop() {
   return (
     <button
       onClick={scrollToTop}
-      className="fixed bottom-24 right-6 w-11 h-11 bg-primary text-white rounded-full shadow-saccs-md flex items-center justify-center hover:shadow-lg transition-all duration-200 z-40 touch-manipulation"
+      className="fixed bottom-36 right-6 lg:bottom-24 w-11 h-11 bg-primary text-white rounded-full shadow-saccs-md flex items-center justify-center hover:shadow-lg transition-all duration-200 z-40 touch-manipulation"
       aria-label="Scroll naar boven"
       style={{ WebkitTapHighlightColor: 'transparent' }}
     >

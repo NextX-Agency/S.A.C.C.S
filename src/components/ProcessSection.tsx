@@ -39,8 +39,105 @@ export default function ProcessSection() {
   return (
     <section ref={sectionRef} id="contact" className="py-16 lg:py-32 bg-surface-container-low">
       <div className="max-w-7xl mx-auto px-6">
+        {/* Mobile: Clean centered form */}
+        <div className="lg:hidden">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl font-bold tracking-tight mb-4">Neem Contact Op</h2>
+            <p className="text-secondary font-light">
+              Klaar om de transformatie van uw ruimte te zien? Neem vrijblijvend contact op.
+            </p>
+          </div>
+
+          {isSubmitted ? (
+            <div className="text-center py-8">
+              <div className="w-16 h-16 bg-accent rounded-full flex items-center justify-center mx-auto mb-4">
+                <svg className="w-8 h-8 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={2}>
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
+                </svg>
+              </div>
+              <h3 className="font-heading text-xl font-bold text-on-surface mb-2">
+                Bedankt voor uw bericht!
+              </h3>
+              <p className="text-on-surface-variant text-sm">
+                We nemen zo spoedig mogelijk contact met u op.
+              </p>
+            </div>
+          ) : (
+            <form onSubmit={handleSubmit} className="flex flex-col gap-8 max-w-md mx-auto">
+              <div className="flex flex-col gap-2">
+                <label className="text-[10px] font-bold uppercase tracking-widest text-outline ml-1">
+                  Volledige Naam
+                </label>
+                <input
+                  type="text"
+                  name="name"
+                  required
+                  className="bg-surface-container-low border-0 rounded-2xl px-6 py-5 focus:ring-2 focus:ring-primary/20 transition-all placeholder:text-outline-variant/60 text-base"
+                  placeholder="Uw naam"
+                />
+              </div>
+              <div className="flex flex-col gap-2">
+                <label className="text-[10px] font-bold uppercase tracking-widest text-outline ml-1">
+                  Email Adres
+                </label>
+                <input
+                  type="email"
+                  name="email"
+                  required
+                  className="bg-surface-container-low border-0 rounded-2xl px-6 py-5 focus:ring-2 focus:ring-primary/20 transition-all placeholder:text-outline-variant/60 text-base"
+                  placeholder="email@voorbeeld.nl"
+                />
+              </div>
+              <div className="flex flex-col gap-2">
+                <label className="text-[10px] font-bold uppercase tracking-widest text-outline ml-1">
+                  Type Dienst
+                </label>
+                <select
+                  name="service"
+                  className="bg-surface-container-low border-0 rounded-2xl px-6 py-5 focus:ring-2 focus:ring-primary/20 transition-all text-base"
+                >
+                  <option>Zakelijke Schoonmaak</option>
+                  <option>Particuliere Schoonmaak</option>
+                  <option>Specialistische Dienst</option>
+                  <option>Anders...</option>
+                </select>
+              </div>
+              <div className="flex flex-col gap-2">
+                <label className="text-[10px] font-bold uppercase tracking-widest text-outline ml-1">
+                  Bericht
+                </label>
+                <textarea
+                  name="message"
+                  rows={4}
+                  required
+                  className="bg-surface-container-low border-0 rounded-2xl px-6 py-5 focus:ring-2 focus:ring-primary/20 transition-all placeholder:text-outline-variant/60 resize-none text-base"
+                  placeholder="Hoe kunnen we u helpen?"
+                />
+              </div>
+              <button
+                type="submit"
+                disabled={isSubmitting}
+                className="bg-primary text-on-primary font-bold py-5 rounded-full shadow-lg shadow-primary/10 active:scale-95 transition-all mt-4 disabled:opacity-70 disabled:cursor-not-allowed flex items-center justify-center gap-2 min-h-[48px] touch-manipulation"
+              >
+                {isSubmitting ? (
+                  <>
+                    <svg className="animate-spin w-5 h-5" fill="none" viewBox="0 0 24 24">
+                      <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
+                      <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z" />
+                    </svg>
+                    <span>Versturen...</span>
+                  </>
+                ) : (
+                  <span>Verstuur Aanvraag</span>
+                )}
+              </button>
+            </form>
+          )}
+        </div>
+
+        {/* Desktop: Original split layout */}
         <div
-          className={`bg-surface-container-lowest rounded-xl shadow-2xl overflow-hidden grid grid-cols-1 lg:grid-cols-5 transition-all duration-700 ${
+          className={`hidden lg:grid bg-surface-container-lowest rounded-xl shadow-2xl overflow-hidden grid-cols-5 transition-all duration-700 ${
             isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
           }`}
         >
