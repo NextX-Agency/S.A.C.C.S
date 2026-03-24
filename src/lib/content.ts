@@ -51,27 +51,6 @@ export const contactInfo = {
   },
 };
 
-export const navigation = {
-  main: [
-    { href: '/', label: 'Home' },
-    { href: '/over-ons', label: 'Over Ons' },
-    { href: '/diensten', label: 'Diensten' },
-    { href: '/contact', label: 'Contact' },
-  ],
-  footer: {
-    quickLinks: [
-      { href: '/', label: 'Home' },
-      { href: '/over-ons', label: 'Over Ons' },
-      { href: '/diensten', label: 'Diensten' },
-      { href: '/contact', label: 'Contact' },
-    ],
-    legal: [
-      { href: '/privacy', label: 'Privacybeleid' },
-      { href: '/voorwaarden', label: 'Algemene Voorwaarden' },
-    ],
-  },
-};
-
 export const stats = [
   { value: '13+', label: 'Jaar ervaring', suffix: '' },
   { value: '50+', label: 'Tevreden klanten', suffix: '' },
@@ -175,64 +154,6 @@ export const services = [
   },
 ];
 
-export const clients = [
-  { name: 'Torarica Hotel', logo: '/carousel/torarica.jpg', description: 'Premium resort Suriname' },
-  { name: 'Hard Rock Cafe', logo: '/carousel/hardrock.png', fallbackLogo: '/carousel/hardrock.jpg', description: 'Wereldberoemd restaurant' },
-  { name: 'Radisson Hotel', logo: '/carousel/radisson.png', description: 'Luxe accommodatie' },
-  { name: 'AZP Suriname', logo: '/carousel/azplogo.jpg', description: 'Medische faciliteit' },
-];
-
-export const references = [
-  {
-    name: 'Torarica Hotel',
-    logo: '/carousel/torarica.jpg',
-    category: 'Hospitality',
-    description: 'Complete schoonmaakservice voor kamers, lobby en conferentieruimtes.',
-  },
-  {
-    name: 'Hard Rock Cafe',
-    logo: '/carousel/hardrock.png',
-    fallbackLogo: '/carousel/hardrock.jpg',
-    category: 'Horeca',
-    description: 'Restaurant- en keukenreiniging volgens strenge hygiënenormen.',
-  },
-  {
-    name: 'Radisson Hotel',
-    logo: '/carousel/radisson.png',
-    category: 'Hospitality',
-    description: 'Professionele schoonmaakdiensten voor alle hotelruimtes.',
-  },
-  {
-    name: 'AZP Suriname',
-    logo: '/carousel/azplogo.jpg',
-    category: 'Gezondheidszorg',
-    description: 'Medische schoonmaak met focus op hygiëne en desinfectie.',
-  },
-];
-
-export const processSteps = [
-  {
-    number: '01',
-    title: 'Inventarisatie',
-    description: 'Wij beginnen met een grondige inventarisatie van uw wensen en behoeften. Dit omvat een bezoek aan de locatie om de specifieke situatie in kaart te brengen.',
-  },
-  {
-    number: '02',
-    title: 'Op Maat Gemaakt Plan',
-    description: 'Op basis van de inventarisatie stellen wij een schoonmaakplan op dat precies aansluit bij uw wensen. Inclusief frequentie, tijden en specifieke aandachtspunten.',
-  },
-  {
-    number: '03',
-    title: 'Getraind Personeel',
-    description: 'Ons personeel wordt zorgvuldig geselecteerd en getraind. Zij zijn betrouwbaar, professioneel en werken volgens onze hoge kwaliteitsnormen.',
-  },
-  {
-    number: '04',
-    title: 'Kwaliteitscontrole',
-    description: 'Wij voeren regelmatige kwaliteitscontroles uit om de kwaliteit van onze diensten te waarborgen. Bij vragen of opmerkingen zijn wij altijd bereikbaar.',
-  },
-];
-
 export const whyChooseUs = [
   'Gratis vrijblijvende offerte',
   'Maatwerk schoonmaakplannen',
@@ -276,33 +197,3 @@ export const aboutContent = {
     { title: 'Klantgerichtheid', description: 'De tevredenheid van onze klanten staat altijd centraal.' },
   ],
 };
-
-export const heroSlides = [
-  { image: '/beeld/beeld1.jpg', alt: 'Professionele schoonmaak' },
-  { image: '/beeld/beeld2.png', alt: 'Kantoor schoonmaak' },
-  { image: '/beeld/beeld3.png', alt: 'Hotel schoonmaak' },
-  { image: '/beeld/beeld4.png', alt: 'Evenementen schoonmaak' },
-];
-
-export const faq = [
-  {
-    question: 'Hoe vraag ik een offerte aan?',
-    answer: 'U kunt een offerte aanvragen via ons contactformulier, telefonisch of via WhatsApp. Wij nemen binnen 24 uur contact met u op.',
-  },
-  {
-    question: 'Wat zijn jullie werkgebieden?',
-    answer: 'Wij zijn actief in heel Suriname, met een focus op Paramaribo en omgeving.',
-  },
-  {
-    question: 'Zijn jullie verzekerd?',
-    answer: 'Ja, SACCS is volledig verzekerd. Wij hebben een aansprakelijkheidsverzekering voor eventuele schade.',
-  },
-  {
-    question: 'Welke producten gebruiken jullie?',
-    answer: 'Wij gebruiken professionele, milieuvriendelijke schoonmaakproducten die effectief en veilig zijn.',
-  },
-  {
-    question: 'Kan ik de schoonmaakfrequentie aanpassen?',
-    answer: 'Absoluut! Wij bieden flexibele planningen die volledig aan uw wensen kunnen worden aangepast.',
-  },
-];

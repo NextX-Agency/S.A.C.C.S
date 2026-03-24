@@ -14,14 +14,14 @@ export default function ClientsCarousel() {
   const [fallbacks, setFallbacks] = useState<Record<string, string>>({});
 
   return (
-    <section className="py-16 bg-surface-container-lowest">
-      <div className="max-w-7xl mx-auto px-6 text-center">
-        <p className="text-xs font-bold tracking-[0.3em] uppercase text-outline mb-12">
+    <section className="py-10 lg:py-16 bg-surface-container-lowest">
+      <div className="max-w-7xl mx-auto px-4 lg:px-6 text-center">
+        <p className="text-xs font-bold tracking-[0.3em] uppercase text-outline mb-8 lg:mb-12">
           Vertrouwd door marktleiders
         </p>
-        <div className="flex flex-wrap justify-center items-center gap-12 md:gap-24 opacity-60 grayscale hover:grayscale-0 hover:opacity-100 transition-all duration-500">
+        <div className="flex flex-wrap justify-center items-center gap-8 md:gap-24 opacity-60 grayscale hover:grayscale-0 hover:opacity-100 transition-all duration-500">
           {clients.map((client) => (
-            <div key={client.alt} className="relative w-28 h-20 sm:w-36 sm:h-24">
+            <div key={client.alt} className="relative w-20 h-14 sm:w-28 sm:h-20 lg:w-36 lg:h-24">
               <Image
                 src={fallbacks[client.alt] ?? client.src}
                 alt={client.alt}

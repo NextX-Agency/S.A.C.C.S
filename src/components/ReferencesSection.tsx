@@ -30,10 +30,7 @@ export default function ReferencesSection() {
   useEffect(() => {
     const observer = new IntersectionObserver(
       ([entry]) => {
-        if (entry.isIntersecting) {
-          setIsVisible(true);
-          observer.disconnect();
-        }
+        setIsVisible(entry.isIntersecting);
       },
       { threshold: 0.1 }
     );
@@ -46,18 +43,18 @@ export default function ReferencesSection() {
   }, []);
 
   return (
-    <section ref={sectionRef} id="references" className="py-32 bg-surface">
-      <div className="max-w-7xl mx-auto px-6">
-        <div className="text-center mb-20">
-          <h2 className="text-4xl font-black tracking-tighter mb-4">Waarom S.A.C.C.S.?</h2>
-          <p className="text-on-surface-variant">Onze fundamenten rusten op drie kernbeloften.</p>
+    <section ref={sectionRef} id="references" className="py-16 lg:py-32 bg-surface">
+      <div className="max-w-7xl mx-auto px-4 lg:px-6">
+        <div className="text-center mb-10 lg:mb-20">
+          <h2 className="font-heading text-2xl lg:text-4xl font-bold mb-3 lg:mb-4">Waarom S.A.C.C.S.?</h2>
+          <p className="text-on-surface-variant text-sm lg:text-base">Onze fundamenten rusten op drie kernbeloften.</p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 lg:gap-8">
           {reasons.map((reason, index) => (
             <div
               key={reason.title}
-              className={`p-10 rounded-xl space-y-4 hover:-translate-y-2 transition-transform ${
+              className={`p-6 lg:p-10 rounded-xl space-y-3 lg:space-y-4 hover:-translate-y-2 transition-transform ${
                 reason.accent
                   ? 'bg-primary text-white shadow-xl'
                   : 'bg-surface-container-lowest border border-outline-variant/30 shadow-sm'
@@ -65,13 +62,13 @@ export default function ReferencesSection() {
               style={{ transitionDuration: '500ms', transitionDelay: `${index * 150}ms` }}
             >
               <span
-                className={`material-symbols-outlined text-4xl ${
+                className={`material-symbols-outlined text-3xl lg:text-4xl ${
                   reason.accent ? '' : 'text-primary'
                 }`}
               >
                 {reason.icon}
               </span>
-              <h3 className="text-2xl font-bold">{reason.title}</h3>
+              <h3 className="text-xl lg:text-2xl font-bold">{reason.title}</h3>
               <p className={`leading-relaxed ${reason.accent ? 'opacity-80' : 'text-on-surface-variant'}`}>
                 {reason.description}
               </p>

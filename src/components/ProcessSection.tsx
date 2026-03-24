@@ -12,10 +12,7 @@ export default function ProcessSection() {
   useEffect(() => {
     const observer = new IntersectionObserver(
       ([entry]) => {
-        if (entry.isIntersecting) {
-          setIsVisible(true);
-          observer.disconnect();
-        }
+        setIsVisible(entry.isIntersecting);
       },
       { threshold: 0.1 }
     );
@@ -40,7 +37,7 @@ export default function ProcessSection() {
   };
 
   return (
-    <section ref={sectionRef} id="contact" className="py-32 bg-surface-container-low">
+    <section ref={sectionRef} id="contact" className="py-16 lg:py-32 bg-surface-container-low">
       <div className="max-w-7xl mx-auto px-6">
         <div
           className={`bg-surface-container-lowest rounded-xl shadow-2xl overflow-hidden grid grid-cols-1 lg:grid-cols-5 transition-all duration-700 ${
@@ -48,9 +45,9 @@ export default function ProcessSection() {
           }`}
         >
           {/* Left: Green Sidebar */}
-          <div className="lg:col-span-2 bg-primary p-12 text-white space-y-12">
+          <div className="lg:col-span-2 bg-primary p-8 lg:p-12 text-white space-y-8 lg:space-y-12">
             <div>
-              <h2 className="text-3xl font-black mb-4">Neem Contact Op</h2>
+              <h2 className="font-heading text-2xl lg:text-3xl font-bold mb-3 lg:mb-4">Neem Contact Op</h2>
               <p className="opacity-80">
                 Klaar om de transformatie van uw ruimte te zien? Neem vrijblijvend contact op voor een offerte op maat.
               </p>
@@ -76,11 +73,11 @@ export default function ProcessSection() {
           </div>
 
           {/* Right: Form */}
-          <div className="lg:col-span-3 p-12">
+          <div className="lg:col-span-3 p-6 lg:p-12">
             {isSubmitted ? (
               <div className="text-center py-8">
-                <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                  <svg className="w-8 h-8 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={2}>
+                <div className="w-16 h-16 bg-accent rounded-full flex items-center justify-center mx-auto mb-4">
+                  <svg className="w-8 h-8 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={2}>
                     <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
                   </svg>
                 </div>

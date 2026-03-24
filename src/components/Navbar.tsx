@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import { usePathname } from 'next/navigation';
 
 const homeNavItems = [
@@ -45,13 +46,35 @@ export default function Navbar() {
           <a
             href="#home"
             onClick={(e) => handleNavClick(e, '#home')}
-            className="text-xl font-black tracking-tighter text-green-800"
+            className="flex-shrink-0 flex items-center gap-2"
           >
-            S.A.C.C.S.
+            <Image
+              src="/logo/barelogo-removebg-preview.png"
+              alt="S.A.C.C.S."
+              width={40}
+              height={40}
+              className="h-10 w-auto"
+              priority
+            />
+            <div>
+              <div className="text-sm font-black tracking-tight text-on-surface leading-tight">S.A.C.C.S</div>
+              <p className="text-[10px] text-primary italic leading-tight">Wij doen wat wij zeggen</p>
+            </div>
           </a>
         ) : (
-          <Link href="/" className="text-xl font-black tracking-tighter text-green-800">
-            S.A.C.C.S.
+          <Link href="/" className="flex-shrink-0 flex items-center gap-2">
+            <Image
+              src="/logo/barelogo-removebg-preview.png"
+              alt="S.A.C.C.S."
+              width={40}
+              height={40}
+              className="h-10 w-auto"
+              priority
+            />
+            <div>
+              <div className="text-sm font-black tracking-tight text-on-surface leading-tight">S.A.C.C.S</div>
+              <p className="text-[10px] text-primary italic leading-tight">Wij doen wat wij zeggen</p>
+            </div>
           </Link>
         )}
 
@@ -66,8 +89,8 @@ export default function Navbar() {
                 onClick={(e) => handleNavClick(e, item.href)}
                 className={
                   isActive
-                    ? 'text-green-700 font-bold border-b-2 border-green-600'
-                    : 'text-slate-600 hover:text-green-600 transition-all'
+                    ? 'text-primary font-bold border-b-2 border-primary'
+                    : 'text-slate-600 hover:text-primary transition-all'
                 }
               >
                 {item.label}
@@ -78,8 +101,8 @@ export default function Navbar() {
                 href={item.href}
                 className={
                   isActive
-                    ? 'text-green-700 font-bold border-b-2 border-green-600'
-                    : 'text-slate-600 hover:text-green-600 transition-all'
+                    ? 'text-primary font-bold border-b-2 border-primary'
+                    : 'text-slate-600 hover:text-primary transition-all'
                 }
               >
                 {item.label}
@@ -93,14 +116,14 @@ export default function Navbar() {
           <a
             href="#contact"
             onClick={(e) => handleNavClick(e, '#contact')}
-            className="hidden md:block bg-gradient-to-br from-primary to-primary-container text-on-primary px-6 py-2.5 rounded-full font-bold text-sm hover:shadow-lg transition-all active:scale-95 duration-200"
+            className="hidden md:block bg-primary text-on-primary px-6 py-2.5 rounded-full font-bold text-sm hover:shadow-lg transition-all active:scale-95 duration-200"
           >
             Offerte Aanvragen
           </a>
         ) : (
           <Link
-            href="/contact"
-            className="hidden md:block bg-gradient-to-br from-primary to-primary-container text-on-primary px-6 py-2.5 rounded-full font-bold text-sm hover:shadow-lg transition-all active:scale-95 duration-200"
+            href="/#contact"
+            className="hidden md:block bg-primary text-on-primary px-6 py-2.5 rounded-full font-bold text-sm hover:shadow-lg transition-all active:scale-95 duration-200"
           >
             Offerte Aanvragen
           </Link>
@@ -150,7 +173,7 @@ export default function Navbar() {
             <a
               href="#contact"
               onClick={(e) => handleNavClick(e, '#contact')}
-              className="mx-4 mt-2 px-6 py-3 bg-gradient-to-br from-primary to-primary-container text-white font-bold rounded-full text-center transition-all duration-200 touch-manipulation min-h-[48px] flex items-center justify-center"
+              className="mx-4 mt-2 px-6 py-3 bg-primary text-white font-bold rounded-full text-center transition-all duration-200 touch-manipulation min-h-[48px] flex items-center justify-center"
             >
               Offerte Aanvragen
             </a>
@@ -158,7 +181,7 @@ export default function Navbar() {
             <Link
               href="/contact"
               onClick={() => setIsMobileMenuOpen(false)}
-              className="mx-4 mt-2 px-6 py-3 bg-gradient-to-br from-primary to-primary-container text-white font-bold rounded-full text-center transition-all duration-200 touch-manipulation min-h-[48px] flex items-center justify-center"
+              className="mx-4 mt-2 px-6 py-3 bg-primary text-white font-bold rounded-full text-center transition-all duration-200 touch-manipulation min-h-[48px] flex items-center justify-center"
             >
               Offerte Aanvragen
             </Link>

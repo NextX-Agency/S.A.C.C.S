@@ -28,10 +28,7 @@ export default function AboutSection() {
   useEffect(() => {
     const observer = new IntersectionObserver(
       ([entry]) => {
-        if (entry.isIntersecting) {
-          setIsVisible(true);
-          observer.disconnect();
-        }
+        setIsVisible(entry.isIntersecting);
       },
       { threshold: 0.1 }
     );
@@ -44,18 +41,18 @@ export default function AboutSection() {
   }, []);
 
   return (
-    <section ref={sectionRef} id="about" className="py-32 bg-surface-container-low overflow-hidden">
-      <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
+    <section ref={sectionRef} id="about" className="py-16 lg:py-32 bg-surface-container-low overflow-hidden">
+      <div className="max-w-7xl mx-auto px-4 lg:px-6 grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-20 items-center">
         {/* Left: Image with floating badge */}
         <div
           className={`relative transition-all duration-700 ${
             isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-8'
           }`}
         >
-          <div className="aspect-[4/5] rounded-xl overflow-hidden shadow-2xl relative">
+          <div className="aspect-[4/3] lg:aspect-[4/5] rounded-xl overflow-hidden shadow-2xl relative">
             <Image
-              src="/beeld/stallatie.jpeg"
-              alt="Cleaning crew at work"
+              src="/beeld/about.jpg"
+              alt="S.A.C.C.S. medewerker reinigt meubilair"
               fill
               className="object-cover"
               sizes="(max-width: 1024px) 100vw, 50vw"
@@ -70,32 +67,32 @@ export default function AboutSection() {
 
         {/* Right: Content */}
         <div
-          className={`space-y-10 transition-all duration-700 ${
+          className={`space-y-6 lg:space-y-10 transition-all duration-700 ${
             isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-8'
           }`}
           style={{ transitionDelay: '200ms' }}
         >
-          <div className="space-y-4">
-            <h2 className="text-4xl font-black tracking-tighter text-on-surface">
+          <div className="space-y-3 lg:space-y-4">
+            <h2 className="font-heading text-2xl lg:text-4xl font-bold text-on-surface">
               Kwaliteit door Ervaring
             </h2>
-            <p className="text-on-surface-variant text-lg leading-relaxed">
+            <p className="text-on-surface-variant text-sm lg:text-lg leading-relaxed">
               S.A.C.C.S. Schoonmaakdiensten is sinds 2012 een begrip in de sector. Wij combineren jarenlange expertise met de modernste technieken.
             </p>
           </div>
 
-          <div className="space-y-6">
+          <div className="space-y-4 lg:space-y-6">
             {features.map((feature, index) => (
               <div
                 key={feature.title}
-                className="flex gap-6"
+                className="flex gap-4 lg:gap-6"
                 style={{ transitionDelay: `${300 + index * 100}ms` }}
               >
-                <div className="flex-shrink-0 w-12 h-12 bg-white rounded-full shadow-sm flex items-center justify-center text-primary">
+                <div className="flex-shrink-0 w-10 h-10 lg:w-12 lg:h-12 bg-white rounded-full shadow-sm flex items-center justify-center text-primary">
                   <span className="material-symbols-outlined">{feature.icon}</span>
                 </div>
                 <div>
-                  <h4 className="font-bold text-xl mb-1 text-primary">{feature.title}</h4>
+                  <h4 className="font-bold text-base lg:text-xl mb-1 text-primary">{feature.title}</h4>
                   <p className="text-on-surface-variant text-sm leading-relaxed">
                     {feature.description}
                   </p>

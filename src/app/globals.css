@@ -43,7 +43,7 @@
   }
   
   a, button {
-    -webkit-tap-highlight-color: rgba(0, 110, 28, 0.1);
+    -webkit-tap-highlight-color: rgba(17, 175, 78, 0.1);
   }
 
   .material-symbols-outlined {
@@ -52,46 +52,6 @@
 }
 
 @layer components {
-  .glass-effect {
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
-  }
-
-  .hero-gradient {
-    background: linear-gradient(135deg, #006e1c 0%, #4caf50 100%);
-  }
-
-  .btn {
-    @apply inline-flex items-center justify-center px-6 sm:px-8 py-3 sm:py-4 text-sm sm:text-base font-semibold rounded-full transition-all duration-200;
-    min-height: 44px;
-    touch-action: manipulation;
-  }
-  
-  .btn-primary {
-    @apply bg-gradient-to-r from-primary to-primary-container text-white hover:shadow-xl hover:scale-105 transition-transform;
-  }
-
-  @media (hover: none) {
-    .btn-primary:hover {
-      transform: none;
-    }
-    .btn-secondary:hover {
-      transform: none;
-    }
-  }
-  
-  .btn-secondary {
-    @apply bg-surface-container-highest text-primary hover:bg-primary-fixed transition-colors;
-  }
-
-  .section-title {
-    @apply font-heading text-2xl sm:text-3xl md:text-4xl font-black tracking-tighter text-on-surface mb-4;
-  }
-
-  .section-subtitle {
-    @apply text-base sm:text-lg text-on-surface-variant max-w-2xl leading-relaxed;
-  }
-
   .corporate-card {
     @apply bg-surface-container-lowest rounded-xl shadow-saccs-sm transition-all duration-200 border border-transparent;
   }
@@ -108,26 +68,6 @@
 }
 
 @layer utilities {
-  .text-balance {
-    text-wrap: balance;
-  }
-
-  .glass {
-    @apply bg-white/80 backdrop-blur-md;
-  }
-
-  .glass-dark {
-    @apply bg-black/20 backdrop-blur-md;
-  }
-  
-  .will-change-opacity {
-    will-change: opacity;
-  }
-  
-  .will-change-transform {
-    will-change: transform;
-  }
-
   .scrollbar-hide {
     -ms-overflow-style: none;
     scrollbar-width: none;

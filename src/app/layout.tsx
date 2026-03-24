@@ -1,5 +1,5 @@
 import type { Metadata } from 'next';
-import { Inter } from 'next/font/google';
+import { Inter, Poppins } from 'next/font/google';
 import './globals.css';
 
 const inter = Inter({ 
@@ -9,21 +9,28 @@ const inter = Inter({
   weight: ['300', '400', '500', '600', '700', '800', '900'],
 });
 
+const poppins = Poppins({
+  subsets: ['latin'],
+  variable: '--font-poppins',
+  display: 'swap',
+  weight: ['400', '500', '600', '700'],
+});
+
 export const metadata: Metadata = {
   title: {
-    default: 'SACCS - Professionele Schoonmaakdiensten Suriname',
-    template: '%s | SACCS',
+    default: 'S.A.C.C.S - S.A. Cleaning Consultancy Suriname',
+    template: '%s | S.A.C.C.S',
   },
   description: 'S.A. Cleaning Consultancy Suriname - Uw partner in professionele schoonmaakdiensten voor bedrijven en particulieren in Suriname sinds 2012. Wij doen wat wij zeggen.',
-  keywords: 'schoonmaak, cleaning, Suriname, professioneel, B2B, B2C, evenementen, hotel cleaning, zakelijke schoonmaak, SACCS, Paramaribo',
-  authors: [{ name: 'SACCS' }],
-  creator: 'SACCS',
+  keywords: 'schoonmaak, cleaning, Suriname, professioneel, B2B, B2C, evenementen, hotel cleaning, zakelijke schoonmaak, S.A.C.C.S, Paramaribo',
+  authors: [{ name: 'S.A.C.C.S' }],
+  creator: 'S.A.C.C.S',
   metadataBase: new URL('https://saccs.sr'),
   openGraph: {
-    title: 'SACCS - Professionele Schoonmaakdiensten Suriname',
+    title: 'S.A.C.C.S - Professionele Schoonmaakdiensten Suriname',
     description: 'Uw partner in professionele schoonmaakdiensten voor bedrijven en particulieren in Suriname sinds 2012.',
     url: 'https://saccs.sr',
-    siteName: 'SACCS',
+    siteName: 'S.A.C.C.S',
     locale: 'nl_NL',
     type: 'website',
     images: [
@@ -31,13 +38,13 @@ export const metadata: Metadata = {
         url: '/beeld/beeld1.jpg',
         width: 1200,
         height: 630,
-        alt: 'SACCS Professionele Schoonmaakdiensten',
+        alt: 'S.A.C.C.S Professionele Schoonmaakdiensten',
       },
     ],
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'SACCS - Professionele Schoonmaakdiensten Suriname',
+    title: 'S.A.C.C.S - Professionele Schoonmaakdiensten Suriname',
     description: 'Uw partner in professionele schoonmaakdiensten voor bedrijven en particulieren in Suriname sinds 2012.',
     images: ['/beeld/beeld1.jpg'],
   },
@@ -66,7 +73,7 @@ export const metadata: Metadata = {
 const jsonLd = {
   '@context': 'https://schema.org',
   '@type': 'LocalBusiness',
-  name: 'SACCS - S.A. Cleaning Consultancy Suriname',
+  name: 'S.A.C.C.S - S.A. Cleaning Consultancy Suriname',
   image: 'https://saccs.sr/logo/noslogan.png',
   '@id': 'https://saccs.sr',
   url: 'https://saccs.sr',
@@ -122,7 +129,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="nl" className={`${inter.variable} scroll-smooth`}>
+    <html lang="nl" className={`${inter.variable} ${poppins.variable} scroll-smooth`}>
       <head>
         <link
           href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"

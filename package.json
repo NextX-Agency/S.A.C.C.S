@@ -3,8 +3,11 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
+    "predev": "if not exist .next mkdir .next && attrib +s .next",
     "dev": "next dev",
+    "prebuild": "if not exist .next mkdir .next && attrib +s .next",
     "build": "next build",
+    "postbuild": "attrib +s .next",
     "start": "next start",
     "lint": "next lint",
     "type-check": "tsc --noEmit"

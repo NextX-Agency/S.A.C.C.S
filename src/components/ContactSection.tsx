@@ -21,7 +21,7 @@ const contactInfo = [
       </svg>
     ),
     title: 'Telefoon',
-    value: '+597 8517364',
+    value: '+597 851-7364',
     href: 'tel:+5978517364',
   },
   {
@@ -46,10 +46,7 @@ export default function ContactSection() {
   useEffect(() => {
     const observer = new IntersectionObserver(
       ([entry]) => {
-        if (entry.isIntersecting) {
-          setIsVisible(true);
-          observer.disconnect();
-        }
+        setIsVisible(entry.isIntersecting);
       },
       { threshold: 0.1 }
     );
@@ -87,7 +84,7 @@ export default function ContactSection() {
             Neem Contact Op
           </h2>
           <p className="text-saccs-grey text-base md:text-lg max-w-2xl mx-auto">
-            Vraag een offerte aan of stel uw vraag – wij reageren binnen 24 uur
+            Vraag een offerte aan of stel uw vraag – wij reageren binnen 3 werkdagen
           </p>
         </div>
 
@@ -136,8 +133,8 @@ export default function ContactSection() {
             <div className="corporate-card p-6 md:p-8">
               {isSubmitted ? (
                 <div className="text-center py-8">
-                  <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                    <svg className="w-8 h-8 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={2}>
+                  <div className="w-16 h-16 bg-accent rounded-full flex items-center justify-center mx-auto mb-4">
+                    <svg className="w-8 h-8 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={2}>
                       <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
                     </svg>
                   </div>

@@ -1,6 +1,7 @@
 'use client';
 
 import Link from 'next/link';
+import Image from 'next/image';
 import { usePathname } from 'next/navigation';
 import { siteConfig } from '@/lib/content';
 
@@ -49,10 +50,22 @@ export default function Footer() {
 
   return (
     <footer className="bg-slate-50 w-full border-t border-slate-100">
-      <div className="grid grid-cols-1 md:grid-cols-4 gap-12 max-w-7xl mx-auto px-8 py-16">
+      <div className="grid grid-cols-2 md:grid-cols-4 gap-6 lg:gap-12 max-w-7xl mx-auto px-4 lg:px-8 py-10 lg:py-16">
         {/* Company Info */}
-        <div className="space-y-6">
-          <div className="text-lg font-bold text-green-800">S.A.C.C.S.</div>
+        <div className="space-y-4 col-span-2 md:col-span-1">
+          <div className="flex items-center gap-3">
+            <Image
+              src="/logo/barelogo-removebg-preview.png"
+              alt="S.A.C.C.S."
+              width={40}
+              height={40}
+              className="h-10 w-auto"
+            />
+            <div>
+              <div className="text-lg font-black tracking-tight text-on-surface">S.A.C.C.S</div>
+              <p className="text-xs text-on-surface-variant italic">Wij doen wat wij zeggen</p>
+            </div>
+          </div>
           <p className="text-slate-500 text-sm leading-relaxed">
             Uw professionele partner voor alle schoonmaakuitdagingen. Kwaliteit en betrouwbaarheid sinds 2012.
           </p>
@@ -68,12 +81,12 @@ export default function Footer() {
                   <a
                     href={link.href}
                     onClick={(e) => handleNavClick(e, link.href)}
-                    className="text-slate-500 hover:text-green-600 transition-colors"
+                    className="text-slate-500 hover:text-primary transition-colors"
                   >
                     {link.label}
                   </a>
                 ) : (
-                  <Link href={link.href} className="text-slate-500 hover:text-green-600 transition-colors">
+                  <Link href={link.href} className="text-slate-500 hover:text-primary transition-colors">
                     {link.label}
                   </Link>
                 )}
@@ -88,7 +101,7 @@ export default function Footer() {
           <ul className="space-y-3 text-sm leading-relaxed">
             {dienstenLinks.map((link) => (
               <li key={link.label}>
-                <span className="text-slate-500 hover:text-green-600 transition-colors cursor-default">
+                <span className="text-slate-500 hover:text-primary transition-colors cursor-default">
                   {link.label}
                 </span>
               </li>
@@ -104,7 +117,7 @@ export default function Footer() {
               <Link
                 key={link.href}
                 href={link.href}
-                className="text-slate-500 hover:text-green-600 transition-colors"
+                className="text-slate-500 hover:text-primary transition-colors"
               >
                 {link.label}
               </Link>
