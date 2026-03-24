@@ -4,49 +4,24 @@ import { useEffect, useRef, useState } from 'react';
 
 const services = [
   {
-    icon: (
-      <svg className="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-        <rect x="2" y="7" width="20" height="14" rx="2" ry="2" />
-        <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16" />
-      </svg>
-    ),
+    icon: 'corporate_fare',
     title: 'Zakelijke Schoonmaak',
-    description:
-      'Professionele schoonmaakdiensten voor kantoren, hotels en restaurants. Wij zorgen voor een representatieve werkomgeving.',
+    description: 'Complete ontzorging voor uw kantoor of bedrijfspand met oog voor detail.',
   },
   {
-    icon: (
-      <svg className="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-        <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" />
-        <polyline points="9 22 9 12 15 12 15 22" />
-      </svg>
-    ),
+    icon: 'home',
     title: 'Particuliere Schoonmaak',
-    description:
-      'Betrouwbare schoonmaakdiensten voor particulieren. Van regelmatige huishouding tot grote schoonmaakbeurten.',
+    description: 'Een fris en hygiënisch thuis zonder dat u er zelf omkijken naar heeft.',
   },
   {
-    icon: (
-      <svg className="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-        <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
-        <circle cx="9" cy="7" r="4" />
-        <path d="M23 21v-2a4 4 0 0 0-3-3.87" />
-        <path d="M16 3.13a4 4 0 0 1 0 7.75" />
-      </svg>
-    ),
+    icon: 'event',
     title: 'Evenementenservice',
-    description:
-      'Schoonmaakdiensten tijdens en na evenementen. Voorbereidende reiniging, onderhoud en opruimen na afloop.',
+    description: 'Professionele ondersteuning voor, tijdens en na uw grootschalige events.',
   },
   {
-    icon: (
-      <svg className="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-        <path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z" />
-      </svg>
-    ),
+    icon: 'sanitizer',
     title: 'Specialistische Diensten',
-    description:
-      'Gespecialiseerde schoonmaakdiensten zoals dieptereiniging, glazenwassen, vloeronderhoud en stoomreiniging.',
+    description: 'Dieptereiniging, glasbewassing en vloeronderhoud op topniveau.',
   },
 ];
 
@@ -69,7 +44,6 @@ export default function ServicesSection() {
       observer.observe(sectionRef.current);
     }
 
-    // Fallback: if observer hasn't fired after 1s, force visible
     const fallback = setTimeout(() => setIsVisible(true), 1000);
 
     return () => {
@@ -78,61 +52,37 @@ export default function ServicesSection() {
     };
   }, []);
 
-  const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
-    e.preventDefault();
-    const target = document.querySelector('#contact');
-    if (target) {
-      const offsetTop = target.getBoundingClientRect().top + window.scrollY - 70;
-      window.scrollTo({ top: offsetTop, behavior: 'smooth' });
-    }
-  };
-
   return (
-    <section ref={sectionRef} id="diensten" className="py-16 md:py-20 bg-white">
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Section Header */}
-        <div className="text-center mb-12 md:mb-16">
-          <h2 className="font-heading text-3xl md:text-4xl font-bold text-saccs-text mb-4">
-            Onze Diensten
-          </h2>
-          <p className="text-saccs-grey text-base md:text-lg max-w-2xl mx-auto">
-            Wij bieden een breed scala aan professionele schoonmaakdiensten voor elke behoefte
+    <section ref={sectionRef} id="services" className="py-32 bg-surface">
+      <div className="max-w-7xl mx-auto px-6">
+        {/* Left-aligned header */}
+        <div className="mb-20 space-y-4 max-w-2xl">
+          <h2 className="text-4xl font-black tracking-tighter text-on-surface">Onze Specialismen</h2>
+          <p className="text-on-surface-variant text-lg leading-relaxed">
+            Wij bieden een breed scala aan diensten aan, afgestemd op de specifieke behoeften van zowel de zakelijke als de particuliere sector.
           </p>
         </div>
 
         {/* Services Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8 mb-12">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
           {services.map((service, index) => (
             <div
               key={service.title}
-              className={`corporate-card p-6 text-center transition-all duration-700 ${
+              className={`bg-surface-container-lowest p-8 rounded-xl hover:shadow-2xl transition-all group cursor-pointer border border-transparent hover:border-primary-fixed ${
                 isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'
               }`}
-              style={{ transitionDelay: isVisible ? `${index * 150}ms` : '0ms' }}
+              style={{ transitionDuration: '700ms', transitionDelay: isVisible ? `${index * 150}ms` : '0ms' }}
             >
-              <div className="w-14 h-14 mx-auto bg-icon-bg rounded-xl flex items-center justify-center text-primary mb-4">
-                {service.icon}
+              <div className="w-14 h-14 bg-primary-container/10 rounded-full flex items-center justify-center mb-6 text-primary group-hover:scale-110 transition-transform">
+                <span className="material-symbols-outlined text-3xl">{service.icon}</span>
               </div>
-              <h3 className="font-heading text-base font-bold text-saccs-text mb-3">
-                {service.title}
-              </h3>
-              <p className="text-saccs-grey text-sm leading-relaxed">{service.description}</p>
+              <h3 className="text-xl font-bold mb-3">{service.title}</h3>
+              <p className="text-on-surface-variant text-sm leading-relaxed mb-6">
+                {service.description}
+              </p>
+              <div className="h-1 w-0 bg-primary group-hover:w-full transition-all duration-300" />
             </div>
           ))}
-        </div>
-
-        {/* CTA */}
-        <div className="text-center">
-          <a
-            href="#contact"
-            onClick={handleNavClick}
-            className="inline-flex items-center gap-2 px-8 py-3 bg-primary text-white font-semibold rounded-full hover:bg-primary-dark transition-all duration-200"
-          >
-            <span>Bekijk alle diensten</span>
-            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={2}>
-              <path strokeLinecap="round" strokeLinejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
-            </svg>
-          </a>
         </div>
       </div>
     </section>
