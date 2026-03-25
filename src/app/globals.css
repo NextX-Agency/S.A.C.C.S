@@ -96,6 +96,15 @@
   }
 }
 
+/* Mobile design gradients */
+.hero-gradient {
+  background: linear-gradient(135deg, rgba(17, 175, 78, 0.05) 0%, rgba(126, 200, 130, 0.05) 100%);
+}
+
+.cta-gradient {
+  background: linear-gradient(135deg, #11af4e 0%, #7ec882 100%);
+}
+
 /* Form styles - iOS Safari fixes */
 .form-input {
   @apply w-full px-4 py-4 border-none rounded-lg font-body text-base transition-all duration-200 bg-surface-container-low focus:outline-none focus:ring-2 focus:ring-primary;

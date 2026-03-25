@@ -7,21 +7,18 @@ export default function Stats() {
   ];
 
   return (
-    <section className="py-12 lg:py-24 bg-surface-container-low overflow-hidden">
+    <section className="py-12 lg:py-24 bg-surface lg:bg-surface-container-low overflow-hidden">
       <div className="max-w-7xl mx-auto">
-        {/* Mobile: Section title + horizontal scroller */}
-        <div className="lg:hidden">
-          <div className="px-6 mb-8">
-            <h2 className="text-sm font-bold tracking-[0.15em] uppercase text-outline">Onze Cijfers</h2>
-          </div>
-          <div className="flex overflow-x-auto scrollbar-hide snap-x snap-mandatory px-6 gap-4 pb-4">
+        {/* Mobile: Centered stacked stat cards */}
+        <div className="lg:hidden px-6">
+          <div className="max-w-md mx-auto grid grid-cols-1 gap-8 text-center">
             {stats.map((stat) => (
               <div
                 key={stat.label}
-                className="snap-center shrink-0 w-60 bg-surface-container-lowest p-8 rounded-3xl flex flex-col gap-2"
+                className="p-8 rounded-3xl bg-primary-container/5 relative overflow-hidden"
               >
-                <span className="text-4xl font-bold text-primary tracking-tighter">{stat.number}</span>
-                <span className="text-sm font-medium text-secondary uppercase tracking-widest">{stat.label}</span>
+                <div className="text-5xl font-extrabold text-on-primary-container mb-2 tracking-tighter">{stat.number}</div>
+                <div className="text-sm font-bold uppercase tracking-widest text-primary">{stat.label}</div>
               </div>
             ))}
           </div>

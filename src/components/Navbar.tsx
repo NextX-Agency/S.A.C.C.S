@@ -129,17 +129,19 @@ export default function Navbar() {
           </Link>
         )}
 
-        {/* Mobile Menu Toggle */}
-        <button
-          className="md:hidden flex flex-col justify-center items-center w-10 h-10 space-y-1.5 touch-manipulation"
-          onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-          aria-label="Toggle menu"
-          aria-expanded={isMobileMenuOpen}
-        >
-          <span className={`w-6 h-0.5 bg-on-surface transition-all duration-200 ${isMobileMenuOpen ? 'rotate-45 translate-y-2' : ''}`} />
-          <span className={`w-6 h-0.5 bg-on-surface transition-all duration-200 ${isMobileMenuOpen ? 'opacity-0' : ''}`} />
-          <span className={`w-6 h-0.5 bg-on-surface transition-all duration-200 ${isMobileMenuOpen ? '-rotate-45 -translate-y-2' : ''}`} />
-        </button>
+        {/* Mobile Menu Toggle - Only on sub-pages */}
+        {!isHomePage && (
+          <button
+            className="md:hidden flex flex-col justify-center items-center w-10 h-10 space-y-1.5 touch-manipulation"
+            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+            aria-label="Toggle menu"
+            aria-expanded={isMobileMenuOpen}
+          >
+            <span className={`w-6 h-0.5 bg-on-surface transition-all duration-200 ${isMobileMenuOpen ? 'rotate-45 translate-y-2' : ''}`} />
+            <span className={`w-6 h-0.5 bg-on-surface transition-all duration-200 ${isMobileMenuOpen ? 'opacity-0' : ''}`} />
+            <span className={`w-6 h-0.5 bg-on-surface transition-all duration-200 ${isMobileMenuOpen ? '-rotate-45 -translate-y-2' : ''}`} />
+          </button>
+        )}
       </div>
 
       {/* Mobile Navigation */}

@@ -45,33 +45,34 @@ export default function ServicesSection() {
   }, []);
 
   return (
-    <section ref={sectionRef} id="services" className="py-16 lg:py-32 bg-surface">
+    <section ref={sectionRef} id="services" className="py-16 lg:py-32 bg-surface-container-low/30 lg:bg-surface">
       <div className="max-w-7xl mx-auto px-4 lg:px-6">
         {/* Header */}
         <div className="mb-10 lg:mb-20 space-y-3 lg:space-y-4 max-w-2xl">
+          <span className="lg:hidden text-[11px] font-bold uppercase tracking-[0.2em] text-primary mb-2 block">Onze Expertise</span>
           <h2 className="font-heading text-3xl lg:text-4xl font-bold tracking-tight text-on-surface">Onze Specialismen</h2>
           <p className="hidden lg:block text-on-surface-variant text-lg leading-relaxed">
             Wij bieden een breed scala aan diensten aan, afgestemd op de specifieke behoeften van zowel de zakelijke als de particuliere sector.
           </p>
         </div>
 
-        {/* Mobile: Numbered list */}
-        <div className="lg:hidden flex flex-col gap-12">
+        {/* Mobile: Card layout with icons */}
+        <div className="lg:hidden flex flex-col gap-6">
           {services.map((service, index) => (
             <div
               key={service.title}
-              className={`group border-b border-outline-variant/20 pb-10 last:border-0 transition-all ${
+              className={`bg-surface-container-lowest p-6 rounded-[1.5rem] flex items-start gap-5 transition-all ${
                 isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'
               }`}
               style={{ transitionDuration: '700ms', transitionDelay: isVisible ? `${index * 150}ms` : '0ms' }}
             >
-              <span className="text-primary text-xs font-bold uppercase tracking-widest block mb-4">
-                {String(index + 1).padStart(2, '0')}.
-              </span>
-              <h3 className="text-2xl font-semibold mb-3 group-hover:text-primary transition-colors">
-                {service.title}
-              </h3>
-              <p className="text-secondary font-light leading-relaxed">{service.description}</p>
+              <div className="w-14 h-14 rounded-full bg-primary-container/15 flex items-center justify-center flex-shrink-0 text-primary">
+                <span className="material-symbols-outlined">{service.icon}</span>
+              </div>
+              <div>
+                <h3 className="font-bold text-lg mb-1">{service.title}</h3>
+                <p className="text-on-surface-variant text-sm leading-relaxed">{service.description}</p>
+              </div>
             </div>
           ))}
         </div>

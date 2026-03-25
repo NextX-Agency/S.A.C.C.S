@@ -42,9 +42,9 @@ export default function ProcessSection() {
         {/* Mobile: Clean centered form */}
         <div className="lg:hidden">
           <div className="text-center mb-12">
-            <h2 className="text-3xl font-bold tracking-tight mb-4">Neem Contact Op</h2>
-            <p className="text-secondary font-light">
-              Klaar om de transformatie van uw ruimte te zien? Neem vrijblijvend contact op.
+            <h2 className="text-3xl font-bold tracking-tight mb-3">Begin Uw Transformatie</h2>
+            <p className="text-on-surface-variant opacity-80">
+              Eenvoudige stappen naar een schonere omgeving.
             </p>
           </div>
 
@@ -63,38 +63,38 @@ export default function ProcessSection() {
               </p>
             </div>
           ) : (
-            <form onSubmit={handleSubmit} className="flex flex-col gap-8 max-w-md mx-auto">
+            <form onSubmit={handleSubmit} className="flex flex-col gap-6 max-w-md mx-auto">
               <div className="flex flex-col gap-2">
-                <label className="text-[10px] font-bold uppercase tracking-widest text-outline ml-1">
+                <label className="text-[11px] font-bold uppercase tracking-wider text-on-surface-variant ml-4">
                   Volledige Naam
                 </label>
                 <input
                   type="text"
                   name="name"
                   required
-                  className="bg-surface-container-low border-0 rounded-2xl px-6 py-5 focus:ring-2 focus:ring-primary/20 transition-all placeholder:text-outline-variant/60 text-base"
+                  className="bg-surface-container-lowest border-0 rounded-2xl px-6 py-4 focus:ring-2 focus:ring-primary transition-all placeholder:text-outline-variant/50 text-base"
                   placeholder="Uw naam"
                 />
               </div>
               <div className="flex flex-col gap-2">
-                <label className="text-[10px] font-bold uppercase tracking-widest text-outline ml-1">
+                <label className="text-[11px] font-bold uppercase tracking-wider text-on-surface-variant ml-4">
                   Email Adres
                 </label>
                 <input
                   type="email"
                   name="email"
                   required
-                  className="bg-surface-container-low border-0 rounded-2xl px-6 py-5 focus:ring-2 focus:ring-primary/20 transition-all placeholder:text-outline-variant/60 text-base"
+                  className="bg-surface-container-lowest border-0 rounded-2xl px-6 py-4 focus:ring-2 focus:ring-primary transition-all placeholder:text-outline-variant/50 text-base"
                   placeholder="email@voorbeeld.nl"
                 />
               </div>
               <div className="flex flex-col gap-2">
-                <label className="text-[10px] font-bold uppercase tracking-widest text-outline ml-1">
-                  Type Dienst
+                <label className="text-[11px] font-bold uppercase tracking-wider text-on-surface-variant ml-4">
+                  Onderwerp
                 </label>
                 <select
                   name="service"
-                  className="bg-surface-container-low border-0 rounded-2xl px-6 py-5 focus:ring-2 focus:ring-primary/20 transition-all text-base"
+                  className="bg-surface-container-lowest border-0 rounded-2xl px-6 py-4 focus:ring-2 focus:ring-primary transition-all text-base"
                 >
                   <option>Zakelijke Schoonmaak</option>
                   <option>Particuliere Schoonmaak</option>
@@ -103,21 +103,21 @@ export default function ProcessSection() {
                 </select>
               </div>
               <div className="flex flex-col gap-2">
-                <label className="text-[10px] font-bold uppercase tracking-widest text-outline ml-1">
+                <label className="text-[11px] font-bold uppercase tracking-wider text-on-surface-variant ml-4">
                   Bericht
                 </label>
                 <textarea
                   name="message"
                   rows={4}
                   required
-                  className="bg-surface-container-low border-0 rounded-2xl px-6 py-5 focus:ring-2 focus:ring-primary/20 transition-all placeholder:text-outline-variant/60 resize-none text-base"
+                  className="bg-surface-container-lowest border-0 rounded-2xl px-6 py-4 focus:ring-2 focus:ring-primary transition-all placeholder:text-outline-variant/50 resize-none text-base"
                   placeholder="Hoe kunnen we u helpen?"
                 />
               </div>
               <button
                 type="submit"
                 disabled={isSubmitting}
-                className="bg-primary text-on-primary font-bold py-5 rounded-full shadow-lg shadow-primary/10 active:scale-95 transition-all mt-4 disabled:opacity-70 disabled:cursor-not-allowed flex items-center justify-center gap-2 min-h-[48px] touch-manipulation"
+                className="w-full py-5 cta-gradient text-on-primary rounded-full font-bold shadow-lg shadow-primary/20 active:scale-95 transition-transform mt-4 disabled:opacity-70 disabled:cursor-not-allowed flex items-center justify-center gap-2 min-h-[48px] touch-manipulation"
               >
                 {isSubmitting ? (
                   <>

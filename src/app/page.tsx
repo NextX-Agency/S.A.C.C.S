@@ -8,13 +8,13 @@ import ReferencesSection from '@/components/ReferencesSection';
 import ProcessSection from '@/components/ProcessSection';
 import Footer from '@/components/Footer';
 import WhatsAppButton from '@/components/WhatsAppButton';
-import MobileFloatingCTA from '@/components/MobileFloatingCTA';
+import BottomNavigation from '@/components/BottomNavigation';
 
 export default function HomePage() {
   return (
     <>
       <Navbar />
-      <main className="pt-20">
+      <main className="pt-16 pb-28 lg:pt-20 lg:pb-0">
         <Hero />
         <Stats />
         <ClientsCarousel />
@@ -25,7 +25,7 @@ export default function HomePage() {
       </main>
       <Footer />
       <WhatsAppButton />
-      <MobileFloatingCTA />
+      <BottomNavigation />
     </>
   );
 }
