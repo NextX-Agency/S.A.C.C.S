@@ -39,12 +39,19 @@ export default function ProcessSection() {
   return (
     <section ref={sectionRef} id="contact" className="py-16 lg:py-32 bg-surface-container-low">
       <div className="max-w-7xl mx-auto px-6">
+        {/* Section Header */}
+        <div className="text-center mb-12 lg:mb-16">
+          <h2 className="font-heading text-3xl lg:text-4xl font-extrabold tracking-tight text-on-surface">
+            Ready voor de S.A.C.C.S Standaard?
+          </h2>
+        </div>
+
         {/* Mobile: Clean centered form */}
         <div className="lg:hidden">
           <div className="text-center mb-12">
-            <h2 className="text-3xl font-bold tracking-tight mb-3">Begin Uw Transformatie</h2>
+            <h3 className="text-2xl font-bold tracking-tight mb-3">Neem Contact Op</h3>
             <p className="text-on-surface-variant opacity-80">
-              Eenvoudige stappen naar een schonere omgeving.
+              Klaar om de transformatie van uw ruimte te zien? Neem vrijblijvend contact op voor een offerte op maat.
             </p>
           </div>
 

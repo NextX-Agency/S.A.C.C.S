@@ -9,7 +9,6 @@ const homeNavItems = [
   { href: '#home', label: 'Home' },
   { href: '#about', label: 'Over Ons' },
   { href: '#services', label: 'Diensten' },
-  { href: '#references', label: 'Referenties' },
   { href: '#contact', label: 'Contact' },
 ];
 
@@ -39,8 +38,9 @@ export default function Navbar() {
   };
 
   return (
-    <nav className="fixed top-0 w-full z-50 bg-white/60 backdrop-blur-md shadow-sm transition-colors duration-300">
-      <div className="flex justify-between items-center max-w-7xl mx-auto px-6 h-20">
+    <nav className="hidden md:block fixed top-0 w-full z-50 transition-colors duration-300">
+      <div className="max-w-7xl mx-auto px-4 pt-4">
+        <div className="flex justify-between items-center bg-white/70 backdrop-blur-xl shadow-lg rounded-full px-6 h-16">
         {/* Logo */}
         {isHomePage ? (
           <a
@@ -145,8 +145,8 @@ export default function Navbar() {
       </div>
 
       {/* Mobile Navigation */}
-      <div className={`md:hidden overflow-hidden transition-all duration-200 bg-white/90 backdrop-blur-md ${isMobileMenuOpen ? 'max-h-[500px] pb-4' : 'max-h-0'}`}>
-        <div className="flex flex-col space-y-1 pt-4 px-6 border-t border-gray-100">
+      <div className={`md:hidden overflow-hidden transition-all duration-200 mx-4 mt-2 bg-white/90 backdrop-blur-xl rounded-3xl shadow-lg ${isMobileMenuOpen ? 'max-h-[500px] pb-4' : 'max-h-0 shadow-none'}`}>
+        <div className="flex flex-col space-y-1 pt-4 px-4">
           {navItems.map((item) => {
             const isActive = !isHomePage && pathname === item.href;
             return isHomePage && item.href.startsWith('#') ? (
@@ -189,6 +189,7 @@ export default function Navbar() {
             </Link>
           )}
         </div>
+      </div>
       </div>
     </nav>
   );

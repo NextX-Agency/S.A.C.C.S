@@ -10,32 +10,47 @@ const clients = [
   { src: '/carousel/torarica.jpg', alt: 'Torarica Hotel' },
 ];
 
+function LogoItem({ client, fallbacks, setFallbacks }: {
+  client: typeof clients[number];
+  fallbacks: Record<string, string>;
+  setFallbacks: React.Dispatch<React.SetStateAction<Record<string, string>>>;
+}) {
+  return (
+    <div className="relative w-20 h-14 sm:w-28 sm:h-20 lg:w-36 lg:h-24 flex-shrink-0 mx-6 sm:mx-10 lg:mx-16">
+      <Image
+        src={fallbacks[client.alt] ?? client.src}
+        alt={client.alt}
+        fill
+        className="object-contain"
+        loading="lazy"
+        sizes="(max-width: 640px) 112px, 144px"
+        onError={() => {
+          if (client.fallback && !fallbacks[client.alt]) {
+            setFallbacks((prev) => ({ ...prev, [client.alt]: client.fallback! }));
+          }
+        }}
+      />
+    </div>
+  );
+}
+
 export default function ClientsCarousel() {
   const [fallbacks, setFallbacks] = useState<Record<string, string>>({});
 
+  // Duplicate the list so the second copy seamlessly follows the first
+  const doubled = [...clients, ...clients];
+
   return (
-    <section className="py-10 lg:py-16 bg-surface-container-lowest">
+    <section className="py-10 lg:py-16 bg-surface-container-lowest overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 lg:px-6 text-center">
         <p className="text-xs font-bold tracking-[0.3em] uppercase text-outline mb-8 lg:mb-12">
           Vertrouwd door marktleiders
         </p>
-        <div className="flex flex-wrap justify-center items-center gap-8 md:gap-24 opacity-60 grayscale hover:grayscale-0 hover:opacity-100 transition-all duration-500">
-          {clients.map((client) => (
-            <div key={client.alt} className="relative w-20 h-14 sm:w-28 sm:h-20 lg:w-36 lg:h-24">
-              <Image
-                src={fallbacks[client.alt] ?? client.src}
-                alt={client.alt}
-                fill
-                className="object-contain"
-                loading="lazy"
-                sizes="(max-width: 640px) 112px, 144px"
-                onError={() => {
-                  if (client.fallback && !fallbacks[client.alt]) {
-                    setFallbacks((prev) => ({ ...prev, [client.alt]: client.fallback! }));
-                  }
-                }}
-              />
-            </div>
+      </div>
+      <div className="relative opacity-60 grayscale hover:grayscale-0 hover:opacity-100 transition-all duration-500">
+        <div className="flex animate-scroll-infinite w-max">
+          {doubled.map((client, i) => (
+            <LogoItem key={`${client.alt}-${i}`} client={client} fallbacks={fallbacks} setFallbacks={setFallbacks} />
           ))}
         </div>
       </div>

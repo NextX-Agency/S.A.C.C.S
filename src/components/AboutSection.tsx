@@ -46,10 +46,12 @@ export default function AboutSection() {
         {/* Mobile: Spacious vertical layout */}
         <div className="lg:hidden">
           <div className="mb-16">
-            <h2 className="font-heading text-3xl font-bold tracking-tight mb-6 text-on-surface">
+            <h2 className="font-heading text-3xl font-bold tracking-tight mb-4 text-on-surface">
               Kwaliteit door Ervaring
             </h2>
-            <div className="h-1 w-12 bg-primary rounded-full"></div>
+            <p className="text-on-surface-variant text-sm leading-relaxed">
+              S.A.C.C.S. Schoonmaakdiensten is sinds 2012 een begrip in de sector. Wij combineren jarenlange expertise met de modernste technieken.
+            </p>
           </div>
 
           <div className="space-y-14">

@@ -17,23 +17,14 @@ export default function Hero() {
       {/* ─── Mobile Layout ─── */}
       <div className="lg:hidden px-6 py-12 hero-gradient relative">
         <div className="max-w-md mx-auto">
-          <div className="mb-8 rounded-[2.5rem] overflow-hidden aspect-[4/5] shadow-2xl relative">
-            <Image
-              src="/beeld/hero.jpeg"
-              alt="S.A.C.C.S. professionele schoonmaakdiensten"
-              fill
-              className="object-cover"
-              priority
-              sizes="100vw"
-            />
-            <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent" />
-          </div>
           <div className="text-center space-y-4">
             <h1 className="text-4xl font-extrabold tracking-tight text-on-surface leading-[1.1]">
-              Schone Ruimtes, Moeiteloos.
+              Uw partner in{' '}
+              <span className="text-primary">professionele</span>{' '}
+              schoonmaakdiensten
             </h1>
-            <p className="text-on-surface-variant font-medium opacity-80 max-w-[80%] mx-auto">
-              Klinische precisie schoonmaak voor de meest veeleisende residentiële en commerciële omgevingen.
+            <p className="text-on-surface-variant font-medium opacity-80 max-w-[90%] mx-auto">
+              Kwaliteit die zichtbaar en voelbaar is. Wij creëren de perfecte omgeving voor uw bedrijf of woning met onze klinische precisie.
             </p>
             <div className="pt-6">
               <a
@@ -41,7 +32,7 @@ export default function Hero() {
                 onClick={(e) => handleNavClick(e, '#contact')}
                 className="cta-gradient text-on-primary px-8 py-4 rounded-full font-bold text-lg shadow-xl active:scale-95 transition-transform w-full block text-center"
               >
-                Offerte Aanvragen
+                Start Nu een Aanvraag
               </a>
             </div>
           </div>

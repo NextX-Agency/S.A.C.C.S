@@ -49,9 +49,8 @@ export default function ServicesSection() {
       <div className="max-w-7xl mx-auto px-4 lg:px-6">
         {/* Header */}
         <div className="mb-10 lg:mb-20 space-y-3 lg:space-y-4 max-w-2xl">
-          <span className="lg:hidden text-[11px] font-bold uppercase tracking-[0.2em] text-primary mb-2 block">Onze Expertise</span>
           <h2 className="font-heading text-3xl lg:text-4xl font-bold tracking-tight text-on-surface">Onze Specialismen</h2>
-          <p className="hidden lg:block text-on-surface-variant text-lg leading-relaxed">
+          <p className="text-on-surface-variant text-sm lg:text-lg leading-relaxed">
             Wij bieden een breed scala aan diensten aan, afgestemd op de specifieke behoeften van zowel de zakelijke als de particuliere sector.
           </p>
         </div>
