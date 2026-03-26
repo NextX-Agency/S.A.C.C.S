@@ -1,6 +1,5 @@
 import Navbar from '@/components/Navbar';
 import Hero from '@/components/Hero';
-import Stats from '@/components/Stats';
 import ClientsCarousel from '@/components/ClientsCarousel';
 import ServicesSection from '@/components/ServicesSection';
 import AboutSection from '@/components/AboutSection';
@@ -16,7 +15,6 @@ export default function HomePage() {
       <Navbar />
       <main className="pt-16 pb-28 lg:pt-20 lg:pb-0">
         <Hero />
-        <Stats />
         <ClientsCarousel />
         <ServicesSection />
         <AboutSection />
