@@ -65,6 +65,8 @@ module.exports = {
         'saccs-dark': '#191c1e',
         'saccs-text': '#191c1e',
         'icon-bg': '#e6e8ea',
+        'forest': '#0d2117',
+        'forest-card': '#10291e',
       },
       fontFamily: {
         sans: ['Inter', '-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'sans-serif'],

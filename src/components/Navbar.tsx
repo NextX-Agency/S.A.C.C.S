@@ -83,7 +83,7 @@ export default function Navbar() {
             />
             <div>
               <div className="text-sm font-black tracking-tight leading-tight text-on-surface">S.A.C.C.S</div>
-              <p className="text-[10px] text-primary italic leading-tight">Wij doen wat wij zeggen</p>
+              <p className="text-[10px] text-primary italic leading-tight font-semibold">Wij doen wat wij zeggen</p>
             </div>
           </a>
         ) : (
@@ -98,7 +98,7 @@ export default function Navbar() {
             />
             <div>
               <div className="text-sm font-black tracking-tight leading-tight text-on-surface">S.A.C.C.S</div>
-              <p className="text-[10px] text-primary italic leading-tight">Wij doen wat wij zeggen</p>
+              <p className="text-[10px] text-primary italic leading-tight font-semibold">Wij doen wat wij zeggen</p>
             </div>
           </Link>
         )}
@@ -141,14 +141,14 @@ export default function Navbar() {
           <a
             href="#contact"
             onClick={(e) => handleNavClick(e, '#contact')}
-            className="hidden md:block bg-primary text-on-primary px-6 py-2.5 rounded-full font-bold text-sm hover:shadow-lg transition-all active:scale-95 duration-200"
+            className="hidden md:block bg-primary text-on-primary px-6 py-2.5 rounded-full font-bold text-sm hover:shadow-lg shadow-md shadow-primary/30 transition-all active:scale-95 duration-200"
           >
             Offerte Aanvragen
           </a>
         ) : (
           <Link
             href="/#contact"
-            className="hidden md:block bg-primary text-on-primary px-6 py-2.5 rounded-full font-bold text-sm hover:shadow-lg transition-all active:scale-95 duration-200"
+            className="hidden md:block bg-primary text-on-primary px-6 py-2.5 rounded-full font-bold text-sm hover:shadow-lg shadow-md shadow-primary/30 transition-all active:scale-95 duration-200"
           >
             Offerte Aanvragen
           </Link>

@@ -44,12 +44,12 @@ export default function ReferencesSection() {
   }, []);
 
   return (
-    <section ref={sectionRef} id="references" className="py-16 lg:py-32 bg-surface">
+    <section ref={sectionRef} id="references" className="py-16 lg:py-32 bg-forest">
       <div className="max-w-7xl mx-auto px-4 lg:px-6">
         {/* Mobile: Compact header */}
         <div className="text-center lg:text-center mb-10 lg:mb-20">
-          <h2 className="font-heading text-3xl lg:text-4xl font-bold tracking-tight mb-3 lg:mb-4">Waarom S.A.C.C.S.?</h2>
-          <p className="text-on-surface-variant text-sm lg:text-base">Onze fundamenten rusten op drie kernbeloften.</p>
+          <h2 className="font-heading text-3xl lg:text-5xl font-extrabold tracking-tight mb-3 lg:mb-4 text-white">Waarom S.A.C.C.S.?</h2>
+          <p className="text-white/60 text-sm lg:text-base">Onze fundamenten rusten op drie kernbeloften.</p>
         </div>
 
         {/* Unified responsive grid */}
@@ -59,16 +59,16 @@ export default function ReferencesSection() {
               key={reason.title}
               className={`p-8 lg:p-10 rounded-2xl lg:rounded-xl space-y-3 lg:space-y-4 lg:hover:-translate-y-2 transition-all ${
                 reason.accent
-                  ? 'bg-primary text-white shadow-xl'
-                  : 'bg-surface-container-lowest border border-outline-variant/30 shadow-sm'
+                  ? 'bg-white text-on-surface shadow-xl'
+                  : 'bg-forest-card border border-white/10 text-white'
               } ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}
               style={{ transitionDuration: '500ms', transitionDelay: `${index * 150}ms` }}
             >
               <reason.icon
-                className={`w-8 h-8 lg:w-9 lg:h-9 ${reason.accent ? '' : 'text-primary'}`}
+                className={`w-8 h-8 lg:w-9 lg:h-9 text-primary`}
               />
               <h3 className="text-xl lg:text-2xl font-bold">{reason.title}</h3>
-              <p className={`leading-relaxed ${reason.accent ? 'opacity-80 font-light' : 'text-on-surface-variant'}`}>
+              <p className={`leading-relaxed ${reason.accent ? 'text-on-surface-variant' : 'text-white/70'}`}>
                 {reason.description}
               </p>
             </div>

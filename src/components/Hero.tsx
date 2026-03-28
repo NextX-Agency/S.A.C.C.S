@@ -1,6 +1,7 @@
 'use client';
 
 import Image from 'next/image';
+import { ArrowRight } from 'lucide-react';
 
 export default function Hero() {
   const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
@@ -23,9 +24,9 @@ export default function Hero() {
         {/* Top content area */}
         <div className="relative z-10 px-6 pt-24 pb-6">
           {/* Heading */}
-          <h1 className="font-heading text-[2rem] font-extrabold leading-[1.15] tracking-tight text-on-surface mb-5">
+          <h1 className="font-heading text-[2.4rem] font-extrabold leading-[1.1] tracking-tight text-on-surface mb-5">
             Uw partner in{' '}
-            <span className="text-primary">professionele</span>{' '}
+            <span className="green-text-gradient">professionele</span>{' '}
             schoonmaakdiensten
           </h1>
 
@@ -39,14 +40,15 @@ export default function Hero() {
             <a
               href="#contact"
               onClick={(e) => handleNavClick(e, '#contact')}
-              className="bg-primary text-white px-8 py-4 rounded-full font-semibold text-base shadow-lg shadow-primary/20 active:scale-95 transition-transform text-center"
+              className="bg-primary text-white px-8 py-4 rounded-full font-semibold text-base shadow-lg shadow-primary/20 active:scale-95 transition-transform text-center inline-flex items-center justify-center gap-2"
             >
               Start Nu een Aanvraag
+              <ArrowRight className="w-4 h-4" />
             </a>
             <a
               href="#services"
               onClick={(e) => handleNavClick(e, '#services')}
-              className="bg-surface-container-highest text-primary px-8 py-4 rounded-full font-bold text-base active:scale-95 transition-transform text-center"
+              className="border-2 border-primary text-primary bg-transparent px-8 py-4 rounded-full font-bold text-base active:scale-95 transition-all text-center hover:bg-primary hover:text-white"
             >
               Ontdek Onze Diensten
             </a>
@@ -66,7 +68,7 @@ export default function Hero() {
             />
           </div>
           {/* Floating testimonial card — mirrors desktop */}
-          <div className="absolute top-6 -right-1 bg-surface-container-lowest rounded-xl shadow-xl p-3.5 w-48 -rotate-2 border border-outline-variant/20 z-20">
+          <div className="absolute top-6 -right-1 bg-surface-container-lowest rounded-xl shadow-xl p-3.5 w-48 -rotate-2 border-l-4 border-primary z-20">
             <p className="text-primary font-bold text-xs italic leading-snug">
               &ldquo;Onze ruimtes zijn nog nooit zo schoon geweest.&rdquo;
             </p>
@@ -77,17 +79,17 @@ export default function Hero() {
         {/* Stats row — light theme to match desktop feel */}
         <div className="relative z-10 flex justify-around items-center px-6 py-5 mt-6 border-t border-outline-variant/30">
           <div className="text-center">
-            <div className="text-on-surface font-extrabold text-xl">10+</div>
+            <div className="text-primary font-black text-3xl">10+</div>
             <div className="text-on-surface-variant text-[11px] font-medium mt-0.5">Jaar ervaring</div>
           </div>
           <div className="w-px h-8 bg-outline-variant/40" />
           <div className="text-center">
-            <div className="text-on-surface font-extrabold text-xl">200+</div>
+            <div className="text-primary font-black text-3xl">200+</div>
             <div className="text-on-surface-variant text-[11px] font-medium mt-0.5">Tevreden klanten</div>
           </div>
           <div className="w-px h-8 bg-outline-variant/40" />
           <div className="text-center">
-            <div className="text-on-surface font-extrabold text-xl">100%</div>
+            <div className="text-primary font-black text-3xl">100%</div>
             <div className="text-on-surface-variant text-[11px] font-medium mt-0.5">Tevredenheid</div>
           </div>
         </div>
@@ -95,6 +97,8 @@ export default function Hero() {
 
       {/* ─── Desktop: 2-column light layout ─── */}
       <div className="hidden lg:flex min-h-[870px] items-center bg-surface-container-lowest relative">
+        {/* Dot grid texture */}
+        <div className="absolute inset-0 z-0 dot-grid opacity-30 pointer-events-none" />
         <div className="absolute inset-0 z-0 opacity-10">
           <Image
             src="/beeld/exterior.jpeg"
@@ -122,9 +126,9 @@ export default function Hero() {
               </div>
             </div>
 
-            <h1 className="font-heading text-5xl font-extrabold leading-[1.1] tracking-tight text-on-surface">
+            <h1 className="font-heading text-6xl xl:text-7xl font-extrabold leading-[1.05] tracking-tight text-on-surface">
               Uw partner in{' '}
-              <span className="text-primary">professionele</span>{' '}
+              <span className="green-text-gradient">professionele</span>{' '}
               schoonmaakdiensten
             </h1>
 
@@ -136,21 +140,40 @@ export default function Hero() {
               <a
                 href="#contact"
                 onClick={(e) => handleNavClick(e, '#contact')}
-                className="bg-primary text-white px-8 py-4 rounded-full font-semibold text-base shadow-lg shadow-primary/10 hover:scale-105 transition-all"
+                className="bg-primary text-white px-8 py-4 rounded-full font-semibold text-base shadow-lg shadow-primary/10 hover:scale-105 transition-all inline-flex items-center gap-2"
               >
                 Start Nu een Aanvraag
+                <ArrowRight className="w-4 h-4" />
               </a>
               <a
                 href="#services"
                 onClick={(e) => handleNavClick(e, '#services')}
-                className="bg-surface-container-highest text-primary px-8 py-4 rounded-full font-bold text-base hover:bg-primary-fixed transition-colors"
+                className="border-2 border-primary text-primary bg-transparent px-8 py-4 rounded-full font-bold text-base hover:bg-primary hover:text-white transition-all"
               >
                 Ontdek Onze Diensten
               </a>
             </div>
+
+            {/* Desktop stats row */}
+            <div className="flex gap-10 pt-4">
+              <div>
+                <div className="text-4xl font-black text-primary">13+</div>
+                <div className="text-on-surface-variant text-sm font-medium">Jaar ervaring</div>
+              </div>
+              <div>
+                <div className="text-4xl font-black text-primary">50+</div>
+                <div className="text-on-surface-variant text-sm font-medium">Tevreden klanten</div>
+              </div>
+              <div>
+                <div className="text-4xl font-black text-primary">100%</div>
+                <div className="text-on-surface-variant text-sm font-medium">Tevredenheid</div>
+              </div>
+            </div>
           </div>
 
           <div className="relative z-10 pl-8">
+            {/* Green accent behind image */}
+            <div className="absolute inset-0 bg-primary/10 rounded-xl rotate-6 max-w-md ml-auto" />
             <div className="aspect-square rounded-xl overflow-hidden shadow-2xl rotate-3 max-w-md ml-auto relative">
               <Image
                 src="/beeld/hero.jpeg"
@@ -161,7 +184,7 @@ export default function Hero() {
                 priority
               />
             </div>
-            <div className="absolute -bottom-8 -left-8 bg-white p-6 rounded-xl shadow-2xl max-w-xs -rotate-3 border border-outline-variant/20">
+            <div className="absolute -bottom-8 -left-8 bg-white p-6 rounded-xl shadow-2xl max-w-xs -rotate-3 border-l-4 border-primary">
               <p className="text-primary font-bold text-lg italic">
                 &ldquo;Onze ruimtes zijn nog nooit zo schoon geweest. S.A.C.C.S. is simpelweg de beste.&rdquo;
               </p>

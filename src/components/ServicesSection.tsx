@@ -46,11 +46,12 @@ export default function ServicesSection() {
   }, []);
 
   return (
-    <section ref={sectionRef} id="services" className="py-16 lg:py-32 bg-surface-container-low/30 lg:bg-surface">
+    <section ref={sectionRef} id="services" className="py-16 lg:py-32 bg-surface">
       <div className="max-w-7xl mx-auto px-4 lg:px-6">
         {/* Header */}
         <div className="mb-10 lg:mb-20 space-y-3 lg:space-y-4 max-w-2xl">
-          <h2 className="font-heading text-3xl lg:text-4xl font-bold tracking-tight text-on-surface">Onze Specialismen</h2>
+          <h2 className="font-heading text-3xl lg:text-5xl font-extrabold tracking-tight text-on-surface">Onze Specialismen</h2>
+          <div className="w-16 h-1 bg-primary rounded-full" />
           <p className="text-on-surface-variant text-sm lg:text-lg leading-relaxed">
             Wij bieden een breed scala aan diensten aan, afgestemd op de specifieke behoeften van zowel de zakelijke als de particuliere sector.
           </p>
@@ -61,12 +62,18 @@ export default function ServicesSection() {
           {services.map((service, index) => (
             <div
               key={service.title}
-              className={`bg-surface-container-lowest p-6 lg:p-8 rounded-2xl lg:rounded-xl flex items-start gap-5 lg:flex-col lg:gap-0 hover:shadow-2xl transition-all group cursor-pointer border border-transparent hover:border-primary-fixed ${
+              className={`relative bg-surface-container-lowest p-6 lg:p-8 rounded-2xl lg:rounded-xl flex items-start gap-5 lg:flex-col lg:gap-0 hover:shadow-2xl transition-all group cursor-pointer border border-transparent hover:border-primary-fixed overflow-hidden ${
+                index === 0 ? 'border-t-4 !border-t-primary' : ''
+              } ${
                 isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'
               }`}
               style={{ transitionDuration: '700ms', transitionDelay: isVisible ? `${index * 150}ms` : '0ms' }}
             >
-              <div className="w-14 h-14 rounded-full bg-primary-container/15 lg:bg-primary-container/10 flex items-center justify-center flex-shrink-0 text-primary lg:mb-6 group-hover:scale-110 transition-transform">
+              {/* Ghost number */}
+              <span className="absolute -bottom-3 -right-1 text-8xl font-black text-primary/5 select-none pointer-events-none leading-none">
+                0{index + 1}
+              </span>
+              <div className="w-14 h-14 rounded-xl bg-primary-container/15 lg:bg-primary-container/10 flex items-center justify-center flex-shrink-0 text-primary lg:mb-6 group-hover:scale-110 transition-transform">
                 <service.icon className="w-6 h-6 lg:w-7 lg:h-7" />
               </div>
               <div>
