@@ -4,7 +4,7 @@ import { useState, useRef, useEffect } from 'react';
 import Image from 'next/image';
 
 const clients = [
-  { src: '/carousel/hardrock.jpg', alt: 'Hard Rock Cafe' },
+  { src: '/carousel/hardrock.png', alt: 'Hard Rock Cafe' },
   { src: '/carousel/radisson.png', alt: 'Radisson Hotel', fallback: '/carousel/radisson.png' },
   { src: '/carousel/azplogo.jpg', alt: 'AZP Suriname' },
   { src: '/carousel/torarica.jpg', alt: 'Torarica Hotel' },
