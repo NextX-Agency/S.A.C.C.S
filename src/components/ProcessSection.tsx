@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect, useRef, useState, FormEvent } from 'react';
+import { Phone, Mail, MapPin } from 'lucide-react';
 import { contactInfo } from '@/lib/content';
 
 export default function ProcessSection() {
@@ -8,6 +9,7 @@ export default function ProcessSection() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
   const sectionRef = useRef<HTMLElement>(null);
+  const [formError, setFormError] = useState('');
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -27,13 +29,41 @@ export default function ProcessSection() {
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setIsSubmitting(true);
-    await new Promise((resolve) => setTimeout(resolve, 1500));
-    setIsSubmitting(false);
-    setIsSubmitted(true);
-    setTimeout(() => {
-      setIsSubmitted(false);
-      (e.target as HTMLFormElement).reset();
-    }, 5000);
+    setFormError('');
+
+    const formData = new FormData(e.currentTarget);
+    const data = {
+      name: formData.get('name') as string,
+      email: formData.get('email') as string,
+      service: formData.get('service') as string,
+      message: formData.get('message') as string,
+    };
+
+    try {
+      const res = await fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data),
+      });
+
+      const result = await res.json();
+
+      if (!res.ok) {
+        setFormError(result.error || 'Er is een fout opgetreden.');
+        setIsSubmitting(false);
+        return;
+      }
+
+      setIsSubmitting(false);
+      setIsSubmitted(true);
+      setTimeout(() => {
+        setIsSubmitted(false);
+        (e.target as HTMLFormElement).reset();
+      }, 5000);
+    } catch {
+      setFormError('Verbindingsfout. Controleer uw internet en probeer opnieuw.');
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -46,109 +76,13 @@ export default function ProcessSection() {
           </h2>
         </div>
 
-        {/* Mobile: Clean centered form */}
-        <div className="lg:hidden">
-          <div className="text-center mb-12">
-            <h3 className="text-2xl font-bold tracking-tight mb-3">Neem Contact Op</h3>
-            <p className="text-on-surface-variant opacity-80">
-              Klaar om de transformatie van uw ruimte te zien? Neem vrijblijvend contact op voor een offerte op maat.
-            </p>
-          </div>
-
-          {isSubmitted ? (
-            <div className="text-center py-8">
-              <div className="w-16 h-16 bg-accent rounded-full flex items-center justify-center mx-auto mb-4">
-                <svg className="w-8 h-8 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={2}>
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
-                </svg>
-              </div>
-              <h3 className="font-heading text-xl font-bold text-on-surface mb-2">
-                Bedankt voor uw bericht!
-              </h3>
-              <p className="text-on-surface-variant text-sm">
-                We nemen zo spoedig mogelijk contact met u op.
-              </p>
-            </div>
-          ) : (
-            <form onSubmit={handleSubmit} className="flex flex-col gap-6 max-w-md mx-auto">
-              <div className="flex flex-col gap-2">
-                <label className="text-[11px] font-bold uppercase tracking-wider text-on-surface-variant ml-4">
-                  Volledige Naam
-                </label>
-                <input
-                  type="text"
-                  name="name"
-                  required
-                  className="bg-surface-container-lowest border-0 rounded-2xl px-6 py-4 focus:ring-2 focus:ring-primary transition-all placeholder:text-outline-variant/50 text-base"
-                  placeholder="Uw naam"
-                />
-              </div>
-              <div className="flex flex-col gap-2">
-                <label className="text-[11px] font-bold uppercase tracking-wider text-on-surface-variant ml-4">
-                  Email Adres
-                </label>
-                <input
-                  type="email"
-                  name="email"
-                  required
-                  className="bg-surface-container-lowest border-0 rounded-2xl px-6 py-4 focus:ring-2 focus:ring-primary transition-all placeholder:text-outline-variant/50 text-base"
-                  placeholder="email@voorbeeld.nl"
-                />
-              </div>
-              <div className="flex flex-col gap-2">
-                <label className="text-[11px] font-bold uppercase tracking-wider text-on-surface-variant ml-4">
-                  Onderwerp
-                </label>
-                <select
-                  name="service"
-                  className="bg-surface-container-lowest border-0 rounded-2xl px-6 py-4 focus:ring-2 focus:ring-primary transition-all text-base"
-                >
-                  <option>Zakelijke Schoonmaak</option>
-                  <option>Particuliere Schoonmaak</option>
-                  <option>Specialistische Dienst</option>
-                  <option>Anders...</option>
-                </select>
-              </div>
-              <div className="flex flex-col gap-2">
-                <label className="text-[11px] font-bold uppercase tracking-wider text-on-surface-variant ml-4">
-                  Bericht
-                </label>
-                <textarea
-                  name="message"
-                  rows={4}
-                  required
-                  className="bg-surface-container-lowest border-0 rounded-2xl px-6 py-4 focus:ring-2 focus:ring-primary transition-all placeholder:text-outline-variant/50 resize-none text-base"
-                  placeholder="Hoe kunnen we u helpen?"
-                />
-              </div>
-              <button
-                type="submit"
-                disabled={isSubmitting}
-                className="w-full py-5 cta-gradient text-on-primary rounded-full font-bold shadow-lg shadow-primary/20 active:scale-95 transition-transform mt-4 disabled:opacity-70 disabled:cursor-not-allowed flex items-center justify-center gap-2 min-h-[48px] touch-manipulation"
-              >
-                {isSubmitting ? (
-                  <>
-                    <svg className="animate-spin w-5 h-5" fill="none" viewBox="0 0 24 24">
-                      <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
-                      <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z" />
-                    </svg>
-                    <span>Versturen...</span>
-                  </>
-                ) : (
-                  <span>Verstuur Aanvraag</span>
-                )}
-              </button>
-            </form>
-          )}
-        </div>
-
-        {/* Desktop: Original split layout */}
+        {/* Unified responsive layout */}
         <div
-          className={`hidden lg:grid bg-surface-container-lowest rounded-xl shadow-2xl overflow-hidden grid-cols-5 transition-all duration-700 ${
+          className={`bg-surface-container-lowest rounded-xl shadow-2xl overflow-hidden grid grid-cols-1 lg:grid-cols-5 transition-all duration-700 ${
             isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
           }`}
         >
-          {/* Left: Green Sidebar */}
+          {/* Left: Green sidebar / top on mobile */}
           <div className="lg:col-span-2 bg-primary p-8 lg:p-12 text-white space-y-8 lg:space-y-12">
             <div>
               <h2 className="font-heading text-2xl lg:text-3xl font-bold mb-3 lg:mb-4">Neem Contact Op</h2>
@@ -158,19 +92,19 @@ export default function ProcessSection() {
             </div>
             <div className="space-y-6">
               <div className="flex items-center gap-4">
-                <span className="material-symbols-outlined">call</span>
+                <Phone className="w-5 h-5" />
                 <a href={contactInfo.phone.href} className="font-medium hover:underline">
                   {contactInfo.phone.display}
                 </a>
               </div>
               <div className="flex items-center gap-4">
-                <span className="material-symbols-outlined">mail</span>
+                <Mail className="w-5 h-5" />
                 <a href={contactInfo.email.href} className="font-medium hover:underline">
                   {contactInfo.email.display}
                 </a>
               </div>
               <div className="flex items-center gap-4">
-                <span className="material-symbols-outlined">location_on</span>
+                <MapPin className="w-5 h-5" />
                 <span className="font-medium">{contactInfo.address.full}</span>
               </div>
             </div>
@@ -245,6 +179,10 @@ export default function ProcessSection() {
                     placeholder="Hoe kunnen we u helpen?"
                   />
                 </div>
+
+                {formError && (
+                  <p className="text-red-500 text-sm text-center bg-red-50 rounded-lg px-4 py-3">{formError}</p>
+                )}
 
                 <button
                   type="submit"

@@ -6,14 +6,12 @@ import AboutSection from '@/components/AboutSection';
 import ReferencesSection from '@/components/ReferencesSection';
 import ProcessSection from '@/components/ProcessSection';
 import Footer from '@/components/Footer';
-import WhatsAppButton from '@/components/WhatsAppButton';
-import BottomNavigation from '@/components/BottomNavigation';
 
 export default function HomePage() {
   return (
     <>
       <Navbar />
-      <main className="pt-16 pb-28 lg:pt-20 lg:pb-0">
+      <main>
         <Hero />
         <ClientsCarousel />
         <ServicesSection />
@@ -22,8 +20,6 @@ export default function HomePage() {
         <ProcessSection />
       </main>
       <Footer />
-      <WhatsAppButton />
-      <BottomNavigation />
     </>
   );
 }

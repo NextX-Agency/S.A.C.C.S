@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import Image from 'next/image';
 
 const clients = [
@@ -36,19 +36,34 @@ function LogoItem({ client, fallbacks, setFallbacks }: {
 
 export default function ClientsCarousel() {
   const [fallbacks, setFallbacks] = useState<Record<string, string>>({});
+  const [isPaused, setIsPaused] = useState(false);
+  const sectionRef = useRef<HTMLElement>(null);
+
+  // Pause animation when off-screen to save GPU
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => setIsPaused(!entry.isIntersecting),
+      { threshold: 0 }
+    );
+    if (sectionRef.current) observer.observe(sectionRef.current);
+    return () => observer.disconnect();
+  }, []);
 
   // Duplicate the list so the second copy seamlessly follows the first
   const doubled = [...clients, ...clients];
 
   return (
-    <section className="py-10 lg:py-16 bg-surface-container-lowest overflow-hidden">
+    <section ref={sectionRef} className="py-10 lg:py-16 bg-surface-container-lowest overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 lg:px-6 text-center">
         <p className="text-xs font-bold tracking-[0.3em] uppercase text-outline mb-8 lg:mb-12">
           Vertrouwd door marktleiders
         </p>
       </div>
       <div className="relative opacity-60 grayscale hover:grayscale-0 hover:opacity-100 transition-all duration-500">
-        <div className="flex animate-scroll-infinite w-max">
+        <div
+          className="flex animate-scroll-infinite w-max"
+          style={isPaused ? { animationPlayState: 'paused' } : undefined}
+        >
           {doubled.map((client, i) => (
             <LogoItem key={`${client.alt}-${i}`} client={client} fallbacks={fallbacks} setFallbacks={setFallbacks} />
           ))}

@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { usePathname } from 'next/navigation';
@@ -21,9 +21,34 @@ const siteNavItems = [
 
 export default function Navbar() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [activeSection, setActiveSection] = useState('#home');
   const pathname = usePathname();
   const isHomePage = pathname === '/';
   const navItems = isHomePage ? homeNavItems : siteNavItems;
+
+  // Scroll-based active section tracking for homepage
+  useEffect(() => {
+    if (!isHomePage) return;
+
+    const sectionIds = homeNavItems.map((item) => item.href);
+    const observer = new IntersectionObserver(
+      (entries) => {
+        for (const entry of entries) {
+          if (entry.isIntersecting) {
+            setActiveSection('#' + entry.target.id);
+          }
+        }
+      },
+      { rootMargin: '-40% 0px -40% 0px', threshold: 0 }
+    );
+
+    const elements = sectionIds
+      .map((id) => document.querySelector(id))
+      .filter(Boolean) as Element[];
+    elements.forEach((el) => observer.observe(el));
+
+    return () => observer.disconnect();
+  }, [isHomePage]);
 
   const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
     if (isHomePage && href.startsWith('#')) {
@@ -38,7 +63,7 @@ export default function Navbar() {
   };
 
   return (
-    <nav className="hidden md:block fixed top-0 w-full z-50 transition-colors duration-300">
+    <nav className="fixed top-0 w-full z-50 transition-colors duration-300">
       <div className="max-w-7xl mx-auto px-4 pt-4">
         <div className="flex justify-between items-center bg-white/70 backdrop-blur-xl shadow-lg rounded-full px-6 h-16">
         {/* Logo */}
@@ -57,7 +82,7 @@ export default function Navbar() {
               priority
             />
             <div>
-              <div className="text-sm font-black tracking-tight text-on-surface leading-tight">S.A.C.C.S</div>
+              <div className="text-sm font-black tracking-tight leading-tight text-on-surface">S.A.C.C.S</div>
               <p className="text-[10px] text-primary italic leading-tight">Wij doen wat wij zeggen</p>
             </div>
           </a>
@@ -72,7 +97,7 @@ export default function Navbar() {
               priority
             />
             <div>
-              <div className="text-sm font-black tracking-tight text-on-surface leading-tight">S.A.C.C.S</div>
+              <div className="text-sm font-black tracking-tight leading-tight text-on-surface">S.A.C.C.S</div>
               <p className="text-[10px] text-primary italic leading-tight">Wij doen wat wij zeggen</p>
             </div>
           </Link>
@@ -80,8 +105,8 @@ export default function Navbar() {
 
         {/* Desktop Navigation */}
         <div className="hidden md:flex items-center space-x-8 tracking-tight text-sm font-medium">
-          {navItems.map((item, index) => {
-            const isActive = (!isHomePage && pathname === item.href) || (isHomePage && index === 0);
+          {navItems.map((item) => {
+            const isActive = (!isHomePage && pathname === item.href) || (isHomePage && activeSection === item.href);
             return isHomePage && item.href.startsWith('#') ? (
               <a
                 key={item.href}
@@ -129,19 +154,17 @@ export default function Navbar() {
           </Link>
         )}
 
-        {/* Mobile Menu Toggle - Only on sub-pages */}
-        {!isHomePage && (
-          <button
-            className="md:hidden flex flex-col justify-center items-center w-10 h-10 space-y-1.5 touch-manipulation"
-            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+        {/* Mobile Menu Toggle */}
+        <button
+          className="md:hidden flex flex-col justify-center items-center w-10 h-10 space-y-1.5 touch-manipulation"
+          onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
             aria-label="Toggle menu"
             aria-expanded={isMobileMenuOpen}
           >
-            <span className={`w-6 h-0.5 bg-on-surface transition-all duration-200 ${isMobileMenuOpen ? 'rotate-45 translate-y-2' : ''}`} />
-            <span className={`w-6 h-0.5 bg-on-surface transition-all duration-200 ${isMobileMenuOpen ? 'opacity-0' : ''}`} />
-            <span className={`w-6 h-0.5 bg-on-surface transition-all duration-200 ${isMobileMenuOpen ? '-rotate-45 -translate-y-2' : ''}`} />
+          <span className={`w-6 h-0.5 bg-on-surface transition-all duration-200 ${isMobileMenuOpen ? 'rotate-45 translate-y-2' : ''}`} />
+          <span className={`w-6 h-0.5 bg-on-surface transition-all duration-200 ${isMobileMenuOpen ? 'opacity-0' : ''}`} />
+          <span className={`w-6 h-0.5 bg-on-surface transition-all duration-200 ${isMobileMenuOpen ? '-rotate-45 -translate-y-2' : ''}`} />
           </button>
-        )}
       </div>
 
       {/* Mobile Navigation */}

@@ -3,6 +3,7 @@
 import Link from 'next/link';
 import Image from 'next/image';
 import { usePathname } from 'next/navigation';
+import { Globe, Share2 } from 'lucide-react';
 import { siteConfig } from '@/lib/content';
 
 const footerQuickLinks = [
@@ -50,39 +51,21 @@ export default function Footer() {
 
   return (
     <footer className="bg-slate-50 w-full border-t border-slate-100">
-      {/* Mobile: Minimal centered footer */}
-      <div className="lg:hidden flex flex-col items-center gap-6 w-full text-center py-12 px-8">
-        <div className="flex gap-8 mb-2">
-          {legalLinks.map((link) => (
-            <Link
-              key={link.href}
-              href={link.href}
-              className="text-slate-400 text-[11px] font-medium tracking-[0.05em] uppercase hover:text-primary transition-colors"
-            >
-              {link.label}
-            </Link>
-          ))}
-        </div>
-        <div className="text-on-surface text-[11px] font-medium tracking-[0.05em] uppercase opacity-80">
-          &copy; {currentYear} {siteConfig.fullName}
-        </div>
-      </div>
-
-      {/* Desktop: Full grid footer */}
-      <div className="hidden lg:grid grid-cols-4 gap-12 max-w-7xl mx-auto px-8 py-16">
+      {/* Unified responsive grid */}
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-12 max-w-7xl mx-auto px-6 lg:px-8 py-12 lg:py-16">
         {/* Company Info */}
-        <div className="space-y-4">
+        <div className="sm:col-span-2 lg:col-span-1 space-y-4">
           <div className="flex items-center gap-3">
             <Image
               src="/logo/barelogo-removebg-preview.png"
               alt="S.A.C.C.S."
               width={40}
               height={40}
-              className="h-10 w-auto"
+              className="h-9 lg:h-10 w-auto"
             />
             <div>
-              <div className="text-lg font-black tracking-tight text-on-surface">S.A.C.C.S</div>
-              <p className="text-xs text-on-surface-variant italic">Wij doen wat wij zeggen</p>
+              <div className="text-base lg:text-lg font-black tracking-tight text-on-surface leading-tight">S.A.C.C.S</div>
+              <p className="text-[10px] lg:text-xs text-on-surface-variant italic leading-tight">Wij doen wat wij zeggen</p>
             </div>
           </div>
           <p className="text-slate-500 text-sm leading-relaxed">
@@ -91,9 +74,9 @@ export default function Footer() {
         </div>
 
         {/* Snelmenu */}
-        <div className="space-y-6">
-          <h4 className="font-bold text-on-surface uppercase text-xs tracking-widest">Snelmenu</h4>
-          <ul className="space-y-3 text-sm leading-relaxed">
+        <div className="space-y-4 lg:space-y-6">
+          <h4 className="font-bold text-on-surface uppercase text-[11px] lg:text-xs tracking-widest">Snelmenu</h4>
+          <ul className="space-y-2.5 lg:space-y-3 text-sm">
             {quickLinks.map((link) => (
               <li key={link.href}>
                 {isHomePage && link.href.startsWith('#') ? (
@@ -115,23 +98,21 @@ export default function Footer() {
         </div>
 
         {/* Diensten */}
-        <div className="space-y-6">
-          <h4 className="font-bold text-on-surface uppercase text-xs tracking-widest">Diensten</h4>
-          <ul className="space-y-3 text-sm leading-relaxed">
+        <div className="space-y-4 lg:space-y-6">
+          <h4 className="font-bold text-on-surface uppercase text-[11px] lg:text-xs tracking-widest">Diensten</h4>
+          <ul className="space-y-2.5 lg:space-y-3 text-sm">
             {dienstenLinks.map((link) => (
               <li key={link.label}>
-                <span className="text-slate-500 hover:text-primary transition-colors cursor-default">
-                  {link.label}
-                </span>
+                <span className="text-slate-500">{link.label}</span>
               </li>
             ))}
           </ul>
         </div>
 
         {/* Juridisch */}
-        <div className="space-y-6">
-          <h4 className="font-bold text-on-surface uppercase text-xs tracking-widest">Juridisch</h4>
-          <div className="flex flex-col gap-3 text-sm leading-relaxed">
+        <div className="space-y-4 lg:space-y-6">
+          <h4 className="font-bold text-on-surface uppercase text-[11px] lg:text-xs tracking-widest">Juridisch</h4>
+          <div className="flex flex-col gap-2.5 lg:gap-3 text-sm">
             {legalLinks.map((link) => (
               <Link
                 key={link.href}
@@ -145,42 +126,21 @@ export default function Footer() {
         </div>
       </div>
 
-      {/* Bottom Bar - Desktop only */}
-      <div className="hidden lg:flex max-w-7xl mx-auto px-8 py-8 border-t border-slate-100 flex-row justify-between items-center gap-4">
+      {/* Bottom Bar */}
+      <div className="max-w-7xl mx-auto px-6 lg:px-8 py-6 lg:py-8 border-t border-slate-100 flex flex-col sm:flex-row justify-between items-center gap-4">
         <p className="text-slate-500 text-xs leading-relaxed">
           &copy; {currentYear} {siteConfig.fullName}. Alle rechten voorbehouden.
         </p>
         <div className="flex gap-6">
           <a className="text-slate-400 hover:text-primary transition-colors" href="#" aria-label="Website">
-            <span className="material-symbols-outlined">public</span>
+            <Globe className="w-5 h-5" />
           </a>
           <a className="text-slate-400 hover:text-primary transition-colors" href="#" aria-label="Delen">
-            <span className="material-symbols-outlined">share</span>
+            <Share2 className="w-5 h-5" />
           </a>
         </div>
       </div>
 
-      {/* Scroll to Top Button - Only on homepage */}
-      {isHomePage && <ScrollToTop />}
     </footer>
-  );
-}
-
-function ScrollToTop() {
-  const scrollToTop = () => {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-  };
-
-  return (
-    <button
-      onClick={scrollToTop}
-      className="fixed bottom-36 right-6 lg:bottom-24 w-11 h-11 bg-primary text-white rounded-full shadow-saccs-md flex items-center justify-center hover:shadow-lg transition-all duration-200 z-40 touch-manipulation"
-      aria-label="Scroll naar boven"
-      style={{ WebkitTapHighlightColor: 'transparent' }}
-    >
-      <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={2}>
-        <path strokeLinecap="round" strokeLinejoin="round" d="M5 10l7-7m0 0l7 7m-7-7v18" />
-      </svg>
-    </button>
   );
 }

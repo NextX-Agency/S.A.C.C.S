@@ -3,30 +3,21 @@
 import { useState, useEffect } from 'react';
 
 export default function WhatsAppButton() {
-  const [isVisible, setIsVisible] = useState(false);
   const [showPulse, setShowPulse] = useState(true);
   const message = encodeURIComponent('Hallo, ik zou graag meer informatie willen over uw schoonmaakdiensten.');
   const whatsappUrl = `https://wa.me/5978517364?text=${message}`;
 
-  // Delay showing the button for better performance
   useEffect(() => {
-    const timer = setTimeout(() => setIsVisible(true), 1000);
-    // Stop pulse after 10 seconds
     const pulseTimer = setTimeout(() => setShowPulse(false), 10000);
-    return () => {
-      clearTimeout(timer);
-      clearTimeout(pulseTimer);
-    };
+    return () => clearTimeout(pulseTimer);
   }, []);
-
-  if (!isVisible) return null;
 
   return (
     <a
       href={whatsappUrl}
       target="_blank"
       rel="noopener noreferrer"
-      className="fixed bottom-28 right-6 lg:bottom-6 z-50 flex items-center gap-3 bg-[#25D366] text-white pl-4 pr-5 py-3 rounded-full shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 active:scale-95 touch-manipulation"
+      className="fixed bottom-6 right-6 z-50 flex items-center gap-3 bg-[#25D366] text-white pl-4 pr-5 py-3 rounded-full shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 active:scale-95 touch-manipulation"
       aria-label="Chat op WhatsApp"
       style={{ WebkitTapHighlightColor: 'transparent' }}
     >
