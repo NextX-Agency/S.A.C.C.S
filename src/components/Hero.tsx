@@ -24,7 +24,7 @@ export default function Hero() {
         {/* Top content area */}
         <div className="relative z-10 px-6 pt-24 pb-6">
           {/* Heading */}
-          <h1 className="font-heading text-[2.4rem] font-extrabold leading-[1.1] tracking-tight text-on-surface mb-5">
+          <h1 className="font-heading text-[1.95rem] sm:text-[2.2rem] font-extrabold leading-[1.15] tracking-tight text-on-surface mb-5">
             Uw partner in{' '}
             <span className="green-text-gradient">professionele</span>{' '}
             schoonmaakdiensten
@@ -112,31 +112,17 @@ export default function Hero() {
 
         <div className="max-w-7xl mx-auto px-6 grid grid-cols-2 gap-12 items-center relative z-10 py-24">
           <div className="space-y-8 relative z-20 flex flex-col items-start">
-            <div className="flex items-center gap-3">
-              <Image
-                src="/logo/barelogo-removebg-preview.png"
-                alt="S.A.C.C.S."
-                width={48}
-                height={48}
-                className="h-12 w-auto"
-              />
-              <div>
-                <div className="text-lg font-black tracking-tight text-on-surface">S.A.C.C.S</div>
-                <p className="text-xs text-primary italic">Wij doen wat wij zeggen</p>
-              </div>
-            </div>
-
             <h1 className="font-heading text-6xl xl:text-7xl font-extrabold leading-[1.05] tracking-tight text-on-surface">
               Uw partner in{' '}
               <span className="green-text-gradient">professionele</span>{' '}
               schoonmaakdiensten
             </h1>
 
-            <p className="text-on-surface-variant max-w-xl text-lg leading-relaxed">
+            <p className="text-on-surface-variant max-w-2xl text-lg leading-relaxed">
               Kwaliteit die zichtbaar en voelbaar is. Wij creëren de perfecte omgeving voor uw bedrijf of woning met onze klinische precisie.
             </p>
 
-            <div className="flex flex-row gap-3 pt-4">
+            <div className="flex flex-row gap-3 pt-8">
               <a
                 href="#contact"
                 onClick={(e) => handleNavClick(e, '#contact')}
@@ -155,7 +141,7 @@ export default function Hero() {
             </div>
 
             {/* Desktop stats row */}
-            <div className="flex gap-10 pt-4">
+            <div className="flex gap-10 pt-8">
               <div>
                 <div className="text-4xl font-black text-primary">13+</div>
                 <div className="text-on-surface-variant text-sm font-medium">Jaar ervaring</div>
