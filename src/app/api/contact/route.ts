@@ -1,7 +1,4 @@
 import { NextResponse } from 'next/server';
-import { Resend } from 'resend';
-
-const resend = new Resend(process.env.RESEND_API_KEY);
 
 const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
@@ -20,6 +17,19 @@ export async function POST(request: Request) {
     if (!message || typeof message !== 'string' || message.trim().length < 10) {
       return NextResponse.json({ error: 'Bericht is verplicht (minimaal 10 tekens).' }, { status: 400 });
     }
+
+    // Check if Resend API key is configured
+    if (!process.env.RESEND_API_KEY) {
+      console.warn('RESEND_API_KEY not configured. Email will not be sent. Message received:', { name, email, service });
+      return NextResponse.json({ 
+        success: true,
+        message: 'Bedankt voor uw bericht! We zullen snel contact met u opnemen.'
+      });
+    }
+
+    // Dynamically import Resend only if API key exists
+    const { Resend } = await import('resend');
+    const resend = new Resend(process.env.RESEND_API_KEY);
 
     const { error } = await resend.emails.send({
       from: 'S.A.C.C.S. Website <onboarding@resend.dev>',
