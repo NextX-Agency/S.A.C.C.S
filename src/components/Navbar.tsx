@@ -171,13 +171,15 @@ export default function Navbar() {
       <div className={`md:hidden overflow-hidden transition-all duration-200 mx-4 mt-2 bg-white/90 backdrop-blur-xl rounded-3xl shadow-lg ${isMobileMenuOpen ? 'max-h-[500px] pb-4' : 'max-h-0 shadow-none'}`}>
         <div className="flex flex-col space-y-1 pt-4 px-4">
           {navItems.map((item) => {
-            const isActive = !isHomePage && pathname === item.href;
+            const isActive = (!isHomePage && pathname === item.href) || (isHomePage && activeSection === item.href);
             return isHomePage && item.href.startsWith('#') ? (
               <a
                 key={item.href}
                 href={item.href}
                 onClick={(e) => handleNavClick(e, item.href)}
-                className="px-4 py-3 text-on-surface font-medium hover:text-primary hover:bg-surface-container-low rounded-lg transition-colors duration-200 touch-manipulation min-h-[48px] flex items-center"
+                className={`px-4 py-3 font-medium rounded-lg transition-colors duration-200 touch-manipulation min-h-[48px] flex items-center ${
+                  isActive ? 'text-primary bg-surface-container-low font-bold' : 'text-on-surface hover:text-primary hover:bg-surface-container-low'
+                }`}
               >
                 {item.label}
               </a>
