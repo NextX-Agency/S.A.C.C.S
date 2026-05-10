@@ -204,13 +204,9 @@ export default function Navbar() {
                 key={item.href}
                 href={item.href}
                 onClick={(e) => handleNavClick(e, item.href)}
-<<<<<<< HEAD
-                className="px-3 py-3 text-on-surface font-medium hover:text-primary rounded-lg transition-colors touch-manipulation min-h-[48px] flex items-center"
-=======
-                className={`px-4 py-3 font-medium rounded-lg transition-colors duration-200 touch-manipulation min-h-[48px] flex items-center ${
-                  isActive ? 'text-primary bg-surface-container-low font-bold' : 'text-on-surface hover:text-primary hover:bg-surface-container-low'
+                className={`px-3 py-3 font-medium rounded-lg transition-colors touch-manipulation min-h-[48px] flex items-center ${
+                  isActive ? 'text-primary font-semibold' : 'text-on-surface hover:text-primary'
                 }`}
->>>>>>> 7035d61e088616e421e04096b6b599383b2fd229
               >
                 {item.label}
               </a>
