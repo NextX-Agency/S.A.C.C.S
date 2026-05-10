@@ -66,7 +66,7 @@ export default function Hero() {
         </div>
 
         {/* Image block */}
-        <div className="relative z-10 px-6 pt-2 pb-0">
+        <div className="relative z-10 px-6 pt-2 pb-6">
           <div className="relative rounded-2xl overflow-hidden shadow-2xl aspect-[4/3]">
             <Image
               src="/beeld/hero.jpeg"
@@ -76,13 +76,13 @@ export default function Hero() {
               priority
               sizes="100vw"
             />
-          </div>
-          {/* Floating testimonial card */}
-          <div className="absolute top-6 -right-1 bg-surface-container-lowest rounded-xl shadow-xl p-3.5 w-48 -rotate-2 border-l-4 border-primary z-20">
-            <p className="text-primary font-bold text-xs italic leading-snug">
-              &ldquo;Onze ruimtes zijn nog nooit zo schoon geweest.&rdquo;
-            </p>
-            <p className="mt-1.5 text-[11px] text-on-surface-variant font-medium">— Radisson Team</p>
+            {/* Floating testimonial card — inside image to stay within bounds */}
+            <div className="absolute bottom-4 left-4 right-4 bg-white/95 backdrop-blur-sm rounded-xl shadow-lg p-3 border-l-4 border-primary z-20 max-w-[220px]">
+              <p className="text-primary font-bold text-xs italic leading-snug">
+                &ldquo;Onze ruimtes zijn nog nooit zo schoon geweest.&rdquo;
+              </p>
+              <p className="mt-1 text-[11px] text-on-surface-variant font-medium">— Radisson Team</p>
+            </div>
           </div>
         </div>
 

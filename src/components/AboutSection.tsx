@@ -28,59 +28,53 @@ export default function AboutSection() {
 
   useEffect(() => {
     const observer = new IntersectionObserver(
-      ([entry]) => {
-        setIsVisible(entry.isIntersecting);
-      },
+      ([entry]) => { setIsVisible(entry.isIntersecting); },
       { threshold: 0.1 }
     );
-
-    if (sectionRef.current) {
-      observer.observe(sectionRef.current);
-    }
-
+    if (sectionRef.current) observer.observe(sectionRef.current);
     return () => observer.disconnect();
   }, []);
 
   return (
     <section ref={sectionRef} id="about" className="py-16 lg:py-32 bg-surface-container-low overflow-hidden relative">
-      {/* Subtle background bubble */}
+      {/* Subtle background bubble — safe, fully inside bounds */}
       <div className="absolute inset-0 pointer-events-none" aria-hidden="true">
         <div className="absolute -bottom-20 -right-20 w-72 h-72 rounded-full bg-primary-container/10 animate-saccs-b" />
       </div>
 
       <div className="max-w-7xl mx-auto px-4 lg:px-6">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-20 items-center">
-          {/* Image with bubble decorations — trio echoes logo */}
+
+          {/* Image with badge */}
           <div
             className={`relative transition-all duration-700 ${
               isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 lg:-translate-x-8'
             }`}
           >
-            <div className="aspect-[4/3] lg:aspect-[4/5] rounded-2xl lg:rounded-3xl overflow-hidden shadow-xl lg:shadow-2xl relative">
-              <Image
-                src="/beeld/about.jpg"
-                alt="S.A.C.C.S. medewerker reinigt meubilair"
-                fill
-                className="object-cover"
-                sizes="(min-width: 1024px) 50vw, 100vw"
-                loading="lazy"
-              />
-            </div>
+            {/* Wrapper with overflow-hidden to contain any badge overflow on mobile */}
+            <div className="relative pt-6 pr-6 lg:pt-10 lg:pr-10">
+              <div className="aspect-[4/3] lg:aspect-[4/5] rounded-2xl lg:rounded-3xl overflow-hidden shadow-xl lg:shadow-2xl relative">
+                <Image
+                  src="/beeld/about.jpg"
+                  alt="S.A.C.C.S. medewerker reinigt meubilair"
+                  fill
+                  className="object-cover"
+                  sizes="(min-width: 1024px) 50vw, 100vw"
+                  loading="lazy"
+                />
+              </div>
 
-            {/* Bubble trio badge — the "13+" circle + two companions echoing the logo */}
-            <div className="absolute -top-5 -right-2 lg:-top-10 lg:-right-10" aria-hidden="true">
-              <div className="w-10 h-10 rounded-full bg-primary-container/40 absolute -top-4 -left-6 animate-saccs-c" />
-              <div className="w-7 h-7 rounded-full bg-primary/20 absolute -top-1 -left-3 animate-saccs-a" />
-            </div>
-            <div className="absolute -top-5 -right-2 lg:-top-10 lg:-right-10 bg-primary p-8 lg:p-12 rounded-full flex flex-col items-center justify-center shadow-lg z-10">
-              <span className="text-white text-2xl lg:text-3xl font-black leading-none">13+</span>
-              <span className="text-white text-xs lg:text-sm font-normal">Jaar</span>
-            </div>
+              {/* 13+ badge — positioned inside the pt/pr wrapper so it stays visible */}
+              <div className="absolute top-0 right-0 bg-primary w-20 h-20 lg:w-28 lg:h-28 rounded-full flex flex-col items-center justify-center shadow-lg z-10">
+                <span className="text-white text-xl lg:text-3xl font-black leading-none">13+</span>
+                <span className="text-white text-[10px] lg:text-sm font-normal">Jaar</span>
+              </div>
 
-            {/* Extra bubble decorations bottom-left */}
-            <div className="absolute -bottom-4 -left-4 pointer-events-none" aria-hidden="true">
-              <div className="w-16 h-16 rounded-full bg-primary-container/25 animate-saccs-b" />
-              <div className="w-10 h-10 rounded-full bg-primary/15 animate-saccs-c absolute top-4 left-8" />
+              {/* Companion bubble decorations — desktop only to avoid mobile overflow */}
+              <div className="hidden lg:block absolute top-0 right-0 pointer-events-none" aria-hidden="true">
+                <div className="w-10 h-10 rounded-full bg-primary-container/40 absolute -top-3 -left-4 animate-saccs-c" />
+                <div className="w-7 h-7 rounded-full bg-primary/20 absolute top-1 -left-8 animate-saccs-a" />
+              </div>
             </div>
           </div>
 
@@ -106,20 +100,20 @@ export default function AboutSection() {
               </p>
             </div>
 
-            <div className="space-y-5 lg:space-y-6">
+            <div className="space-y-4 lg:space-y-6">
               {features.map((feature, index) => (
                 <div
                   key={feature.title}
-                  className={`flex gap-4 lg:gap-6 items-start bg-surface-container-lowest p-5 rounded-2xl transition-all duration-700 hover:shadow-md ${
+                  className={`flex gap-4 items-start bg-surface-container-lowest p-4 lg:p-5 rounded-2xl transition-all duration-700 hover:shadow-md ${
                     isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'
                   }`}
                   style={{ transitionDelay: `${300 + index * 150}ms` }}
                 >
-                  <div className="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center flex-shrink-0 text-primary">
-                    <feature.icon className="w-6 h-6" />
+                  <div className="w-11 h-11 bg-primary/10 rounded-full flex items-center justify-center flex-shrink-0 text-primary">
+                    <feature.icon className="w-5 h-5" />
                   </div>
                   <div>
-                    <h4 className="text-base lg:text-xl font-bold mb-1 text-primary">{feature.title}</h4>
+                    <h4 className="text-base lg:text-lg font-bold mb-1 text-primary">{feature.title}</h4>
                     <p className="text-on-surface-variant text-sm leading-relaxed">{feature.description}</p>
                   </div>
                 </div>
