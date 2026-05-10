@@ -71,41 +71,60 @@ export default function ProcessSection() {
       <div className="max-w-7xl mx-auto px-6">
         {/* Section Header */}
         <div className="text-center mb-12 lg:mb-16">
+          {/* Centered bubble trio */}
+          <div className="flex items-center justify-center mb-4" aria-hidden="true">
+            <div className="w-3 h-3 rounded-full bg-on-primary-container" />
+            <div className="w-4 h-4 rounded-full bg-primary -ml-1.5" />
+            <div className="w-3 h-3 rounded-full bg-primary-container -ml-1.5" />
+          </div>
           <h2 className="font-heading text-3xl lg:text-4xl font-extrabold tracking-tight text-on-surface">
             Ready voor de S.A.C.C.S Standaard?
           </h2>
+          <p className="text-on-surface-variant text-sm lg:text-base mt-3 max-w-lg mx-auto">
+            Vraag vrijblijvend een offerte aan en ontdek wat wij voor uw ruimte kunnen betekenen.
+          </p>
         </div>
 
-        {/* Unified responsive layout */}
+        {/* Card */}
         <div
-          className={`bg-surface-container-lowest rounded-xl shadow-2xl overflow-hidden grid grid-cols-1 lg:grid-cols-5 transition-all duration-700 ${
+          className={`bg-surface-container-lowest rounded-3xl shadow-2xl overflow-hidden grid grid-cols-1 lg:grid-cols-5 transition-all duration-700 ${
             isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
           }`}
         >
-          {/* Left: Green sidebar / top on mobile */}
-          <div className="lg:col-span-2 bg-primary p-8 lg:p-12 text-white space-y-8 lg:space-y-12">
-            <div>
+          {/* Left: Green sidebar with bubble decorations */}
+          <div className="lg:col-span-2 bg-primary p-8 lg:p-12 text-white space-y-8 lg:space-y-12 relative overflow-hidden">
+            {/* Bubble trio decorations on green sidebar */}
+            <div className="absolute inset-0 pointer-events-none" aria-hidden="true">
+              <div className="absolute -top-20 -right-20 w-56 h-56 rounded-full bg-white/8 animate-saccs-a" />
+              <div className="absolute -bottom-16 -left-16 w-48 h-48 rounded-full bg-white/6 animate-saccs-b" />
+              <div className="absolute top-1/2 -right-8 w-32 h-32 rounded-full bg-white/5 animate-saccs-c" />
+            </div>
+
+            <div className="relative z-10">
               <h2 className="font-heading text-2xl lg:text-3xl font-bold mb-3 lg:mb-4">Neem Contact Op</h2>
-              <p className="opacity-80">
+              <p className="opacity-80 text-sm lg:text-base">
                 Klaar om de transformatie van uw ruimte te zien? Neem vrijblijvend contact op voor een offerte op maat.
               </p>
             </div>
-            <div className="space-y-6">
+
+            <div className="space-y-5 relative z-10">
+              <a href={contactInfo.phone.href} className="flex items-center gap-4 group">
+                <div className="w-10 h-10 rounded-full bg-white/15 flex items-center justify-center flex-shrink-0 group-hover:bg-white/25 transition-colors">
+                  <Phone className="w-4 h-4" />
+                </div>
+                <span className="font-medium text-sm hover:underline">{contactInfo.phone.display}</span>
+              </a>
+              <a href={contactInfo.email.href} className="flex items-center gap-4 group">
+                <div className="w-10 h-10 rounded-full bg-white/15 flex items-center justify-center flex-shrink-0 group-hover:bg-white/25 transition-colors">
+                  <Mail className="w-4 h-4" />
+                </div>
+                <span className="font-medium text-sm hover:underline">{contactInfo.email.display}</span>
+              </a>
               <div className="flex items-center gap-4">
-                <Phone className="w-5 h-5" />
-                <a href={contactInfo.phone.href} className="font-medium hover:underline">
-                  {contactInfo.phone.display}
-                </a>
-              </div>
-              <div className="flex items-center gap-4">
-                <Mail className="w-5 h-5" />
-                <a href={contactInfo.email.href} className="font-medium hover:underline">
-                  {contactInfo.email.display}
-                </a>
-              </div>
-              <div className="flex items-center gap-4">
-                <MapPin className="w-5 h-5" />
-                <span className="font-medium">{contactInfo.address.full}</span>
+                <div className="w-10 h-10 rounded-full bg-white/15 flex items-center justify-center flex-shrink-0">
+                  <MapPin className="w-4 h-4" />
+                </div>
+                <span className="font-medium text-sm">{contactInfo.address.full}</span>
               </div>
             </div>
           </div>
@@ -113,11 +132,15 @@ export default function ProcessSection() {
           {/* Right: Form */}
           <div className="lg:col-span-3 p-6 lg:p-12">
             {isSubmitted ? (
-              <div className="text-center py-8">
-                <div className="w-16 h-16 bg-accent rounded-full flex items-center justify-center mx-auto mb-4">
-                  <svg className="w-8 h-8 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={2}>
-                    <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
-                  </svg>
+              <div className="text-center py-12">
+                <div className="relative w-20 h-20 mx-auto mb-6">
+                  {/* Bubble trio success animation */}
+                  <div className="absolute inset-0 rounded-full bg-primary-container/30 animate-saccs-a" />
+                  <div className="w-20 h-20 bg-primary/10 rounded-full flex items-center justify-center relative z-10">
+                    <svg className="w-9 h-9 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={2.5}>
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
+                    </svg>
+                  </div>
                 </div>
                 <h3 className="font-heading text-xl font-bold text-on-surface mb-2">
                   Bedankt voor uw bericht!
@@ -181,13 +204,13 @@ export default function ProcessSection() {
                 </div>
 
                 {formError && (
-                  <p className="text-red-500 text-sm text-center bg-red-50 rounded-lg px-4 py-3">{formError}</p>
+                  <p className="text-red-500 text-sm text-center bg-red-50 rounded-xl px-4 py-3">{formError}</p>
                 )}
 
                 <button
                   type="submit"
                   disabled={isSubmitting}
-                  className="w-full bg-primary text-white font-black py-4 rounded-xl hover:shadow-xl transition-all uppercase tracking-widest text-sm disabled:opacity-70 disabled:cursor-not-allowed flex items-center justify-center gap-2 min-h-[48px] touch-manipulation"
+                  className="w-full bg-primary text-white font-black py-4 rounded-full hover:shadow-xl hover:scale-[1.02] transition-all uppercase tracking-widest text-sm disabled:opacity-70 disabled:cursor-not-allowed flex items-center justify-center gap-2 min-h-[52px] touch-manipulation"
                 >
                   {isSubmitting ? (
                     <>

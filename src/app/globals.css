@@ -158,6 +158,29 @@
   transform: translateY(0);
 }
 
+/* SACCS Bubbly Theme — floating bubble animations (echo logo circles) */
+@keyframes saccs-bubble-a {
+  0%, 100% { transform: translateY(0) scale(1); }
+  50% { transform: translateY(-14px) scale(1.02); }
+}
+@keyframes saccs-bubble-b {
+  0%, 100% { transform: translateY(0) scale(1); }
+  50% { transform: translateY(-20px) scale(1.03); }
+}
+@keyframes saccs-bubble-c {
+  0%, 100% { transform: translateY(0) scale(1); }
+  50% { transform: translateY(-9px) scale(1.01); }
+}
+
+.animate-saccs-a { animation: saccs-bubble-a 7s ease-in-out infinite; }
+.animate-saccs-b { animation: saccs-bubble-b 9s ease-in-out infinite 1.5s; }
+.animate-saccs-c { animation: saccs-bubble-c 11s ease-in-out infinite 3s; }
+
+/* Hero section — subtle green-tinted background */
+.hero-section-bg {
+  background: linear-gradient(150deg, #eaf7ef 0%, #f7f9fb 45%, #edf7f1 100%);
+}
+
 /* Reduced motion preference */
 @media (prefers-reduced-motion: reduce) {
   *,

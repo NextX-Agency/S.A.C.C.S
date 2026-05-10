@@ -53,11 +53,18 @@ export default function ClientsCarousel() {
   const doubled = [...clients, ...clients];
 
   return (
-    <section ref={sectionRef} className="py-10 lg:py-16 bg-surface-container-lowest overflow-hidden">
+    <section ref={sectionRef} className="py-10 lg:py-16 bg-surface-container-lowest overflow-hidden border-b border-primary/8">
       <div className="max-w-7xl mx-auto px-4 lg:px-6 text-center">
-        <p className="text-xs font-bold tracking-[0.3em] uppercase text-outline mb-8 lg:mb-12">
-          Vertrouwd door marktleiders
-        </p>
+        <div className="flex items-center justify-center gap-2 mb-6 lg:mb-10">
+          <div className="flex items-center" aria-hidden="true">
+            <div className="w-2 h-2 rounded-full bg-on-primary-container/50" />
+            <div className="w-2.5 h-2.5 rounded-full bg-primary/70 -ml-0.5" />
+            <div className="w-2 h-2 rounded-full bg-primary-container -ml-0.5" />
+          </div>
+          <p className="text-xs font-bold tracking-[0.3em] uppercase text-outline">
+            Vertrouwd door marktleiders
+          </p>
+        </div>
       </div>
       <div className="relative opacity-60 grayscale hover:grayscale-0 hover:opacity-100 transition-all duration-500">
         <div

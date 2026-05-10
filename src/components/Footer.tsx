@@ -50,9 +50,15 @@ export default function Footer() {
   };
 
   return (
-    <footer className="bg-slate-50 w-full border-t border-slate-100">
-      {/* Unified responsive grid */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-12 max-w-7xl mx-auto px-6 lg:px-8 py-12 lg:py-16">
+    <footer className="bg-surface-container-lowest w-full border-t-2 border-primary/10 relative overflow-hidden">
+      {/* Subtle bubble decoration */}
+      <div className="absolute inset-0 pointer-events-none" aria-hidden="true">
+        <div className="absolute -top-20 -right-20 w-64 h-64 rounded-full bg-primary-container/8 animate-saccs-a" />
+        <div className="absolute -bottom-10 -left-10 w-40 h-40 rounded-full bg-primary/5 animate-saccs-c" />
+      </div>
+
+      {/* Content grid */}
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-12 max-w-7xl mx-auto px-6 lg:px-8 py-12 lg:py-16 relative z-10">
         {/* Company Info */}
         <div className="sm:col-span-2 lg:col-span-1 space-y-4">
           <div className="flex items-center gap-3">
@@ -65,12 +71,18 @@ export default function Footer() {
             />
             <div>
               <div className="text-base lg:text-lg font-black tracking-tight text-on-surface leading-tight">S.A.C.C.S</div>
-              <p className="text-[10px] lg:text-xs text-on-surface-variant italic leading-tight">Wij doen wat wij zeggen</p>
+              <p className="text-[10px] lg:text-xs text-primary italic leading-tight font-semibold">Wij doen wat wij zeggen</p>
             </div>
           </div>
-          <p className="text-slate-500 text-sm leading-relaxed">
+          <p className="text-on-surface-variant text-sm leading-relaxed">
             Uw professionele partner voor alle schoonmaakuitdagingen. Kwaliteit en betrouwbaarheid sinds 2012.
           </p>
+          {/* Mini bubble trio */}
+          <div className="flex items-center" aria-hidden="true">
+            <div className="w-2.5 h-2.5 rounded-full bg-on-primary-container/60" />
+            <div className="w-3.5 h-3.5 rounded-full bg-primary/70 -ml-1" />
+            <div className="w-2.5 h-2.5 rounded-full bg-primary-container -ml-1" />
+          </div>
         </div>
 
         {/* Snelmenu */}
@@ -83,12 +95,12 @@ export default function Footer() {
                   <a
                     href={link.href}
                     onClick={(e) => handleNavClick(e, link.href)}
-                    className="text-slate-500 hover:text-primary transition-colors"
+                    className="text-on-surface-variant hover:text-primary transition-colors"
                   >
                     {link.label}
                   </a>
                 ) : (
-                  <Link href={link.href} className="text-slate-500 hover:text-primary transition-colors">
+                  <Link href={link.href} className="text-on-surface-variant hover:text-primary transition-colors">
                     {link.label}
                   </Link>
                 )}
@@ -103,7 +115,7 @@ export default function Footer() {
           <ul className="space-y-2.5 lg:space-y-3 text-sm">
             {dienstenLinks.map((link) => (
               <li key={link.label}>
-                <span className="text-slate-500">{link.label}</span>
+                <span className="text-on-surface-variant">{link.label}</span>
               </li>
             ))}
           </ul>
@@ -117,7 +129,7 @@ export default function Footer() {
               <Link
                 key={link.href}
                 href={link.href}
-                className="text-slate-500 hover:text-primary transition-colors"
+                className="text-on-surface-variant hover:text-primary transition-colors"
               >
                 {link.label}
               </Link>
@@ -127,20 +139,19 @@ export default function Footer() {
       </div>
 
       {/* Bottom Bar */}
-      <div className="max-w-7xl mx-auto px-6 lg:px-8 py-6 lg:py-8 border-t border-slate-100 flex flex-col sm:flex-row justify-between items-center gap-4">
-        <p className="text-slate-500 text-xs leading-relaxed">
+      <div className="max-w-7xl mx-auto px-6 lg:px-8 py-5 lg:py-6 border-t border-outline-variant/20 flex flex-col sm:flex-row justify-between items-center gap-4 relative z-10">
+        <p className="text-on-surface-variant text-xs leading-relaxed">
           &copy; {currentYear} {siteConfig.fullName}. Alle rechten voorbehouden.
         </p>
         <div className="flex gap-6">
-          <a className="text-slate-400 hover:text-primary transition-colors" href="#" aria-label="Website">
+          <a className="text-on-surface-variant hover:text-primary transition-colors" href="#" aria-label="Website">
             <Globe className="w-5 h-5" />
           </a>
-          <a className="text-slate-400 hover:text-primary transition-colors" href="#" aria-label="Delen">
+          <a className="text-on-surface-variant hover:text-primary transition-colors" href="#" aria-label="Delen">
             <Share2 className="w-5 h-5" />
           </a>
         </div>
       </div>
-
     </footer>
   );
 }
