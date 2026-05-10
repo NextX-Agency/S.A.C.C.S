@@ -8,39 +8,35 @@ export default function Hero() {
     e.preventDefault();
     const target = document.querySelector(href);
     if (target) {
-      const offsetTop = target.getBoundingClientRect().top + window.scrollY - 80;
+      const offsetTop = target.getBoundingClientRect().top + window.scrollY - 64;
       window.scrollTo({ top: offsetTop, behavior: 'smooth' });
     }
   };
 
   return (
-    <section id="home" className="relative overflow-hidden">
-      {/* ─── Mobile: Light corporate hero (matches desktop theme) ─── */}
-      <div className="lg:hidden relative bg-surface overflow-hidden">
-        {/* Decorative background blobs */}
-        <div className="absolute top-0 right-0 w-72 h-72 rounded-full bg-primary/5 -translate-y-1/3 translate-x-1/3 pointer-events-none" />
-        <div className="absolute top-1/3 left-0 w-48 h-48 rounded-full bg-primary/5 -translate-x-1/2 pointer-events-none" />
+    <section id="home" className="relative">
 
-        {/* Top content area */}
-        <div className="relative z-10 px-6 pt-24 pb-6">
-          {/* Heading */}
-          <h1 className="font-heading text-[1.95rem] sm:text-[2.2rem] font-extrabold leading-[1.15] tracking-tight text-on-surface mb-5">
+      {/* ─── Mobile ─── */}
+      <div className="lg:hidden bg-white">
+        {/* Text content */}
+        <div className="px-6 pt-24 pb-8">
+          <p className="text-primary text-xs font-bold uppercase tracking-widest mb-4">
+            Professionele Schoonmaakdiensten · Paramaribo
+          </p>
+          <h1 className="font-heading text-[2rem] font-extrabold leading-[1.1] tracking-tight text-on-surface mb-5">
             Uw partner in{' '}
-            <span className="green-text-gradient">professionele</span>{' '}
+            <span className="text-primary">professionele</span>{' '}
             schoonmaakdiensten
           </h1>
-
-          {/* Subtext */}
-          <p className="text-on-surface-variant text-base leading-relaxed mb-7">
-            Kwaliteit die zichtbaar en voelbaar is. Wij creëren de perfecte omgeving voor uw bedrijf of woning.
+          <p className="text-on-surface-variant text-base leading-relaxed mb-8">
+            Kwaliteit die zichtbaar en voelbaar is. Wij creëren de perfecte
+            omgeving voor uw bedrijf of woning.
           </p>
-
-          {/* CTAs — same style as desktop */}
           <div className="flex flex-col gap-3">
             <a
               href="#contact"
               onClick={(e) => handleNavClick(e, '#contact')}
-              className="bg-primary text-white px-8 py-4 rounded-full font-semibold text-base shadow-lg shadow-primary/20 active:scale-95 transition-transform text-center inline-flex items-center justify-center gap-2"
+              className="bg-primary text-white px-7 py-3.5 rounded-lg font-semibold text-base inline-flex items-center justify-center gap-2 hover:bg-primary/90 transition-colors"
             >
               Start Nu een Aanvraag
               <ArrowRight className="w-4 h-4" />
@@ -48,85 +44,75 @@ export default function Hero() {
             <a
               href="#services"
               onClick={(e) => handleNavClick(e, '#services')}
-              className="border-2 border-primary text-primary bg-transparent px-8 py-4 rounded-full font-bold text-base active:scale-95 transition-all text-center hover:bg-primary hover:text-white"
+              className="border border-outline-variant text-on-surface px-7 py-3.5 rounded-lg font-medium text-base text-center hover:border-primary hover:text-primary transition-colors"
             >
               Ontdek Onze Diensten
             </a>
           </div>
         </div>
 
-        {/* Image block with floating testimonial — mirrors desktop */}
-        <div className="relative z-10 px-6 pt-2 pb-0">
-          <div className="relative rounded-2xl overflow-hidden shadow-2xl aspect-[4/3]">
-            <Image
-              src="/beeld/hero.jpeg"
-              alt="S.A.C.C.S. professional cleaning service"
-              fill
-              className="object-cover object-center"
-              priority
-              sizes="100vw"
-            />
-          </div>
-          {/* Floating testimonial card — mirrors desktop */}
-          <div className="absolute top-6 -right-1 bg-surface-container-lowest rounded-xl shadow-xl p-3.5 w-48 -rotate-2 border-l-4 border-primary z-20">
-            <p className="text-primary font-bold text-xs italic leading-snug">
-              &ldquo;Onze ruimtes zijn nog nooit zo schoon geweest.&rdquo;
+        {/* Image */}
+        <div className="relative aspect-[4/3] overflow-hidden">
+          <Image
+            src="/beeld/hero.jpeg"
+            alt="S.A.C.C.S. professional cleaning service"
+            fill
+            className="object-cover object-center"
+            priority
+            sizes="100vw"
+          />
+          <div className="absolute inset-0 bg-gradient-to-t from-navy/60 to-transparent" />
+          {/* Testimonial over image */}
+          <div className="absolute bottom-5 left-5 right-5 bg-white/95 rounded-lg p-4 border-l-4 border-primary">
+            <p className="text-on-surface-variant text-sm italic leading-snug">
+              &ldquo;Onze ruimtes zijn nog nooit zo schoon geweest. S.A.C.C.S. is simpelweg de beste.&rdquo;
             </p>
-            <p className="mt-1.5 text-[11px] text-on-surface-variant font-medium">— Radisson Team</p>
+            <p className="mt-1.5 text-xs text-primary font-semibold">— Radisson Team</p>
           </div>
         </div>
 
-        {/* Stats row — light theme to match desktop feel */}
-        <div className="relative z-10 flex justify-around items-center px-6 py-5 mt-6 border-t border-outline-variant/30">
+        {/* Stats strip */}
+        <div className="bg-navy flex justify-around items-center px-6 py-5">
           <div className="text-center">
-            <div className="text-primary font-black text-3xl">10+</div>
-            <div className="text-on-surface-variant text-[11px] font-medium mt-0.5">Jaar ervaring</div>
+            <div className="text-primary font-black text-2xl">13+</div>
+            <div className="text-white/50 text-[10px] font-medium mt-0.5 uppercase tracking-wider">Jaar ervaring</div>
           </div>
-          <div className="w-px h-8 bg-outline-variant/40" />
+          <div className="w-px h-8 bg-white/20" />
           <div className="text-center">
-            <div className="text-primary font-black text-3xl">200+</div>
-            <div className="text-on-surface-variant text-[11px] font-medium mt-0.5">Tevreden klanten</div>
+            <div className="text-primary font-black text-2xl">50+</div>
+            <div className="text-white/50 text-[10px] font-medium mt-0.5 uppercase tracking-wider">Tevreden klanten</div>
           </div>
-          <div className="w-px h-8 bg-outline-variant/40" />
+          <div className="w-px h-8 bg-white/20" />
           <div className="text-center">
-            <div className="text-primary font-black text-3xl">100%</div>
-            <div className="text-on-surface-variant text-[11px] font-medium mt-0.5">Tevredenheid</div>
+            <div className="text-primary font-black text-2xl">100%</div>
+            <div className="text-white/50 text-[10px] font-medium mt-0.5 uppercase tracking-wider">Tevredenheid</div>
           </div>
         </div>
       </div>
 
-      {/* ─── Desktop: 2-column light layout ─── */}
-      <div className="hidden lg:flex min-h-[870px] items-center bg-surface-container-lowest relative">
-        {/* Dot grid texture */}
-        <div className="absolute inset-0 z-0 dot-grid opacity-30 pointer-events-none" />
-        <div className="absolute inset-0 z-0 opacity-10">
-          <Image
-            src="/beeld/exterior.jpeg"
-            alt="Clean professional environment"
-            fill
-            className="object-cover"
-            loading="lazy"
-            sizes="100vw"
-          />
-        </div>
-
-        <div className="max-w-7xl mx-auto px-6 grid grid-cols-2 gap-12 items-center relative z-10 py-24">
-          <div className="space-y-8 relative z-20 flex flex-col items-start">
-            <h1 className="font-heading text-6xl xl:text-7xl font-extrabold leading-[1.05] tracking-tight text-on-surface">
+      {/* ─── Desktop: clean geometric split ─── */}
+      <div className="hidden lg:flex min-h-[680px]">
+        {/* Left: Text column */}
+        <div className="flex-1 bg-white flex items-center">
+          <div className="w-full max-w-[600px] ml-auto px-16 py-28 pr-14">
+            <p className="text-primary text-xs font-bold uppercase tracking-widest mb-5">
+              Professionele Schoonmaakdiensten · Paramaribo, Suriname
+            </p>
+            <h1 className="font-heading text-5xl xl:text-[3.5rem] font-extrabold leading-[1.08] tracking-tight text-on-surface mb-6">
               Uw partner in{' '}
-              <span className="green-text-gradient">professionele</span>{' '}
-              schoonmaakdiensten
+              <span className="text-primary">professionele</span>{' '}
+              schoonmaak&shy;diensten
             </h1>
-
-            <p className="text-on-surface-variant max-w-2xl text-lg leading-relaxed">
-              Kwaliteit die zichtbaar en voelbaar is. Wij creëren de perfecte omgeving voor uw bedrijf of woning met onze klinische precisie.
+            <p className="text-on-surface-variant text-lg leading-relaxed mb-10 max-w-lg">
+              Kwaliteit die zichtbaar en voelbaar is. Wij creëren de perfecte
+              omgeving voor uw bedrijf of woning met klinische precisie.
             </p>
 
-            <div className="flex flex-row gap-3 pt-8">
+            <div className="flex gap-3 mb-10">
               <a
                 href="#contact"
                 onClick={(e) => handleNavClick(e, '#contact')}
-                className="bg-primary text-white px-8 py-4 rounded-full font-semibold text-base shadow-lg shadow-primary/10 hover:scale-105 transition-all inline-flex items-center gap-2"
+                className="bg-primary text-white px-7 py-3.5 rounded-lg font-semibold text-base inline-flex items-center gap-2 hover:bg-primary/90 transition-colors"
               >
                 Start Nu een Aanvraag
                 <ArrowRight className="w-4 h-4" />
@@ -134,48 +120,58 @@ export default function Hero() {
               <a
                 href="#services"
                 onClick={(e) => handleNavClick(e, '#services')}
-                className="border-2 border-primary text-primary bg-transparent px-8 py-4 rounded-full font-bold text-base hover:bg-primary hover:text-white transition-all"
+                className="border border-outline-variant text-on-surface px-7 py-3.5 rounded-lg font-medium text-base hover:border-primary hover:text-primary transition-colors"
               >
                 Ontdek Onze Diensten
               </a>
             </div>
 
-            {/* Desktop stats row */}
-            <div className="flex gap-10 pt-8">
-              <div>
-                <div className="text-4xl font-black text-primary">13+</div>
-                <div className="text-on-surface-variant text-sm font-medium">Jaar ervaring</div>
-              </div>
-              <div>
-                <div className="text-4xl font-black text-primary">50+</div>
-                <div className="text-on-surface-variant text-sm font-medium">Tevreden klanten</div>
-              </div>
-              <div>
-                <div className="text-4xl font-black text-primary">100%</div>
-                <div className="text-on-surface-variant text-sm font-medium">Tevredenheid</div>
-              </div>
+            {/* Testimonial — clean left-border style */}
+            <div className="border-l-4 border-primary pl-5 py-1">
+              <p className="text-on-surface-variant text-sm italic leading-relaxed">
+                &ldquo;Onze ruimtes zijn nog nooit zo schoon geweest.
+                S.A.C.C.S. is simpelweg de beste.&rdquo;
+              </p>
+              <p className="mt-2 text-sm text-primary font-semibold">— Radisson Team</p>
             </div>
           </div>
+        </div>
 
-          <div className="relative z-10 pl-8">
-            {/* Green accent behind image */}
-            <div className="absolute inset-0 bg-primary/10 rounded-xl rotate-6 max-w-md ml-auto" />
-            <div className="aspect-square rounded-xl overflow-hidden shadow-2xl rotate-3 max-w-md ml-auto relative">
-              <Image
-                src="/beeld/hero.jpeg"
-                alt="S.A.C.C.S. professional cleaning service"
-                fill
-                className="object-cover"
-                sizes="50vw"
-                priority
-              />
-            </div>
-            <div className="absolute -bottom-8 -left-8 bg-white p-6 rounded-xl shadow-2xl max-w-xs -rotate-3 border-l-4 border-primary">
-              <p className="text-primary font-bold text-lg italic">
-                &ldquo;Onze ruimtes zijn nog nooit zo schoon geweest. S.A.C.C.S. is simpelweg de beste.&rdquo;
-              </p>
-              <p className="mt-2 text-sm text-on-surface-variant font-medium">— Radisson Team</p>
-            </div>
+        {/* Right: Full-bleed image */}
+        <div className="w-[45%] relative flex-shrink-0">
+          <Image
+            src="/beeld/hero.jpeg"
+            alt="S.A.C.C.S. professional cleaning service"
+            fill
+            className="object-cover object-center"
+            sizes="45vw"
+            priority
+          />
+          {/* Subtle green bottom fade */}
+          <div className="absolute inset-0 bg-gradient-to-t from-primary/20 via-transparent to-transparent" />
+        </div>
+      </div>
+
+      {/* Desktop stats strip */}
+      <div className="hidden lg:block bg-navy">
+        <div className="max-w-7xl mx-auto px-16 py-6 flex items-center gap-12">
+          <div>
+            <div className="text-2xl font-black text-primary">13+</div>
+            <div className="text-white/50 text-[11px] uppercase tracking-wider mt-0.5">Jaar ervaring</div>
+          </div>
+          <div className="w-px h-8 bg-white/20" />
+          <div>
+            <div className="text-2xl font-black text-primary">50+</div>
+            <div className="text-white/50 text-[11px] uppercase tracking-wider mt-0.5">Tevreden klanten</div>
+          </div>
+          <div className="w-px h-8 bg-white/20" />
+          <div>
+            <div className="text-2xl font-black text-primary">100%</div>
+            <div className="text-white/50 text-[11px] uppercase tracking-wider mt-0.5">Tevredenheid</div>
+          </div>
+          {/* Right-aligned tagline */}
+          <div className="ml-auto">
+            <p className="text-white/40 text-xs italic">Actief in Suriname sinds 2012</p>
           </div>
         </div>
       </div>

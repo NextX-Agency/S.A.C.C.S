@@ -8,21 +8,17 @@ export default function ProcessSection() {
   const [isVisible, setIsVisible] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
-  const sectionRef = useRef<HTMLElement>(null);
   const [formError, setFormError] = useState('');
+  const sectionRef = useRef<HTMLElement>(null);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
       ([entry]) => {
-        setIsVisible(entry.isIntersecting);
+        if (entry.isIntersecting) setIsVisible(true);
       },
       { threshold: 0.1 }
     );
-
-    if (sectionRef.current) {
-      observer.observe(sectionRef.current);
-    }
-
+    if (sectionRef.current) observer.observe(sectionRef.current);
     return () => observer.disconnect();
   }, []);
 
@@ -68,44 +64,60 @@ export default function ProcessSection() {
 
   return (
     <section ref={sectionRef} id="contact" className="py-16 lg:py-32 bg-surface-container-low">
-      <div className="max-w-7xl mx-auto px-6">
-        {/* Section Header */}
-        <div className="text-center mb-12 lg:mb-16">
-          <h2 className="font-heading text-3xl lg:text-4xl font-extrabold tracking-tight text-on-surface">
-            Ready voor de S.A.C.C.S Standaard?
+      <div className="max-w-7xl mx-auto px-4 lg:px-6">
+        {/* Section header */}
+        <div className="mb-10 lg:mb-14">
+          <p className="text-primary text-xs font-bold uppercase tracking-widest mb-3">Contact</p>
+          <h2 className="font-heading text-3xl lg:text-4xl font-extrabold tracking-tight text-on-surface mb-2">
+            Vraag een offerte aan
           </h2>
+          <p className="text-on-surface-variant text-sm lg:text-base">
+            Wij nemen binnen 24 uur contact met u op.
+          </p>
         </div>
 
-        {/* Unified responsive layout */}
+        {/* Card */}
         <div
-          className={`bg-surface-container-lowest rounded-xl shadow-2xl overflow-hidden grid grid-cols-1 lg:grid-cols-5 transition-all duration-700 ${
+          className={`bg-white rounded-xl border border-outline-variant/20 overflow-hidden grid grid-cols-1 lg:grid-cols-5 shadow-saccs-md transition-all duration-700 ${
             isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
           }`}
         >
-          {/* Left: Green sidebar / top on mobile */}
-          <div className="lg:col-span-2 bg-primary p-8 lg:p-12 text-white space-y-8 lg:space-y-12">
-            <div>
-              <h2 className="font-heading text-2xl lg:text-3xl font-bold mb-3 lg:mb-4">Neem Contact Op</h2>
-              <p className="opacity-80">
-                Klaar om de transformatie van uw ruimte te zien? Neem vrijblijvend contact op voor een offerte op maat.
-              </p>
-            </div>
-            <div className="space-y-6">
+          {/* Left: Navy contact info */}
+          <div className="lg:col-span-2 bg-navy p-8 lg:p-12 text-white">
+            <h3 className="font-heading text-xl lg:text-2xl font-bold mb-2">Neem Contact Op</h3>
+            <p className="text-white/55 text-sm leading-relaxed mb-8">
+              Klaar om uw ruimte te transformeren? Neem vrijblijvend contact op
+              voor een offerte op maat.
+            </p>
+
+            <div className="space-y-5">
               <div className="flex items-center gap-4">
-                <Phone className="w-5 h-5" />
-                <a href={contactInfo.phone.href} className="font-medium hover:underline">
+                <div className="w-9 h-9 bg-white/10 rounded-lg flex items-center justify-center flex-shrink-0">
+                  <Phone className="w-4 h-4" />
+                </div>
+                <a
+                  href={contactInfo.phone.href}
+                  className="text-sm font-medium hover:text-primary transition-colors"
+                >
                   {contactInfo.phone.display}
                 </a>
               </div>
               <div className="flex items-center gap-4">
-                <Mail className="w-5 h-5" />
-                <a href={contactInfo.email.href} className="font-medium hover:underline">
+                <div className="w-9 h-9 bg-white/10 rounded-lg flex items-center justify-center flex-shrink-0">
+                  <Mail className="w-4 h-4" />
+                </div>
+                <a
+                  href={contactInfo.email.href}
+                  className="text-sm font-medium hover:text-primary transition-colors break-all"
+                >
                   {contactInfo.email.display}
                 </a>
               </div>
               <div className="flex items-center gap-4">
-                <MapPin className="w-5 h-5" />
-                <span className="font-medium">{contactInfo.address.full}</span>
+                <div className="w-9 h-9 bg-white/10 rounded-lg flex items-center justify-center flex-shrink-0">
+                  <MapPin className="w-4 h-4" />
+                </div>
+                <span className="text-sm font-medium">{contactInfo.address.full}</span>
               </div>
             </div>
           </div>
@@ -113,9 +125,15 @@ export default function ProcessSection() {
           {/* Right: Form */}
           <div className="lg:col-span-3 p-6 lg:p-12">
             {isSubmitted ? (
-              <div className="text-center py-8">
-                <div className="w-16 h-16 bg-accent rounded-full flex items-center justify-center mx-auto mb-4">
-                  <svg className="w-8 h-8 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={2}>
+              <div className="h-full flex flex-col items-center justify-center text-center py-12">
+                <div className="w-14 h-14 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-5">
+                  <svg
+                    className="w-7 h-7 text-primary"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                    strokeWidth={2.5}
+                  >
                     <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
                   </svg>
                 </div>
@@ -123,13 +141,13 @@ export default function ProcessSection() {
                   Bedankt voor uw bericht!
                 </h3>
                 <p className="text-on-surface-variant text-sm">
-                  We nemen zo spoedig mogelijk contact met u op.
+                  Wij nemen zo spoedig mogelijk contact met u op.
                 </p>
               </div>
             ) : (
-              <form onSubmit={handleSubmit} className="space-y-6">
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                  <div className="space-y-2">
+              <form onSubmit={handleSubmit} className="space-y-5">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+                  <div className="space-y-1.5">
                     <label className="text-xs font-bold uppercase tracking-widest text-on-surface-variant">
                       Volledige Naam
                     </label>
@@ -141,9 +159,9 @@ export default function ProcessSection() {
                       placeholder="Uw naam"
                     />
                   </div>
-                  <div className="space-y-2">
+                  <div className="space-y-1.5">
                     <label className="text-xs font-bold uppercase tracking-widest text-on-surface-variant">
-                      Email Adres
+                      E-mailadres
                     </label>
                     <input
                       type="email"
@@ -155,19 +173,20 @@ export default function ProcessSection() {
                   </div>
                 </div>
 
-                <div className="space-y-2">
+                <div className="space-y-1.5">
                   <label className="text-xs font-bold uppercase tracking-widest text-on-surface-variant">
                     Onderwerp
                   </label>
                   <select name="service" className="form-input">
                     <option>Zakelijke Schoonmaak</option>
                     <option>Particuliere Schoonmaak</option>
+                    <option>Evenementenservice</option>
                     <option>Specialistische Dienst</option>
                     <option>Anders...</option>
                   </select>
                 </div>
 
-                <div className="space-y-2">
+                <div className="space-y-1.5">
                   <label className="text-xs font-bold uppercase tracking-widest text-on-surface-variant">
                     Bericht
                   </label>
@@ -176,29 +195,42 @@ export default function ProcessSection() {
                     rows={4}
                     required
                     className="form-input resize-none"
-                    placeholder="Hoe kunnen we u helpen?"
+                    placeholder="Hoe kunnen wij u helpen?"
                   />
                 </div>
 
                 {formError && (
-                  <p className="text-red-500 text-sm text-center bg-red-50 rounded-lg px-4 py-3">{formError}</p>
+                  <p className="text-red-600 text-sm bg-red-50 rounded-lg px-4 py-3">
+                    {formError}
+                  </p>
                 )}
 
                 <button
                   type="submit"
                   disabled={isSubmitting}
-                  className="w-full bg-primary text-white font-black py-4 rounded-xl hover:shadow-xl transition-all uppercase tracking-widest text-sm disabled:opacity-70 disabled:cursor-not-allowed flex items-center justify-center gap-2 min-h-[48px] touch-manipulation"
+                  className="w-full bg-primary text-white font-semibold py-3.5 rounded-lg hover:bg-primary/90 transition-colors duration-150 disabled:opacity-60 disabled:cursor-not-allowed flex items-center justify-center gap-2 min-h-[48px] touch-manipulation"
                 >
                   {isSubmitting ? (
                     <>
-                      <svg className="animate-spin w-5 h-5" fill="none" viewBox="0 0 24 24">
-                        <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
-                        <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z" />
+                      <svg className="animate-spin w-4 h-4" fill="none" viewBox="0 0 24 24">
+                        <circle
+                          className="opacity-25"
+                          cx="12"
+                          cy="12"
+                          r="10"
+                          stroke="currentColor"
+                          strokeWidth="4"
+                        />
+                        <path
+                          className="opacity-75"
+                          fill="currentColor"
+                          d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+                        />
                       </svg>
-                      <span>Versturen...</span>
+                      Versturen...
                     </>
                   ) : (
-                    <span>Verstuur Aanvraag</span>
+                    'Verstuur Aanvraag'
                   )}
                 </button>
               </form>

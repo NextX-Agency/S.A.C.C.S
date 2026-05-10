@@ -67,6 +67,8 @@ module.exports = {
         'icon-bg': '#e6e8ea',
         'forest': '#0d2117',
         'forest-card': '#10291e',
+        'navy': '#0D1B2A',
+        'navy-card': '#152233',
       },
       fontFamily: {
         sans: ['Inter', '-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'sans-serif'],
