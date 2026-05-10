@@ -152,14 +152,14 @@ export default function Navbar() {
           <a
             href="#contact"
             onClick={(e) => handleNavClick(e, '#contact')}
-            className="hidden md:block bg-primary text-white px-5 py-2 rounded-lg font-semibold text-sm hover:bg-primary/90 transition-colors duration-150"
+            className="hidden md:block bg-primary text-white px-6 py-2.5 rounded-full font-semibold text-sm shadow-md shadow-primary/20 hover:bg-primary/90 transition-colors duration-150"
           >
             Offerte Aanvragen
           </a>
         ) : (
           <Link
             href="/#contact"
-            className="hidden md:block bg-primary text-white px-5 py-2 rounded-lg font-semibold text-sm hover:bg-primary/90 transition-colors duration-150"
+            className="hidden md:block bg-primary text-white px-6 py-2.5 rounded-full font-semibold text-sm shadow-md shadow-primary/20 hover:bg-primary/90 transition-colors duration-150"
           >
             Offerte Aanvragen
           </Link>

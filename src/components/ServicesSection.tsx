@@ -61,7 +61,7 @@ export default function ServicesSection() {
           {services.map((service, index) => (
             <div
               key={service.title}
-              className={`bg-white rounded-xl p-6 lg:p-7 border border-outline-variant/30 hover:border-primary hover:shadow-lg transition-all duration-200 group ${
+              className={`bg-white rounded-2xl p-6 lg:p-7 border border-outline-variant/30 hover:border-primary hover:shadow-xl transition-all duration-200 group ${
                 isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'
               }`}
               style={{
@@ -78,12 +78,11 @@ export default function ServicesSection() {
                 <div className="flex-1 h-px bg-outline-variant/40" />
               </div>
 
-              {/* Icon */}
-              <div className="w-11 h-11 bg-primary/10 rounded-lg flex items-center justify-center text-primary mb-4 group-hover:bg-primary group-hover:text-white transition-colors duration-200">
+              {/* Circle icon — references logo circles */}
+              <div className="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center text-primary mb-4 group-hover:bg-primary group-hover:text-white transition-colors duration-200 flex-shrink-0">
                 <service.icon className="w-5 h-5" />
               </div>
 
-              {/* Content */}
               <h3 className="font-bold text-base lg:text-lg text-on-surface mb-2 leading-snug">
                 {service.title}
               </h3>

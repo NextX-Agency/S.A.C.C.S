@@ -82,39 +82,39 @@ export default function ProcessSection() {
             isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
           }`}
         >
-          {/* Left: Navy contact info */}
-          <div className="lg:col-span-2 bg-navy p-8 lg:p-12 text-white">
+          {/* Left: Green sidebar — on-brand color */}
+          <div className="lg:col-span-2 bg-primary p-8 lg:p-12 text-white">
             <h3 className="font-heading text-xl lg:text-2xl font-bold mb-2">Neem Contact Op</h3>
-            <p className="text-white/55 text-sm leading-relaxed mb-8">
+            <p className="text-white/75 text-sm leading-relaxed mb-8">
               Klaar om uw ruimte te transformeren? Neem vrijblijvend contact op
               voor een offerte op maat.
             </p>
 
             <div className="space-y-5">
               <div className="flex items-center gap-4">
-                <div className="w-9 h-9 bg-white/10 rounded-lg flex items-center justify-center flex-shrink-0">
+                <div className="w-9 h-9 bg-white/20 rounded-lg flex items-center justify-center flex-shrink-0">
                   <Phone className="w-4 h-4" />
                 </div>
                 <a
                   href={contactInfo.phone.href}
-                  className="text-sm font-medium hover:text-primary transition-colors"
+                  className="text-sm font-medium hover:text-white/80 transition-colors"
                 >
                   {contactInfo.phone.display}
                 </a>
               </div>
               <div className="flex items-center gap-4">
-                <div className="w-9 h-9 bg-white/10 rounded-lg flex items-center justify-center flex-shrink-0">
+                <div className="w-9 h-9 bg-white/20 rounded-lg flex items-center justify-center flex-shrink-0">
                   <Mail className="w-4 h-4" />
                 </div>
                 <a
                   href={contactInfo.email.href}
-                  className="text-sm font-medium hover:text-primary transition-colors break-all"
+                  className="text-sm font-medium hover:text-white/80 transition-colors break-all"
                 >
                   {contactInfo.email.display}
                 </a>
               </div>
               <div className="flex items-center gap-4">
-                <div className="w-9 h-9 bg-white/10 rounded-lg flex items-center justify-center flex-shrink-0">
+                <div className="w-9 h-9 bg-white/20 rounded-lg flex items-center justify-center flex-shrink-0">
                   <MapPin className="w-4 h-4" />
                 </div>
                 <span className="text-sm font-medium">{contactInfo.address.full}</span>
@@ -208,7 +208,7 @@ export default function ProcessSection() {
                 <button
                   type="submit"
                   disabled={isSubmitting}
-                  className="w-full bg-primary text-white font-semibold py-3.5 rounded-lg hover:bg-primary/90 transition-colors duration-150 disabled:opacity-60 disabled:cursor-not-allowed flex items-center justify-center gap-2 min-h-[48px] touch-manipulation"
+                  className="w-full bg-primary text-white font-semibold py-3.5 rounded-full hover:bg-primary/90 transition-colors duration-150 disabled:opacity-60 disabled:cursor-not-allowed flex items-center justify-center gap-2 min-h-[48px] touch-manipulation shadow-md shadow-primary/20"
                 >
                   {isSubmitting ? (
                     <>

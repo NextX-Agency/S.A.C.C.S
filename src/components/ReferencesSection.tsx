@@ -36,7 +36,7 @@ export default function ReferencesSection() {
   }, []);
 
   return (
-    <section ref={sectionRef} id="references" className="py-16 lg:py-32 bg-navy">
+    <section ref={sectionRef} id="references" className="py-16 lg:py-32 bg-forest">
       <div className="max-w-7xl mx-auto px-4 lg:px-6">
         {/* Header */}
         <div className="mb-12 lg:mb-20">
@@ -46,7 +46,7 @@ export default function ReferencesSection() {
           </h2>
         </div>
 
-        {/* Three pillars — divider grid */}
+        {/* Three pillars with dividers */}
         <div className="grid grid-cols-1 lg:grid-cols-3 divide-y lg:divide-y-0 lg:divide-x divide-white/10">
           {reasons.map((reason, index) => (
             <div
