@@ -22,17 +22,11 @@ const siteNavItems = [
 export default function Navbar() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [activeSection, setActiveSection] = useState('#home');
-  const [scrolled, setScrolled] = useState(false);
   const pathname = usePathname();
   const isHomePage = pathname === '/';
   const navItems = isHomePage ? homeNavItems : siteNavItems;
 
-  useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 8);
-    window.addEventListener('scroll', onScroll, { passive: true });
-    return () => window.removeEventListener('scroll', onScroll);
-  }, []);
-
+  // Scroll-based active section tracking for homepage
   useEffect(() => {
     if (!isHomePage) return;
 
@@ -61,7 +55,7 @@ export default function Navbar() {
       e.preventDefault();
       const target = document.querySelector(href);
       if (target) {
-        const offsetTop = target.getBoundingClientRect().top + window.scrollY - 64;
+        const offsetTop = target.getBoundingClientRect().top + window.scrollY - 80;
         window.scrollTo({ top: offsetTop, behavior: 'smooth' });
       }
     }
@@ -69,25 +63,22 @@ export default function Navbar() {
   };
 
   return (
-    <nav
-      className={`fixed top-0 w-full z-50 bg-white transition-shadow duration-200 ${
-        scrolled ? 'shadow-[0_1px_0_0_rgba(0,0,0,0.08)]' : 'border-b border-outline-variant/20'
-      }`}
-    >
-      <div className="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
+    <nav className="fixed top-0 w-full z-50 transition-colors duration-300">
+      <div className="max-w-7xl mx-auto px-4 pt-4">
+        <div className="flex justify-between items-center bg-white/70 backdrop-blur-xl shadow-lg rounded-full px-6 h-16">
         {/* Logo */}
         {isHomePage ? (
           <a
             href="#home"
             onClick={(e) => handleNavClick(e, '#home')}
-            className="flex-shrink-0 flex items-center gap-2.5"
+            className="flex-shrink-0 flex items-center gap-2"
           >
             <Image
               src="/logo/barelogo-removebg-preview.png"
               alt="S.A.C.C.S."
-              width={36}
-              height={36}
-              className="h-9 w-auto"
+              width={40}
+              height={40}
+              className="h-10 w-auto"
               priority
             />
             <div>
@@ -96,13 +87,13 @@ export default function Navbar() {
             </div>
           </a>
         ) : (
-          <Link href="/" className="flex-shrink-0 flex items-center gap-2.5">
+          <Link href="/" className="flex-shrink-0 flex items-center gap-2">
             <Image
               src="/logo/barelogo-removebg-preview.png"
               alt="S.A.C.C.S."
-              width={36}
-              height={36}
-              className="h-9 w-auto"
+              width={40}
+              height={40}
+              className="h-10 w-auto"
               priority
             />
             <div>
@@ -113,21 +104,19 @@ export default function Navbar() {
         )}
 
         {/* Desktop Navigation */}
-        <div className="hidden md:flex items-center gap-8 tracking-tight text-sm font-medium">
+        <div className="hidden md:flex items-center space-x-8 tracking-tight text-sm font-medium">
           {navItems.map((item) => {
-            const isActive =
-              (!isHomePage && pathname === item.href) ||
-              (isHomePage && activeSection === item.href);
+            const isActive = (!isHomePage && pathname === item.href) || (isHomePage && activeSection === item.href);
             return isHomePage && item.href.startsWith('#') ? (
               <a
                 key={item.href}
                 href={item.href}
                 onClick={(e) => handleNavClick(e, item.href)}
-                className={`transition-colors duration-150 ${
+                className={
                   isActive
-                    ? 'text-primary font-semibold'
-                    : 'text-on-surface-variant hover:text-on-surface'
-                }`}
+                    ? 'text-primary font-bold border-b-2 border-primary'
+                    : 'text-slate-600 hover:text-primary transition-all'
+                }
               >
                 {item.label}
               </a>
@@ -135,11 +124,11 @@ export default function Navbar() {
               <Link
                 key={item.href}
                 href={item.href}
-                className={`transition-colors duration-150 ${
+                className={
                   isActive
-                    ? 'text-primary font-semibold'
-                    : 'text-on-surface-variant hover:text-on-surface'
-                }`}
+                    ? 'text-primary font-bold border-b-2 border-primary'
+                    : 'text-slate-600 hover:text-primary transition-all'
+                }
               >
                 {item.label}
               </Link>
@@ -152,14 +141,14 @@ export default function Navbar() {
           <a
             href="#contact"
             onClick={(e) => handleNavClick(e, '#contact')}
-            className="hidden md:block bg-primary text-white px-6 py-2.5 rounded-full font-semibold text-sm shadow-md shadow-primary/20 hover:bg-primary/90 transition-colors duration-150"
+            className="hidden md:block bg-primary text-on-primary px-6 py-2.5 rounded-full font-bold text-sm hover:shadow-lg shadow-md shadow-primary/30 transition-all active:scale-95 duration-200"
           >
             Offerte Aanvragen
           </a>
         ) : (
           <Link
             href="/#contact"
-            className="hidden md:block bg-primary text-white px-6 py-2.5 rounded-full font-semibold text-sm shadow-md shadow-primary/20 hover:bg-primary/90 transition-colors duration-150"
+            className="hidden md:block bg-primary text-on-primary px-6 py-2.5 rounded-full font-bold text-sm hover:shadow-lg shadow-md shadow-primary/30 transition-all active:scale-95 duration-200"
           >
             Offerte Aanvragen
           </Link>
@@ -167,46 +156,28 @@ export default function Navbar() {
 
         {/* Mobile Menu Toggle */}
         <button
-          className="md:hidden flex flex-col justify-center items-center w-10 h-10 gap-1.5 touch-manipulation"
+          className="md:hidden flex flex-col justify-center items-center w-10 h-10 space-y-1.5 touch-manipulation"
           onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-          aria-label="Toggle menu"
-          aria-expanded={isMobileMenuOpen}
-        >
-          <span
-            className={`w-5 h-0.5 bg-on-surface transition-all duration-200 origin-center ${
-              isMobileMenuOpen ? 'rotate-45 translate-y-2' : ''
-            }`}
-          />
-          <span
-            className={`w-5 h-0.5 bg-on-surface transition-all duration-200 ${
-              isMobileMenuOpen ? 'opacity-0 scale-x-0' : ''
-            }`}
-          />
-          <span
-            className={`w-5 h-0.5 bg-on-surface transition-all duration-200 origin-center ${
-              isMobileMenuOpen ? '-rotate-45 -translate-y-2' : ''
-            }`}
-          />
-        </button>
+            aria-label="Toggle menu"
+            aria-expanded={isMobileMenuOpen}
+          >
+          <span className={`w-6 h-0.5 bg-on-surface transition-all duration-200 ${isMobileMenuOpen ? 'rotate-45 translate-y-2' : ''}`} />
+          <span className={`w-6 h-0.5 bg-on-surface transition-all duration-200 ${isMobileMenuOpen ? 'opacity-0' : ''}`} />
+          <span className={`w-6 h-0.5 bg-on-surface transition-all duration-200 ${isMobileMenuOpen ? '-rotate-45 -translate-y-2' : ''}`} />
+          </button>
       </div>
 
       {/* Mobile Navigation */}
-      <div
-        className={`md:hidden border-t border-outline-variant/20 bg-white overflow-hidden transition-all duration-200 ${
-          isMobileMenuOpen ? 'max-h-96' : 'max-h-0'
-        }`}
-      >
-        <div className="flex flex-col px-6 py-3 gap-1">
+      <div className={`md:hidden overflow-hidden transition-all duration-200 mx-4 mt-2 bg-white/90 backdrop-blur-xl rounded-3xl shadow-lg ${isMobileMenuOpen ? 'max-h-[500px] pb-4' : 'max-h-0 shadow-none'}`}>
+        <div className="flex flex-col space-y-1 pt-4 px-4">
           {navItems.map((item) => {
-            const isActive = (!isHomePage && pathname === item.href) || (isHomePage && activeSection === item.href);
+            const isActive = !isHomePage && pathname === item.href;
             return isHomePage && item.href.startsWith('#') ? (
               <a
                 key={item.href}
                 href={item.href}
                 onClick={(e) => handleNavClick(e, item.href)}
-                className={`px-3 py-3 font-medium rounded-lg transition-colors touch-manipulation min-h-[48px] flex items-center ${
-                  isActive ? 'text-primary font-semibold' : 'text-on-surface hover:text-primary'
-                }`}
+                className="px-4 py-3 text-on-surface font-medium hover:text-primary hover:bg-surface-container-low rounded-lg transition-colors duration-200 touch-manipulation min-h-[48px] flex items-center"
               >
                 {item.label}
               </a>
@@ -215,34 +186,33 @@ export default function Navbar() {
                 key={item.href}
                 href={item.href}
                 onClick={() => setIsMobileMenuOpen(false)}
-                className={`px-3 py-3 font-medium rounded-lg transition-colors touch-manipulation min-h-[48px] flex items-center ${
-                  isActive ? 'text-primary' : 'text-on-surface hover:text-primary'
+                className={`px-4 py-3 font-medium rounded-lg transition-colors duration-200 touch-manipulation min-h-[48px] flex items-center ${
+                  isActive ? 'text-primary bg-surface-container-low' : 'text-on-surface hover:text-primary hover:bg-surface-container-low'
                 }`}
               >
                 {item.label}
               </Link>
             );
           })}
-          <div className="pt-2 pb-3">
-            {isHomePage ? (
-              <a
-                href="#contact"
-                onClick={(e) => handleNavClick(e, '#contact')}
-                className="w-full px-6 py-3 bg-primary text-white font-semibold rounded-lg text-center touch-manipulation min-h-[48px] flex items-center justify-center"
-              >
-                Offerte Aanvragen
-              </a>
-            ) : (
-              <Link
-                href="/contact"
-                onClick={() => setIsMobileMenuOpen(false)}
-                className="w-full px-6 py-3 bg-primary text-white font-semibold rounded-lg text-center touch-manipulation min-h-[48px] flex items-center justify-center"
-              >
-                Offerte Aanvragen
-              </Link>
-            )}
-          </div>
+          {isHomePage ? (
+            <a
+              href="#contact"
+              onClick={(e) => handleNavClick(e, '#contact')}
+              className="mx-4 mt-2 px-6 py-3 bg-primary text-white font-bold rounded-full text-center transition-all duration-200 touch-manipulation min-h-[48px] flex items-center justify-center"
+            >
+              Offerte Aanvragen
+            </a>
+          ) : (
+            <Link
+              href="/contact"
+              onClick={() => setIsMobileMenuOpen(false)}
+              className="mx-4 mt-2 px-6 py-3 bg-primary text-white font-bold rounded-full text-center transition-all duration-200 touch-manipulation min-h-[48px] flex items-center justify-center"
+            >
+              Offerte Aanvragen
+            </Link>
+          )}
         </div>
+      </div>
       </div>
     </nav>
   );
