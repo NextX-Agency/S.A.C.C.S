@@ -198,13 +198,19 @@ export default function Navbar() {
       >
         <div className="flex flex-col px-6 py-3 gap-1">
           {navItems.map((item) => {
-            const isActive = !isHomePage && pathname === item.href;
+            const isActive = (!isHomePage && pathname === item.href) || (isHomePage && activeSection === item.href);
             return isHomePage && item.href.startsWith('#') ? (
               <a
                 key={item.href}
                 href={item.href}
                 onClick={(e) => handleNavClick(e, item.href)}
+<<<<<<< HEAD
                 className="px-3 py-3 text-on-surface font-medium hover:text-primary rounded-lg transition-colors touch-manipulation min-h-[48px] flex items-center"
+=======
+                className={`px-4 py-3 font-medium rounded-lg transition-colors duration-200 touch-manipulation min-h-[48px] flex items-center ${
+                  isActive ? 'text-primary bg-surface-container-low font-bold' : 'text-on-surface hover:text-primary hover:bg-surface-container-low'
+                }`}
+>>>>>>> 7035d61e088616e421e04096b6b599383b2fd229
               >
                 {item.label}
               </a>
