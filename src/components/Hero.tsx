@@ -86,23 +86,6 @@ export default function Hero() {
           </div>
         </div>
 
-        {/* Stats row */}
-        <div className="relative z-10 flex justify-around items-center px-6 py-5 mt-6 border-t border-primary/10">
-          <div className="text-center">
-            <div className="text-primary font-black text-3xl">13+</div>
-            <div className="text-on-surface-variant text-[11px] font-medium mt-0.5">Jaar ervaring</div>
-          </div>
-          <div className="w-px h-8 bg-primary/20" />
-          <div className="text-center">
-            <div className="text-primary font-black text-3xl">200+</div>
-            <div className="text-on-surface-variant text-[11px] font-medium mt-0.5">Tevreden klanten</div>
-          </div>
-          <div className="w-px h-8 bg-primary/20" />
-          <div className="text-center">
-            <div className="text-primary font-black text-3xl">100%</div>
-            <div className="text-on-surface-variant text-[11px] font-medium mt-0.5">Tevredenheid</div>
-          </div>
-        </div>
       </div>
 
       {/* ─── Desktop: 2-column layout ─── */}
@@ -157,21 +140,6 @@ export default function Hero() {
               </a>
             </div>
 
-            {/* Desktop stats row */}
-            <div className="flex gap-10 pt-4 border-t border-primary/15 w-full">
-              <div>
-                <div className="text-4xl font-black text-primary">13+</div>
-                <div className="text-on-surface-variant text-sm font-medium">Jaar ervaring</div>
-              </div>
-              <div>
-                <div className="text-4xl font-black text-primary">200+</div>
-                <div className="text-on-surface-variant text-sm font-medium">Tevreden klanten</div>
-              </div>
-              <div>
-                <div className="text-4xl font-black text-primary">100%</div>
-                <div className="text-on-surface-variant text-sm font-medium">Tevredenheid</div>
-              </div>
-            </div>
           </div>
 
           <div className="relative z-10 pl-8">
