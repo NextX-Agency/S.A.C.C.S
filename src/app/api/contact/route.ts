@@ -19,15 +19,19 @@ export async function POST(request: Request) {
 
     const apiToken = process.env.MAILERSEND_API_TOKEN;
     if (!apiToken) {
-      console.warn('MAILERSEND_API_TOKEN not configured. Message received:', { name, email, service });
-      return NextResponse.json({ success: true });
+      console.error('[contact] MAILERSEND_API_TOKEN is not set — restart the dev server after adding .env.local');
+      return NextResponse.json({ error: 'Email service niet geconfigureerd.' }, { status: 500 });
     }
+
+    const fromEmail = process.env.MAILERSEND_FROM_EMAIL ?? '';
+    if (!fromEmail) {
+      console.error('[contact] MAILERSEND_FROM_EMAIL is not set');
+      return NextResponse.json({ error: 'Email service niet geconfigureerd.' }, { status: 500 });
+    }
+    const fromName = process.env.MAILERSEND_FROM_NAME ?? 'SACCS Website';
 
     const { MailerSend, EmailParams, Sender, Recipient } = await import('mailersend');
     const mailerSend = new MailerSend({ apiKey: apiToken });
-
-    const fromEmail = process.env.MAILERSEND_FROM_EMAIL ?? 'noreply@saccs.sr';
-    const fromName = process.env.MAILERSEND_FROM_NAME ?? 'SACCS Website';
 
     const emailParams = new EmailParams()
       .setFrom(new Sender(fromEmail, fromName))
@@ -47,10 +51,12 @@ export async function POST(request: Request) {
       `);
 
     await mailerSend.email.send(emailParams);
+    console.log(`[contact] Email sent to jahangier_s@hotmail.com from ${name.trim()} <${email.trim()}>`);
 
     return NextResponse.json({ success: true });
-  } catch (err) {
-    console.error('MailerSend error:', err);
+  } catch (err: unknown) {
+    const message = err instanceof Error ? err.message : JSON.stringify(err);
+    console.error('[contact] MailerSend send failed:', message);
     return NextResponse.json({ error: 'Email kon niet worden verzonden. Probeer het later opnieuw.' }, { status: 500 });
   }
 }
