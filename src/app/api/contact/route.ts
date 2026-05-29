@@ -33,13 +33,14 @@ export async function POST(request: Request) {
     const { MailerSend, EmailParams, Sender, Recipient } = await import('mailersend');
     const mailerSend = new MailerSend({ apiKey: apiToken });
 
-    const emailParams = new EmailParams()
+    // Notification to Safiek
+    const notificationParams = new EmailParams()
       .setFrom(new Sender(fromEmail, fromName))
       .setTo([new Recipient('jahangier_s@hotmail.com', 'Safiek Jahangier')])
       .setReplyTo(new Recipient(email.trim(), name.trim()))
       .setSubject(`Nieuwe aanvraag: ${subject || service || 'Algemeen'} — ${name.trim()}`)
       .setHtml(`
-        <h2 style="font-family:sans-serif;color:#1a1a2e">Nieuwe contactaanvraag via saccs.sr</h2>
+        <h2 style="font-family:sans-serif;color:#1a1a2e">Nieuwe contactaanvraag via saccs-sr.com</h2>
         <table style="border-collapse:collapse;width:100%;max-width:600px;font-family:sans-serif">
           <tr><td style="padding:8px 12px;font-weight:bold;border-bottom:1px solid #eee;width:120px">Naam</td><td style="padding:8px 12px;border-bottom:1px solid #eee">${escapeHtml(name.trim())}</td></tr>
           <tr><td style="padding:8px 12px;font-weight:bold;border-bottom:1px solid #eee">E-mail</td><td style="padding:8px 12px;border-bottom:1px solid #eee">${escapeHtml(email.trim())}</td></tr>
@@ -50,8 +51,36 @@ export async function POST(request: Request) {
         </table>
       `);
 
-    await mailerSend.email.send(emailParams);
-    console.log(`[contact] Email sent to jahangier_s@hotmail.com from ${name.trim()} <${email.trim()}>`);
+    // Confirmation to the visitor
+    const confirmationParams = new EmailParams()
+      .setFrom(new Sender(fromEmail, fromName))
+      .setTo([new Recipient(email.trim(), name.trim())])
+      .setSubject('Wij hebben uw bericht ontvangen — SACCS')
+      .setHtml(`
+        <div style="font-family:sans-serif;max-width:600px;margin:0 auto;color:#1a1a2e">
+          <h2 style="color:#1a1a2e">Bedankt voor uw bericht, ${escapeHtml(name.trim())}!</h2>
+          <p style="color:#555;line-height:1.6">
+            Wij hebben uw aanvraag in goede orde ontvangen en nemen binnen <strong>3 werkdagen</strong> contact met u op.
+          </p>
+          <p style="color:#555;line-height:1.6">Hieronder vindt u een samenvatting van uw bericht:</p>
+          <table style="border-collapse:collapse;width:100%;background:#f9f9f9;border-radius:8px;margin:16px 0">
+            ${service ? `<tr><td style="padding:8px 12px;font-weight:bold;border-bottom:1px solid #eee;width:120px">Dienst</td><td style="padding:8px 12px;border-bottom:1px solid #eee">${escapeHtml(String(service))}</td></tr>` : ''}
+            ${subject ? `<tr><td style="padding:8px 12px;font-weight:bold;border-bottom:1px solid #eee">Onderwerp</td><td style="padding:8px 12px;border-bottom:1px solid #eee">${escapeHtml(String(subject))}</td></tr>` : ''}
+            <tr><td style="padding:8px 12px;font-weight:bold;vertical-align:top">Bericht</td><td style="padding:8px 12px;white-space:pre-wrap">${escapeHtml(message.trim())}</td></tr>
+          </table>
+          <p style="color:#555;line-height:1.6">
+            Met vriendelijke groet,<br/>
+            <strong>SACCS — Professionele Schoonmaakdiensten</strong><br/>
+            <a href="tel:+5978517364" style="color:#1a1a2e">+597 851-7364</a>
+          </p>
+        </div>
+      `);
+
+    await Promise.all([
+      mailerSend.email.send(notificationParams),
+      mailerSend.email.send(confirmationParams),
+    ]);
+    console.log(`[contact] Emails sent — notification to Safiek, confirmation to ${email.trim()}`);
 
     return NextResponse.json({ success: true });
   } catch (err: unknown) {
