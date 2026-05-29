@@ -1,5 +1,6 @@
 import { Metadata } from 'next';
 import PageHeader from '@/components/PageHeader';
+import ContactPageForm from '@/components/ContactPageForm';
 import { contactInfo, whyChooseUs } from '@/lib/content';
 
 export const metadata: Metadata = {
@@ -147,101 +148,7 @@ export default function ContactPage() {
                 <h3 className="font-heading text-2xl font-bold text-saccs-text mb-6">
                   Stuur ons een bericht
                 </h3>
-                <form className="space-y-6">
-                  <div>
-                    <label htmlFor="name" className="block text-sm font-medium text-saccs-text mb-1">
-                      Naam *
-                    </label>
-                    <input
-                      type="text"
-                      id="name"
-                      name="name"
-                      required
-                      className="form-input"
-                      placeholder="Uw volledige naam"
-                    />
-                  </div>
-
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    <div>
-                      <label htmlFor="email" className="block text-sm font-medium text-saccs-text mb-1">
-                        E-mail *
-                      </label>
-                      <input
-                        type="email"
-                        id="email"
-                        name="email"
-                        required
-                        className="form-input"
-                        placeholder="uw@email.com"
-                      />
-                    </div>
-                    <div>
-                      <label htmlFor="phone" className="block text-sm font-medium text-saccs-text mb-1">
-                        Telefoon
-                      </label>
-                      <input
-                        type="tel"
-                        id="phone"
-                        name="phone"
-                        className="form-input"
-                        placeholder="+597 ..."
-                      />
-                    </div>
-                  </div>
-
-                  <div>
-                    <label htmlFor="service" className="block text-sm font-medium text-saccs-text mb-1">
-                      Dienst
-                    </label>
-                    <select id="service" name="service" className="form-input">
-                      <option value="">Selecteer een dienst</option>
-                      <option value="b2b">Zakelijke Schoonmaak</option>
-                      <option value="b2c">Particuliere Schoonmaak</option>
-                      <option value="events">Evenementenservice</option>
-                      <option value="specialist">Specialistische Diensten</option>
-                      <option value="other">Anders</option>
-                    </select>
-                  </div>
-
-                  <div>
-                    <label htmlFor="subject" className="block text-sm font-medium text-saccs-text mb-1">
-                      Onderwerp *
-                    </label>
-                    <input
-                      type="text"
-                      id="subject"
-                      name="subject"
-                      required
-                      className="form-input"
-                      placeholder="Waar kunnen wij u mee helpen?"
-                    />
-                  </div>
-
-                  <div>
-                    <label htmlFor="message" className="block text-sm font-medium text-saccs-text mb-1">
-                      Bericht *
-                    </label>
-                    <textarea
-                      id="message"
-                      name="message"
-                      rows={4}
-                      required
-                      className="form-input resize-none"
-                      placeholder="Vertel ons meer over uw wensen..."
-                    />
-                  </div>
-
-                  <button
-                    type="submit"
-                    className="w-full flex items-center justify-center gap-2 px-6 py-3 bg-primary text-white font-semibold rounded-lg hover:bg-primary-dark transition-all duration-200"
-                  >
-                    <span>Verstuur Bericht</span>
-                    <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8" />
-                    </svg>
-                  </button>
-                </form>
+                <ContactPageForm />
               </div>
             </div>
           </div>
