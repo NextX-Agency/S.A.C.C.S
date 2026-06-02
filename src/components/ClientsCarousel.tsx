@@ -9,32 +9,22 @@ const clients = [
   { src: '/carousel/torarica.jpg', alt: 'Torarica Hotel' },
 ];
 
-function LogoItem({ client, fallbacks, setFallbacks }: {
-  client: typeof clients[number];
-  fallbacks: Record<string, string>;
-  setFallbacks: React.Dispatch<React.SetStateAction<Record<string, string>>>;
-}) {
+function LogoItem({ client }: { client: typeof clients[number] }) {
   return (
     <div className="relative w-20 h-14 sm:w-28 sm:h-20 lg:w-36 lg:h-24 flex-shrink-0 mx-6 sm:mx-10 lg:mx-16">
       <Image
-        src={fallbacks[client.alt] ?? client.src}
+        src={client.src}
         alt={client.alt}
         fill
         className="object-contain"
         loading="lazy"
         sizes="(max-width: 640px) 112px, 144px"
-        onError={() => {
-          if (client.fallback && !fallbacks[client.alt]) {
-            setFallbacks((prev) => ({ ...prev, [client.alt]: client.fallback! }));
-          }
-        }}
       />
     </div>
   );
 }
 
 export default function ClientsCarousel() {
-  const [fallbacks, setFallbacks] = useState<Record<string, string>>({});
   const [isPaused, setIsPaused] = useState(false);
   const sectionRef = useRef<HTMLElement>(null);
 
@@ -71,7 +61,7 @@ export default function ClientsCarousel() {
           style={isPaused ? { animationPlayState: 'paused' } : undefined}
         >
           {doubled.map((client, i) => (
-            <LogoItem key={`${client.alt}-${i}`} client={client} fallbacks={fallbacks} setFallbacks={setFallbacks} />
+            <LogoItem key={`${client.alt}-${i}`} client={client} />
           ))}
         </div>
       </div>
