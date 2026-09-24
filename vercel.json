@@ -1,8 +1,8 @@
 {
   "framework": "nextjs",
   "regions": ["iad1"],
-  "installCommand": "npm install",
-  "buildCommand": "npm run build",
+  "installCommand": "pnpm install --frozen-lockfile",
+  "buildCommand": "pnpm build",
   "functions": {
     "src/app/**/*.tsx": {
       "maxDuration": 10

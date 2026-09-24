@@ -1,6 +1,7 @@
 {
   "name": "saccs",
   "version": "0.1.0",
+  "packageManager": "pnpm@10.15.1",
   "private": true,
   "scripts": {
     "dev": "next dev",
@@ -10,12 +11,11 @@
     "type-check": "tsc --noEmit"
   },
   "dependencies": {
-    "lucide-react": "^1.7.0",
     "mailersend": "^3.0.0",
     "next": "^14.2.35",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
-    "resend": "^6.9.4"
+    "sharp": "^0.33.5"
   },
   "devDependencies": {
     "@types/node": "^20.19.27",

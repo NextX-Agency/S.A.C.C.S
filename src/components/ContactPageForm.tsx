@@ -1,184 +1,137 @@
-'use client';
+"use client";
 
-import { FormEvent, useState } from 'react';
+import { FormEvent, useState } from "react";
 
 export default function ContactPageForm() {
-  const [isSubmitting, setIsSubmitting] = useState(false);
-  const [isSubmitted, setIsSubmitted] = useState(false);
-  const [error, setError] = useState<string | null>(null);
+  const [status, setStatus] = useState<"idle" | "sending" | "success">("idle");
+  const [error, setError] = useState("");
 
-  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    setIsSubmitting(true);
-    setError(null);
-
-    const form = e.target as HTMLFormElement;
+  async function handleSubmit(event: FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+    const form = event.currentTarget;
     const data = new FormData(form);
-
+    if (String(data.get("message") || "").trim().length < 10) {
+      setError("Uw bericht moet minimaal 10 tekens bevatten.");
+      return;
+    }
+    setError("");
+    setStatus("sending");
     try {
-      const res = await fetch('/api/contact', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          name: data.get('name'),
-          email: data.get('email'),
-          phone: data.get('phone'),
-          service: data.get('service'),
-          subject: data.get('subject'),
-          message: data.get('message'),
-        }),
+      const response = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(Object.fromEntries(data.entries())),
       });
-
-      const json = await res.json();
-
-      if (!res.ok) {
-        setError(json.error ?? 'Er is een fout opgetreden. Probeer het later opnieuw.');
+      const result = await response.json();
+      if (!response.ok) {
+        setError(
+          result.error ||
+            "Uw bericht kon niet worden verzonden. Probeer het opnieuw.",
+        );
+        setStatus("idle");
         return;
       }
-
-      setIsSubmitted(true);
-      setTimeout(() => {
-        setIsSubmitted(false);
-        form.reset();
-      }, 5000);
+      form.reset();
+      setStatus("success");
     } catch {
-      setError('Verbindingsfout. Controleer uw internetverbinding en probeer opnieuw.');
-    } finally {
-      setIsSubmitting(false);
+      setError(
+        "Verbinding mislukt. Controleer uw internetverbinding en probeer het opnieuw.",
+      );
+      setStatus("idle");
     }
-  };
-
-  if (isSubmitted) {
-    return (
-      <div className="text-center py-12">
-        <div className="w-16 h-16 bg-accent rounded-full flex items-center justify-center mx-auto mb-4">
-          <svg className="w-8 h-8 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={2}>
-            <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
-          </svg>
-        </div>
-        <h3 className="font-heading text-xl font-bold text-saccs-text mb-2">
-          Bedankt voor uw bericht!
-        </h3>
-        <p className="text-saccs-grey text-sm">
-          We nemen zo spoedig mogelijk contact met u op.
-        </p>
-      </div>
-    );
   }
 
+  if (status === "success")
+    return (
+      <div className="form-success" role="status">
+        <h3>Uw bericht is verzonden.</h3>
+        <p>
+          Bedankt voor uw aanvraag. We nemen zo spoedig mogelijk contact met u
+          op.
+        </p>
+        <button
+          className="text-link"
+          type="button"
+          onClick={() => setStatus("idle")}
+        >
+          Nog een bericht sturen ↗
+        </button>
+      </div>
+    );
+
   return (
-    <form onSubmit={handleSubmit} className="space-y-6">
+    <form className="contact-form" onSubmit={handleSubmit}>
       {error && (
-        <div className="p-3 rounded-lg bg-red-50 border border-red-200 text-red-700 text-sm">
+        <div className="form-error" role="alert" id="form-error">
           {error}
         </div>
       )}
-
-      <div>
-        <label htmlFor="cp-name" className="block text-sm font-medium text-saccs-text mb-1">
-          Naam *
-        </label>
+      <div className="form-field">
+        <label htmlFor="contact-name">Naam *</label>
         <input
-          type="text"
-          id="cp-name"
+          id="contact-name"
           name="name"
+          autoComplete="name"
           required
-          className="form-input"
-          placeholder="Uw volledige naam"
+          minLength={2}
+          aria-describedby={error ? "form-error" : undefined}
         />
       </div>
-
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-        <div>
-          <label htmlFor="cp-email" className="block text-sm font-medium text-saccs-text mb-1">
-            E-mail *
-          </label>
+      <div className="form-two">
+        <div className="form-field">
+          <label htmlFor="contact-email">E-mail *</label>
           <input
-            type="email"
-            id="cp-email"
+            id="contact-email"
             name="email"
+            type="email"
+            autoComplete="email"
             required
-            className="form-input"
-            placeholder="uw@email.com"
           />
         </div>
-        <div>
-          <label htmlFor="cp-phone" className="block text-sm font-medium text-saccs-text mb-1">
-            Telefoon
-          </label>
+        <div className="form-field">
+          <label htmlFor="contact-phone">Telefoon</label>
           <input
-            type="tel"
-            id="cp-phone"
+            id="contact-phone"
             name="phone"
-            className="form-input"
-            placeholder="+597 ..."
+            type="tel"
+            autoComplete="tel"
           />
         </div>
       </div>
-
-      <div>
-        <label htmlFor="cp-service" className="block text-sm font-medium text-saccs-text mb-1">
-          Dienst
-        </label>
-        <select id="cp-service" name="service" className="form-input">
-          <option value="">Selecteer een dienst</option>
-          <option value="b2b">Zakelijke Schoonmaak</option>
-          <option value="b2c">Particuliere Schoonmaak</option>
+      <div className="form-field">
+        <label htmlFor="contact-service">Dienst</label>
+        <select id="contact-service" name="service" defaultValue="">
+          <option value="">Kies een dienst</option>
+          <option value="b2b">Zakelijke schoonmaak</option>
+          <option value="b2c">Particuliere schoonmaak</option>
           <option value="events">Evenementenservice</option>
-          <option value="specialist">Specialistische Diensten</option>
+          <option value="specialist">Specialistische diensten</option>
           <option value="other">Anders</option>
         </select>
       </div>
-
-      <div>
-        <label htmlFor="cp-subject" className="block text-sm font-medium text-saccs-text mb-1">
-          Onderwerp *
-        </label>
-        <input
-          type="text"
-          id="cp-subject"
-          name="subject"
-          required
-          className="form-input"
-          placeholder="Waar kunnen wij u mee helpen?"
-        />
+      <div className="form-field">
+        <label htmlFor="contact-subject">Onderwerp *</label>
+        <input id="contact-subject" name="subject" required />
       </div>
-
-      <div>
-        <label htmlFor="cp-message" className="block text-sm font-medium text-saccs-text mb-1">
-          Bericht *
-        </label>
+      <div className="form-field">
+        <label htmlFor="contact-message">Uw bericht *</label>
         <textarea
-          id="cp-message"
+          id="contact-message"
           name="message"
-          rows={4}
+          minLength={10}
           required
-          className="form-input resize-none"
-          placeholder="Vertel ons meer over uw wensen..."
+          placeholder="Beschrijf uw ruimte en de gewenste werkzaamheden"
         />
       </div>
-
       <button
+        className="button button-primary form-submit"
         type="submit"
-        disabled={isSubmitting}
-        className="w-full flex items-center justify-center gap-2 px-6 py-3 bg-primary text-white font-semibold rounded-lg hover:bg-primary-dark transition-all duration-200 disabled:opacity-70 disabled:cursor-not-allowed"
+        disabled={status === "sending"}
       >
-        {isSubmitting ? (
-          <>
-            <svg className="animate-spin w-5 h-5" fill="none" viewBox="0 0 24 24">
-              <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
-              <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z" />
-            </svg>
-            <span>Versturen...</span>
-          </>
-        ) : (
-          <>
-            <span>Verstuur Bericht</span>
-            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8" />
-            </svg>
-          </>
-        )}
+        {status === "sending"
+          ? "Bericht wordt verzonden…"
+          : "Verstuur uw aanvraag"}{" "}
+        <span aria-hidden="true">↗</span>
       </button>
     </form>
   );

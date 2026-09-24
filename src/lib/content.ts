@@ -6,65 +6,67 @@
 // ============================================================================
 
 export const siteConfig = {
-  name: 'SACCS',
-  fullName: 'S.A. Cleaning Consultancy Suriname',
-  tagline: 'Wij doen wat wij zeggen',
-  description: 'Uw partner in professionele schoonmaakdiensten voor bedrijven en particulieren in Suriname sinds 2012.',
+  name: "SACCS",
+  fullName: "S.A. Cleaning Consultancy Suriname",
+  tagline: "Wij doen wat wij zeggen",
+  description:
+    "Uw partner in professionele schoonmaakdiensten voor bedrijven en particulieren in Suriname sinds 2012.",
   foundedYear: 2012,
-  url: 'https://saccs.sr',
-  locale: 'nl_NL',
+  url: "https://saccs.sr",
+  locale: "nl_NL",
   logo: {
-    main: '/logo/noslogan.png',
-    withSlogan: '/logo/logo.png',
-    icon: '/logo/barelogo-removebg-preview.png',
+    main: "/logo/noslogan.png",
+    withSlogan: "/logo/full-logo.png",
+    icon: "/logo/barelogo-removebg-preview.png",
   },
 };
 
 export const contactInfo = {
   director: {
-    name: 'Safiek Jahangier',
-    title: 'Directeur',
+    name: "Safiek Jahangier",
+    title: "Directeur",
   },
   phone: {
-    display: '+597 8517364',
-    href: 'tel:+5978517364',
-    whatsapp: 'https://wa.me/5978517364',
+    display: "+597 8517364",
+    href: "tel:+5978517364",
+    whatsapp: "https://wa.me/5978517364",
   },
   email: {
-    display: 'jahangier_s@hotmail.com',
-    href: 'mailto:jahangier_s@hotmail.com',
+    display: "jahangier_s@hotmail.com",
+    href: "mailto:jahangier_s@hotmail.com",
   },
   address: {
-    street: 'Paramaribo',
-    city: 'Suriname',
-    full: 'Paramaribo, Suriname',
+    street: "Paramaribo",
+    city: "Suriname",
+    full: "Paramaribo, Suriname",
   },
   social: {
-    facebook: '#',
-    instagram: '#',
-    linkedin: '#',
+    facebook: "#",
+    instagram: "#",
+    linkedin: "#",
   },
   businessHours: {
-    weekdays: '08:00 - 18:00',
-    saturday: '08:00 - 14:00',
-    sunday: 'Gesloten',
+    weekdays: "08:00 - 18:00",
+    saturday: "08:00 - 14:00",
+    sunday: "Gesloten",
   },
 };
 
 export const stats = [
-  { value: '13+', label: 'Jaar ervaring', suffix: '' },
-  { value: '50+', label: 'Tevreden klanten', suffix: '' },
-  { value: '100%', label: 'Tevredenheidsgarantie', suffix: '' },
-  { value: '6/7', label: 'Dagen bereikbaar', suffix: '' },
+  { value: "13+", label: "Jaar ervaring", suffix: "" },
+  { value: "50+", label: "Tevreden klanten", suffix: "" },
+  { value: "100%", label: "Tevredenheidsgarantie", suffix: "" },
+  { value: "6/7", label: "Dagen bereikbaar", suffix: "" },
 ];
 
 export const services = [
   {
-    id: 'b2b',
-    slug: 'zakelijke-schoonmaak',
-    title: 'Zakelijke Schoonmaak (B2B)',
-    shortTitle: 'B2B Schoonmaak',
-    description: 'Professionele schoonmaakdiensten voor kantoren, hotels, restaurants en andere zakelijke ruimtes. Wij zorgen voor een representatieve werkomgeving.',
+    id: "b2b",
+    slug: "zakelijke-schoonmaak",
+    title: "Zakelijke Schoonmaak (B2B)",
+    shortTitle: "B2B Schoonmaak",
+    description:
+      "Professionele schoonmaakdiensten voor kantoren, hotels, restaurants en andere zakelijke ruimtes. Wij zorgen voor een representatieve werkomgeving.",
     longDescription: `
       Bij SACCS begrijpen we dat een schone werkomgeving essentieel is voor productiviteit en professionaliteit. 
       Onze B2B schoonmaakdiensten zijn op maat gemaakt voor elke bedrijfsomgeving, van kleine kantoren tot grote hotels.
@@ -73,22 +75,30 @@ export const services = [
       en uitgerust zijn met professionele apparatuur. Of het nu gaat om dagelijks onderhoud of periodieke 
       dieptereiniging, wij leveren consistent hoge kwaliteit.
     `,
-    features: ['Kantoorgebouwen', 'Hotels & Resorts', 'Restaurants', 'Winkels', 'Medische faciliteiten', 'Industriële ruimtes'],
-    benefits: [
-      'Verbeterde werknemerstevredenheid',
-      'Professionele uitstraling voor klanten',
-      'Verhoogde hygiëne en gezondheid',
-      'Flexibele planning buiten kantooruren',
+    features: [
+      "Kantoorgebouwen",
+      "Hotels & Resorts",
+      "Restaurants",
+      "Winkels",
+      "Medische faciliteiten",
+      "Industriële ruimtes",
     ],
-    icon: 'building',
-    image: '/beeld/beeld2.png',
+    benefits: [
+      "Verbeterde werknemerstevredenheid",
+      "Professionele uitstraling voor klanten",
+      "Verhoogde hygiëne en gezondheid",
+      "Flexibele planning buiten kantooruren",
+    ],
+    icon: "building",
+    image: "/beeld/exterior.jpeg",
   },
   {
-    id: 'b2c',
-    slug: 'particuliere-schoonmaak',
-    title: 'Particuliere Schoonmaak (B2C)',
-    shortTitle: 'B2C Schoonmaak',
-    description: 'Betrouwbare schoonmaakdiensten voor particulieren. Van regelmatige huishouding tot grote schoonmaakbeurten.',
+    id: "b2c",
+    slug: "particuliere-schoonmaak",
+    title: "Particuliere Schoonmaak (B2C)",
+    shortTitle: "B2C Schoonmaak",
+    description:
+      "Betrouwbare schoonmaakdiensten voor particulieren. Van regelmatige huishouding tot grote schoonmaakbeurten.",
     longDescription: `
       Uw thuis verdient de beste zorg. Onze particuliere schoonmaakdiensten zijn ontworpen om u tijd te besparen 
       en een schone, gezonde leefomgeving te garanderen.
@@ -96,22 +106,30 @@ export const services = [
       Of u nu regelmatig hulp nodig heeft of een eenmalige grote schoonmaak, ons team staat voor u klaar. 
       We gebruiken veilige, milieuvriendelijke producten die effectief zijn maar zacht voor uw gezin en huisdieren.
     `,
-    features: ['Huishoudelijke hulp', 'Grote schoonmaak', 'Verhuisschoonmaak', 'Regelmatig onderhoud', 'Raamreiniging', 'Tapijt- en stofferingreiniging'],
-    benefits: [
-      'Meer vrije tijd voor uzelf',
-      'Professionele resultaten',
-      'Betrouwbaar en gecontroleerd personeel',
-      'Flexibele planning op uw gemak',
+    features: [
+      "Huishoudelijke hulp",
+      "Grote schoonmaak",
+      "Verhuisschoonmaak",
+      "Regelmatig onderhoud",
+      "Raamreiniging",
+      "Tapijt- en stofferingreiniging",
     ],
-    icon: 'home',
-    image: '/beeld/beeld3.png',
+    benefits: [
+      "Meer vrije tijd voor uzelf",
+      "Professionele resultaten",
+      "Betrouwbaar en gecontroleerd personeel",
+      "Flexibele planning op uw gemak",
+    ],
+    icon: "home",
+    image: "/beeld/about.jpg",
   },
   {
-    id: 'events',
-    slug: 'evenementen-service',
-    title: 'Evenementenservice',
-    shortTitle: 'Events',
-    description: 'Schoonmaakdiensten tijdens en na evenementen. Wij zorgen ervoor dat uw locatie er perfect uitziet, voor, tijdens en na het evenement.',
+    id: "events",
+    slug: "evenementen-service",
+    title: "Evenementenservice",
+    shortTitle: "Events",
+    description:
+      "Schoonmaakdiensten tijdens en na evenementen. Wij zorgen ervoor dat uw locatie er perfect uitziet, voor, tijdens en na het evenement.",
     longDescription: `
       Een succesvol evenement verdient een vlekkeloze uitvoering, inclusief schoonmaak. 
       SACCS biedt complete schoonmaakoplossingen voor evenementen van elke omvang.
@@ -119,22 +137,30 @@ export const services = [
       Van bruiloften tot bedrijfsfeesten, van conferenties tot festivals - ons team zorgt ervoor 
       dat uw locatie er onberispelijk uitziet gedurende het hele evenement en daarna.
     `,
-    features: ['Voorbereidende reiniging', 'Onderhoud tijdens events', 'Opruimen na afloop', 'Noodservice', 'Sanitairservice', 'Afvalbeheer'],
-    benefits: [
-      'Professionele uitstraling gedurende het event',
-      'Snelle responstijd bij ongelukken',
-      '6 dagen per week bereikbaar',
-      'Ervaring met grote evenementen',
+    features: [
+      "Voorbereidende reiniging",
+      "Onderhoud tijdens events",
+      "Opruimen na afloop",
+      "Noodservice",
+      "Sanitairservice",
+      "Afvalbeheer",
     ],
-    icon: 'users',
-    image: '/beeld/beeld4.png',
+    benefits: [
+      "Professionele uitstraling gedurende het event",
+      "Snelle responstijd bij ongelukken",
+      "6 dagen per week bereikbaar",
+      "Ervaring met grote evenementen",
+    ],
+    icon: "users",
+    image: "/beeld/hero.jpeg",
   },
   {
-    id: 'specialist',
-    slug: 'specialistische-diensten',
-    title: 'Specialistische Diensten',
-    shortTitle: 'Specialist',
-    description: 'Gespecialiseerde schoonmaakdiensten voor specifieke behoeften, zoals dieptereiniging, ramen wassen en meer.',
+    id: "specialist",
+    slug: "specialistische-diensten",
+    title: "Specialistische Diensten",
+    shortTitle: "Specialist",
+    description:
+      "Gespecialiseerde schoonmaakdiensten voor specifieke behoeften, zoals dieptereiniging, ramen wassen en meer.",
     longDescription: `
       Sommige schoonmaaktaken vereisen gespecialiseerde kennis en apparatuur. 
       SACCS biedt een breed scala aan specialistische diensten voor die uitdagende klussen.
@@ -142,58 +168,80 @@ export const services = [
       Onze specialisten zijn getraind in geavanceerde technieken en beschikken over professionele 
       apparatuur voor dieptereiniging, hoogwerkreiniging, en meer.
     `,
-    features: ['Dieptereiniging', 'Glazenwassen', 'Vloeronderhoud', 'Stoomreiniging', 'Gevelreiniging', 'Desinfectie'],
-    benefits: [
-      'Gespecialiseerde apparatuur',
-      'Getrainde professionals',
-      'Veilige werkmethoden',
-      'Garantie op resultaat',
+    features: [
+      "Dieptereiniging",
+      "Glazenwassen",
+      "Vloeronderhoud",
+      "Stoomreiniging",
+      "Gevelreiniging",
+      "Desinfectie",
     ],
-    icon: 'tool',
-    image: '/beeld/beeld1.jpg',
+    benefits: [
+      "Gespecialiseerde apparatuur",
+      "Getrainde professionals",
+      "Veilige werkmethoden",
+      "Garantie op resultaat",
+    ],
+    icon: "tool",
+    image: "/beeld/stallatie.jpeg",
   },
 ];
 
 export const whyChooseUs = [
-  'Gratis vrijblijvende offerte',
-  'Maatwerk schoonmaakplannen',
-  'Ervaren en betrouwbaar personeel',
-  'Kwaliteitsgarantie op alle diensten',
-  'Flexibele planning',
+  "Gratis vrijblijvende offerte",
+  "Maatwerk schoonmaakplannen",
+  "Ervaren en betrouwbaar personeel",
+  "Kwaliteitsgarantie op alle diensten",
+  "Flexibele planning",
 ];
 
 export const aboutContent = {
   mission: {
-    title: 'Onze Missie',
+    title: "Onze Missie",
     content: `Wij streven ernaar schone, hygiënische en uitnodigende omgevingen te creëren door middel van 
     professionele schoonmaakdiensten. Met onze expertise en toewijding helpen wij bedrijven en particulieren 
     om hun ruimtes optimaal te onderhouden.`,
   },
   vision: {
-    title: 'Onze Visie',
+    title: "Onze Visie",
     content: `SACCS wil de meest vertrouwde schoonmaakpartner van Suriname zijn, erkend voor onze 
     professionaliteit, integriteit en consistente kwaliteit. Wij streven naar langdurige relaties 
     met onze klanten, gebaseerd op vertrouwen en wederzijds respect.`,
   },
   history: {
-    title: 'Onze Geschiedenis',
+    title: "Onze Geschiedenis",
     content: `Sinds 2012 is SACCS actief als toonaangevende schoonmaakdienstverlener in Suriname. 
     Wat begon als een klein bedrijf is uitgegroeid tot een betrouwbare partner voor zowel 
     grote hotels als particuliere huishoudens. Onze groei is het resultaat van hard werken, 
     klantgerichtheid en een constante focus op kwaliteit.`,
     milestones: [
-      { year: 2012, event: 'Oprichting SACCS' },
-      { year: 2014, event: 'Eerste hotelcontract' },
-      { year: 2016, event: 'Uitbreiding naar evenementenservice' },
-      { year: 2018, event: 'Partnerschap met internationale hotelketens' },
-      { year: 2020, event: 'Introductie specialistische diensten' },
-      { year: 2024, event: 'Meer dan 50 tevreden klanten' },
+      { year: 2012, event: "Oprichting SACCS" },
+      { year: 2014, event: "Eerste hotelcontract" },
+      { year: 2016, event: "Uitbreiding naar evenementenservice" },
+      { year: 2018, event: "Partnerschap met internationale hotelketens" },
+      { year: 2020, event: "Introductie specialistische diensten" },
+      { year: 2024, event: "Meer dan 50 tevreden klanten" },
     ],
   },
   values: [
-    { title: 'Betrouwbaarheid', description: 'Wij doen wat wij zeggen en staan altijd klaar voor onze klanten.' },
-    { title: 'Professionaliteit', description: 'Ons team werkt volgens de hoogste standaarden in de industrie.' },
-    { title: 'Kwaliteit', description: 'Wij leveren consistent uitstekende resultaten bij elke opdracht.' },
-    { title: 'Klantgerichtheid', description: 'De tevredenheid van onze klanten staat altijd centraal.' },
+    {
+      title: "Betrouwbaarheid",
+      description:
+        "Wij doen wat wij zeggen en staan altijd klaar voor onze klanten.",
+    },
+    {
+      title: "Professionaliteit",
+      description:
+        "Ons team werkt volgens de hoogste standaarden in de industrie.",
+    },
+    {
+      title: "Kwaliteit",
+      description:
+        "Wij leveren consistent uitstekende resultaten bij elke opdracht.",
+    },
+    {
+      title: "Klantgerichtheid",
+      description: "De tevredenheid van onze klanten staat altijd centraal.",
+    },
   ],
 };
