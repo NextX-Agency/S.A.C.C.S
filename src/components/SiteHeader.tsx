@@ -99,7 +99,6 @@ export default function SiteHeader() {
         id="mobile-menu"
         className={`mobile-nav ${open ? "is-open" : ""}`}
         aria-label="Mobiele navigatie"
-        inert={!open}
       >
         {links.map((link, index) => (
           <Link

@@ -278,49 +278,28 @@ textarea {
   border-bottom: 1px solid var(--line);
   overflow: hidden;
 }
-.client-heading {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding-top: 22px;
-}
-.client-heading > p {
-  margin: 0;
-  color: var(--muted);
-  font-size: 13px;
-  line-height: 1.4;
-}
-.client-heading button {
-  background: none;
-  border: 0;
-  color: var(--muted);
-  cursor: pointer;
-  font: inherit;
-  font-size: 12px;
-  padding: 8px;
-}
-.client-heading button:hover,
-.client-heading button:focus-visible { color: var(--green); }
 .client-marquee { width: 100%; overflow: hidden; }
 .client-track {
   display: flex;
-  width: 200%;
-  animation: client-scroll 26s linear infinite;
+  width: max-content;
+  animation: client-scroll 28s linear infinite;
   will-change: transform;
 }
-.client-track.is-paused,
-.client-marquee:hover .client-track { animation-play-state: paused; }
 .client-group {
-  width: 50%;
+  width: max-content;
+  min-width: 100vw;
   flex: none;
-  min-height: 104px;
+  min-height: 124px;
   display: flex;
   align-items: center;
   justify-content: space-around;
+  gap: clamp(24px, 4vw, 68px);
+  padding-inline: clamp(12px, 2vw, 34px);
 }
 .client-logo {
   position: relative;
-  width: clamp(90px, 13vw, 180px);
+  flex: none;
+  width: clamp(120px, 13vw, 200px);
   height: 72px;
   filter: grayscale(1);
   opacity: 0.82;
@@ -328,8 +307,19 @@ textarea {
 .client-logo img {
   object-fit: contain;
 }
+.client-name {
+  display: flex;
+  height: 100%;
+  align-items: center;
+  justify-content: center;
+  color: #36423b;
+  font: 700 clamp(18px, 1.5vw, 26px) var(--font-heading);
+  letter-spacing: -0.04em;
+  text-align: center;
+}
 .client-logo-torarica img { transform: scale(1.55); }
 .client-logo-academisch img { transform: scale(1.3); }
+.client-logo-radisson img { transform: scale(0.76); }
 @keyframes client-scroll { to { transform: translateX(-50%); } }
 .section {
   padding: 118px 0;
@@ -1170,11 +1160,9 @@ h3 {
   .hero-index {
     font-size: 9px;
   }
-  .client-heading { padding-top: 14px; }
-  .client-heading > p { max-width: 190px; }
-  .client-group { min-height: 100px; }
+  .client-group { min-height: 105px; }
   .client-logo {
-    width: 27%;
+    width: 120px;
     height: 64px;
   }
   .section {
@@ -1356,6 +1344,6 @@ h3 {
     transition-duration: 0.01ms !important;
   }
   .client-track { width: 100%; }
-  .client-group { width: 100%; }
+  .client-group { width: 100%; min-width: 0; flex-wrap: wrap; justify-content: center; padding-block: 20px; }
   .client-group[aria-hidden="true"] { display: none; }
 }
