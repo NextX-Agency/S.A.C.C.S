@@ -1,4 +1,3 @@
-import Image from "next/image";
 import Link from "next/link";
 
 export function SectionLabel({
@@ -13,34 +12,6 @@ export function SectionLabel({
       <span>{number}</span>
       {children}
     </p>
-  );
-}
-
-const clients = [
-  { src: "/carousel/torarica.jpg", alt: "Torarica Resort" },
-  { src: "/carousel/hardrock.png", alt: "Hard Rock Cafe" },
-  { src: "/carousel/azplogo.jpg", alt: "Academisch Ziekenhuis Paramaribo" },
-];
-
-export function ClientWall() {
-  return (
-    <section className="client-section" aria-label="Opdrachtgevers">
-      <div className="container client-layout">
-        <p>Een greep uit onze opdrachtgevers</p>
-        <div className="client-logos">
-          {clients.map((client) => (
-            <div className="client-logo" key={client.alt}>
-              <Image
-                src={client.src}
-                alt={client.alt}
-                fill
-                sizes="(max-width: 760px) 28vw, 140px"
-              />
-            </div>
-          ))}
-        </div>
-      </div>
-    </section>
   );
 }
 

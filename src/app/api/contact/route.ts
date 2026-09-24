@@ -40,7 +40,7 @@ export async function POST(request: Request) {
       .setReplyTo(new Recipient(email.trim(), name.trim()))
       .setSubject(`Nieuwe aanvraag: ${subject || service || 'Algemeen'} — ${name.trim()}`)
       .setHtml(`
-        <h2 style="font-family:sans-serif;color:#1a1a2e">Nieuwe contactaanvraag via saccs-sr.com</h2>
+        <h2 style="font-family:sans-serif;color:#1a1a2e">Nieuwe contactaanvraag via saccs.sr</h2>
         <table style="border-collapse:collapse;width:100%;max-width:600px;font-family:sans-serif">
           <tr><td style="padding:8px 12px;font-weight:bold;border-bottom:1px solid #eee;width:120px">Naam</td><td style="padding:8px 12px;border-bottom:1px solid #eee">${escapeHtml(name.trim())}</td></tr>
           <tr><td style="padding:8px 12px;font-weight:bold;border-bottom:1px solid #eee">E-mail</td><td style="padding:8px 12px;border-bottom:1px solid #eee">${escapeHtml(email.trim())}</td></tr>
@@ -60,7 +60,7 @@ export async function POST(request: Request) {
         <div style="font-family:sans-serif;max-width:600px;margin:0 auto;color:#1a1a2e">
           <h2 style="color:#1a1a2e">Bedankt voor uw bericht, ${escapeHtml(name.trim())}!</h2>
           <p style="color:#555;line-height:1.6">
-            Wij hebben uw aanvraag in goede orde ontvangen en nemen binnen <strong>3 werkdagen</strong> contact met u op.
+            Wij hebben uw aanvraag ontvangen en nemen zo spoedig mogelijk contact met u op.
           </p>
           <p style="color:#555;line-height:1.6">Hieronder vindt u een samenvatting van uw bericht:</p>
           <table style="border-collapse:collapse;width:100%;background:#f9f9f9;border-radius:8px;margin:16px 0">

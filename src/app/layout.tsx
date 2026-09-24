@@ -101,13 +101,8 @@ const jsonLd = {
       closes: "14:00",
     },
   ],
-  sameAs: [],
   description:
     "Professionele schoonmaakdiensten voor bedrijven en particulieren in Suriname sinds 2012.",
-  founder: {
-    "@type": "Person",
-    name: "Safiek Jahangier",
-  },
   foundingDate: "2012",
   areaServed: {
     "@type": "Country",

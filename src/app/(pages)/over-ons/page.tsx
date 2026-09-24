@@ -71,14 +71,16 @@ export default function OverOnsPage() {
           <SectionLabel number="03">
             Sinds {siteConfig.foundedYear}
           </SectionLabel>
-          <h2>De ontwikkeling van S.A.C.C.S.</h2>
+          <h2>Schoonmaak met aandacht voor uw ruimte.</h2>
           <div className="timeline">
-            {aboutContent.history.milestones.map((item) => (
-              <div key={item.year}>
-                <strong>{item.year}</strong>
-                <p>{item.event}</p>
-              </div>
-            ))}
+            <div>
+              <strong>{siteConfig.foundedYear}</strong>
+              <p>Oprichting van S.A.C.C.S in Suriname.</p>
+            </div>
+            <div>
+              <strong>Vandaag</strong>
+              <p>Werk voor organisaties en particulieren, afgestemd op de opdracht.</p>
+            </div>
           </div>
         </div>
       </section>

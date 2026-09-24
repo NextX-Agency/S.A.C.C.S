@@ -1,7 +1,8 @@
 import Image from "next/image";
 import Link from "next/link";
 import { services, aboutContent, siteConfig, contactInfo } from "@/lib/content";
-import { ClientWall, ClosingCTA, SectionLabel } from "@/components/Editorial";
+import { ClosingCTA, SectionLabel } from "@/components/Editorial";
+import ClientSlider from "@/components/ClientSlider";
 
 export default function HomePage() {
   return (
@@ -40,12 +41,11 @@ export default function HomePage() {
             </div>
           </div>
           <div className="hero-index" aria-hidden="true">
-            <span>01 / 04</span>
             <span>Paramaribo, Suriname</span>
           </div>
         </div>
       </section>
-      <ClientWall />
+      <ClientSlider />
       <section className="section services-preview" id="diensten">
         <div className="container">
           <div className="section-heading split-heading">

@@ -27,6 +27,7 @@ export default function SiteFooterNew() {
             <span>Een vraag of offerte?</span>
             <a href={contactInfo.phone.href}>{contactInfo.phone.display}</a>
             <a href={contactInfo.email.href}>{contactInfo.email.display}</a>
+            <a href={contactInfo.phone.whatsapp} target="_blank" rel="noopener noreferrer">WhatsApp ↗</a>
           </div>
         </div>
         <div className="footer-bottom">

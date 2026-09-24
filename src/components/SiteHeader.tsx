@@ -113,6 +113,9 @@ export default function SiteHeader() {
             <span aria-hidden="true">↗</span>
           </Link>
         ))}
+        <Link className="mobile-primary-action" href="/contact" onClick={() => setOpen(false)}>
+          Offerte aanvragen <span aria-hidden="true">↗</span>
+        </Link>
       </nav>
     </header>
   );
